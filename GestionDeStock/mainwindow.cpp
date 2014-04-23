@@ -3,6 +3,7 @@
 #include "stock.h"
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
+#include "comboboxtype.h"
 #include <QLabel>
 
 /******************** INITIALISATION DONNEES GLOBALES *****************/
@@ -197,17 +198,21 @@ MainWindow::MainWindow(QWidget *parent) :
     stock->ReadStockFile("../appdata/stock");
 
     int i,s = stock->GetStockSize();
+    StockArticle* sa;
 
     for (i=0; i<s; i++)
     {
         ui->tableWidget->insertRow(i);
 
-        QLabel *label = new QLabel(stock->GetArticleN(i)->GetReferenceString());
+        sa = stock->GetArticleN(i);
+        QLabel* label = new QLabel(sa->GetReferenceString());
         ComboBoxColor* color = new ComboBoxColor(ui->tableWidget);
-        ComboBoxCategory* category = new ComboBoxCategory(ui->tableWidget);
+        ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget);
+        ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt());
 
         ui->tableWidget->setCellWidget(i, 0, label);
-        ui->tableWidget->setCellWidget(i,1,category);
+        ui->tableWidget->setCellWidget(i,1,categ);
+        ui->tableWidget->setCellWidget(i,2,type);
         ui->tableWidget->setCellWidget(i,5,color);
     }
 }

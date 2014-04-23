@@ -17,13 +17,15 @@ SOURCES += main.cpp\
 		article.cpp\
 		stock.cpp\
 		comboboxcolor.cpp \
-    comboboxcategory.cpp
+    comboboxcategory.cpp \
+    comboboxtype.cpp
 
 HEADERS  += mainwindow.h\
 		article.h\
 		datasets.h\
 		stock.h\
 		comboboxcolor.h \
-    comboboxcategory.h
+    comboboxcategory.h \
+    comboboxtype.h
 
 FORMS    += mainwindow.ui
