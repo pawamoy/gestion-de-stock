@@ -29,7 +29,7 @@
      <height>61</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_4">
+   <layout class="QVBoxLayout" name="layoutOkCancel">
     <item>
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="orientation">
@@ -51,11 +51,11 @@
      <height>451</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_13">
+   <layout class="QHBoxLayout" name="bigHLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
+     <layout class="QVBoxLayout" name="labels">
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="label_ref">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -72,7 +72,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="label_categorie">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -89,7 +89,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="label_type">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -106,7 +106,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="label_model">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -123,7 +123,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="label_taille">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -140,7 +140,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="label_couleur">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -157,7 +157,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_7">
+       <widget class="QLabel" name="label_quantite">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -174,7 +174,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="label_achat">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -191,7 +191,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="label_vente">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -213,7 +213,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="label_rabais">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -230,7 +230,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_12">
+       <widget class="QLabel" name="label_date">
         <property name="font">
          <font>
           <weight>75</weight>
@@ -249,9 +249,9 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
+     <layout class="QVBoxLayout" name="fields">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="field_reference">
         <item>
          <widget class="QSpinBox" name="spinBox_4">
           <property name="alignment">
@@ -311,51 +311,35 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <widget class="QSpinBox" name="spinBox_12"/>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout" name="field_categorie"/>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_12">
-        <item>
-         <widget class="QSpinBox" name="spinBox_11"/>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout" name="field_type"/>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <layout class="QHBoxLayout" name="field_modele">
         <item>
          <widget class="QSpinBox" name="spinBox_6"/>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <layout class="QHBoxLayout" name="field_taille"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="field_couleur"/>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="field_quantite">
         <item>
-         <widget class="QSpinBox" name="spinBox_10"/>
+         <widget class="QSpinBox" name="qty_spin"/>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <layout class="QHBoxLayout" name="field_achat">
         <item>
-         <widget class="QSpinBox" name="spinBox_9"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <widget class="QSpinBox" name="spinBox_7"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox">
+         <widget class="QDoubleSpinBox" name="achat_spin">
           <property name="suffix">
            <string> euros</string>
           </property>
@@ -370,9 +354,9 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <layout class="QHBoxLayout" name="field_vente">
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+         <widget class="QDoubleSpinBox" name="vente_spin">
           <property name="suffix">
            <string> euros</string>
           </property>
@@ -387,7 +371,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_14">
+       <layout class="QHBoxLayout" name="field_rabais">
         <item>
          <widget class="QSpinBox" name="spinBox_8">
           <property name="suffix">
@@ -401,9 +385,9 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QHBoxLayout" name="field_date">
         <item>
-         <widget class="QDateEdit" name="dateEdit_2">
+         <widget class="QDateEdit" name="date_edit">
           <property name="currentSection">
            <enum>QDateTimeEdit::DaySection</enum>
           </property>
