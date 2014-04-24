@@ -32,6 +32,7 @@ class Article
 		int GetStock();
         QString GetStockString();
 		float GetBuyPrice();
+        QString GetBuyPriceString();
 		float GetSellPrice();
 		int GetDiscountPercent();
 		float GetDiscountPrice();

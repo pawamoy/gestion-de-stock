@@ -196,7 +196,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     OpenStock(DEFAULT_STOCK);
 
-    FillTableRW();
+    FillTableRO();
 
     //ComboBoxCategory* test;
     //test = dynamic_cast<ComboBoxCategory*>(ui->tableWidget->cellWidget(1,1));
@@ -243,12 +243,21 @@ void MainWindow::InsertRowRO(int r, StockArticle* sa)
     ui->tableWidget->insertRow(r);
 
     QLabel* ref = new QLabel(sa->GetReferenceString());
+    ref->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* categ = new QLabel(sa->GetCategoryName());
+    categ->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* type = new QLabel(sa->GetTypeName());
+    type->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* model = new QLabel(sa->GetModelString());
+    model->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* color = new QLabel(sa->GetColorName());
+    color->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* size = new QLabel(sa->GetSizeName());
+    size->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* qty = new QLabel(sa->GetStockString());
+    qty->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* achat = new QLabel(sa->GetBuyPriceString());
+    achat->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     ui->tableWidget->setCellWidget(r,0,ref);
     ui->tableWidget->setCellWidget(r,1,categ);
@@ -257,6 +266,8 @@ void MainWindow::InsertRowRO(int r, StockArticle* sa)
     ui->tableWidget->setCellWidget(r,4,size);
     ui->tableWidget->setCellWidget(r,5,color);
     ui->tableWidget->setCellWidget(r,6,qty);
+    ui->tableWidget->setCellWidget(r,7,achat);
+
 
     // TODO: set combo boxes to values of sa
 }
@@ -287,7 +298,7 @@ void MainWindow::InsertRowRW(int r, StockArticle* sa)
 
 void MainWindow::on_stock_add_clicked()
 {
-   //Enregistrement *w = new Enregistrement(this);
-    ajoutStock* w = new ajoutStock(this);
+    //Enregistrement *w = new Enregistrement(this);
+    ajoutStock* w = new ajoutStock(this, stock);
     w->show();
 }

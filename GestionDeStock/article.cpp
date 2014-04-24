@@ -97,6 +97,11 @@ float Article::GetBuyPrice()
 	return bprice;
 }
 
+QString Article::GetBuyPriceString()
+{
+    return QString::number(GetBuyPrice());
+}
+
 float Article::GetSellPrice()
 {
 	return sprice;
