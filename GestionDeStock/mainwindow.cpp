@@ -4,6 +4,7 @@
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
 #include "comboboxtype.h"
+#include "enregistrement.h"
 #include <QLabel>
 
 /******************** INITIALISATION DONNEES GLOBALES *****************/
@@ -214,10 +215,21 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->tableWidget->setCellWidget(i,1,categ);
         ui->tableWidget->setCellWidget(i,2,type);
         ui->tableWidget->setCellWidget(i,5,color);
+        //ui->tableWidget->setCellWidget(i,,);
+
+
+
+
     }
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    Enregistrement *w = new Enregistrement(this);
+    w->show();
 }
