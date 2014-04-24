@@ -1,12 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "stock.h"
-#include "comboboxcolor.h"
-#include "comboboxcategory.h"
-#include "comboboxtype.h"
-#include "comboboxsize.h"
-#include "enregistrement.h"
-#include <QLabel>
 
 /******************** INITIALISATION DONNEES GLOBALES *****************/
 
@@ -190,40 +183,17 @@ int size_num[] = {
 
 /**************** FIN INITIALISATION DONNEES GLOBALES *****************/
 
+#define DEFAULT_STOCK "../appdata/stock"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    Stock* stock = new Stock();
-    stock->ReadStockFile("../appdata/stock");
+    OpenStock(DEFAULT_STOCK);
 
-    int i,s = stock->GetStockSize();
-    StockArticle* sa;
-
-    for (i=0; i<s; i++)
-    {
-        ui->tableWidget->insertRow(i);
-
-        sa = stock->GetArticleN(i);
-        //QLabel* ref = new QLabel(sa->GetReferenceString());
-        ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget);
-        ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt());
-        //QLabel* model = new QLabel(sa->GetModelString());
-        ComboBoxColor* color = new ComboBoxColor(ui->tableWidget);
-        ComboBoxSize* size = new ComboBoxSize(ui->tableWidget);
-
-        //ui->tableWidget->setCellWidget(i,0,ref);
-        ui->tableWidget->setItem(i,0,new QTableWidgetItem(sa->GetReferenceString()));
-        ui->tableWidget->setCellWidget(i,1,categ);
-        ui->tableWidget->setCellWidget(i,2,type);
-        //ui->tableWidget->setCellWidget(i,3,model);
-        ui->tableWidget->setItem(i,3,new QTableWidgetItem(sa->GetModelString()));
-        ui->tableWidget->setCellWidget(i,4,size);
-        ui->tableWidget->setCellWidget(i,5,color);
-        //ui->tableWidget->setCellWidget(i,,);
-    }
+    FillTableRO();
 
     //ComboBoxCategory* test;
     //test = dynamic_cast<ComboBoxCategory*>(ui->tableWidget->cellWidget(1,1));
@@ -232,6 +202,73 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::OpenStock(const char* s)
+{
+    stock = new Stock();
+    if (s != NULL)
+        stock->ReadStockFile(s);
+}
+
+void MainWindow::DeleteStock()
+{
+    if (stock != NULL)
+        delete stock;
+}
+
+void MainWindow::FillTableRO()
+{
+    int i,s = stock->GetStockSize();
+
+    ui->tableWidget->setRowCount(0);
+    for (i=0; i<s; i++)
+        InsertRowRO(i, stock->GetArticleN(i));
+}
+
+void MainWindow::FillTableRW()
+{
+    int i,s = stock->GetStockSize();
+
+    ui->tableWidget->setRowCount(0);
+    for (i=0; i<s; i++)
+        InsertRowRW(i, stock->GetArticleN(i));
+}
+
+void MainWindow::InsertRowRO(int r, StockArticle* sa)
+{
+    ui->tableWidget->insertRow(r);
+
+    QLabel* ref = new QLabel(sa->GetReferenceString());
+    QLabel* categ = new QLabel(sa->GetCategoryName());
+    QLabel* type = new QLabel(sa->GetTypeName());
+    QLabel* model = new QLabel(sa->GetModelString());
+    QLabel* color = new QLabel(sa->GetColorName());
+    QLabel* size = new QLabel(sa->GetSizeName());
+
+    ui->tableWidget->setCellWidget(r,0,ref);
+    ui->tableWidget->setCellWidget(r,1,categ);
+    ui->tableWidget->setCellWidget(r,2,type);
+    ui->tableWidget->setCellWidget(r,3,model);
+    ui->tableWidget->setCellWidget(r,4,size);
+    ui->tableWidget->setCellWidget(r,5,color);
+}
+
+void MainWindow::InsertRowRW(int r, StockArticle* sa)
+{
+    ui->tableWidget->insertRow(r);
+
+    ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget);
+    ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt());
+    ComboBoxColor* color = new ComboBoxColor(ui->tableWidget);
+    ComboBoxSize* size = new ComboBoxSize(ui->tableWidget);
+
+    ui->tableWidget->setItem(r,0,new QTableWidgetItem(sa->GetReferenceString()));
+    ui->tableWidget->setCellWidget(r,1,categ);
+    ui->tableWidget->setCellWidget(r,2,type);
+    ui->tableWidget->setItem(r,3,new QTableWidgetItem(sa->GetModelString()));
+    ui->tableWidget->setCellWidget(r,4,size);
+    ui->tableWidget->setCellWidget(r,5,color);
 }
 
 void MainWindow::on_pushButton_2_clicked()
