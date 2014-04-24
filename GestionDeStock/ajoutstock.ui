@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>402</width>
-    <height>534</height>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,28 +20,6 @@
    <iconset>
     <normaloff>../appdata/list-add.png</normaloff>../appdata/list-add.png</iconset>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>470</y>
-     <width>381</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="layoutOkCancel">
-    <item>
-     <widget class="QDialogButtonBox" name="buttonBox">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_12">
    <property name="geometry">
     <rect>
@@ -52,15 +30,18 @@
     </rect>
    </property>
    <layout class="QHBoxLayout" name="bigHLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
     <item>
      <layout class="QVBoxLayout" name="labels">
       <item>
        <widget class="QLabel" name="label_ref">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -75,9 +56,9 @@
        <widget class="QLabel" name="label_categorie">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -92,9 +73,9 @@
        <widget class="QLabel" name="label_type">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -109,9 +90,9 @@
        <widget class="QLabel" name="label_model">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -126,9 +107,9 @@
        <widget class="QLabel" name="label_taille">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -143,9 +124,9 @@
        <widget class="QLabel" name="label_couleur">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -160,9 +141,9 @@
        <widget class="QLabel" name="label_quantite">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -177,9 +158,9 @@
        <widget class="QLabel" name="label_achat">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -194,9 +175,9 @@
        <widget class="QLabel" name="label_vente">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
           <underline>false</underline>
           <strikeout>false</strikeout>
          </font>
@@ -216,9 +197,9 @@
        <widget class="QLabel" name="label_rabais">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -233,9 +214,9 @@
        <widget class="QLabel" name="label_date">
         <property name="font">
          <font>
-          <weight>75</weight>
-          <italic>true</italic>
-          <bold>true</bold>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
          </font>
         </property>
         <property name="text">
@@ -409,40 +390,33 @@
     </item>
    </layout>
   </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>490</y>
+     <width>381</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="boutons_ok">
+    <item>
+     <widget class="QPushButton" name="annuler">
+      <property name="text">
+       <string>Annuler</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="valider">
+      <property name="text">
+       <string>Valider</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>ajoutStock</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>ajoutStock</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
