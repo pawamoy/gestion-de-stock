@@ -184,6 +184,7 @@ int size_num[] = {
 /**************** FIN INITIALISATION DONNEES GLOBALES *****************/
 
 #define DEFAULT_STOCK "../appdata/stock"
+#define MAX_QUANTITY 9999
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -191,9 +192,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //connect(ui->stock_add, SIGNAL(clicked()), this, SLOT(on_stock_add_clicked()));
+
     OpenStock(DEFAULT_STOCK);
 
-    FillTableRO();
+    FillTableRW();
 
     //ComboBoxCategory* test;
     //test = dynamic_cast<ComboBoxCategory*>(ui->tableWidget->cellWidget(1,1));
@@ -245,6 +248,7 @@ void MainWindow::InsertRowRO(int r, StockArticle* sa)
     QLabel* model = new QLabel(sa->GetModelString());
     QLabel* color = new QLabel(sa->GetColorName());
     QLabel* size = new QLabel(sa->GetSizeName());
+    QLabel* qty = new QLabel(sa->GetStockString());
 
     ui->tableWidget->setCellWidget(r,0,ref);
     ui->tableWidget->setCellWidget(r,1,categ);
@@ -252,6 +256,9 @@ void MainWindow::InsertRowRO(int r, StockArticle* sa)
     ui->tableWidget->setCellWidget(r,3,model);
     ui->tableWidget->setCellWidget(r,4,size);
     ui->tableWidget->setCellWidget(r,5,color);
+    ui->tableWidget->setCellWidget(r,6,qty);
+
+    // TODO: set combo boxes to values of sa
 }
 
 void MainWindow::InsertRowRW(int r, StockArticle* sa)
@@ -260,19 +267,27 @@ void MainWindow::InsertRowRW(int r, StockArticle* sa)
 
     ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget);
     ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt());
+    QSpinBox* model = new QSpinBox(ui->tableWidget);
+    model->setMaximum(9);
     ComboBoxColor* color = new ComboBoxColor(ui->tableWidget);
     ComboBoxSize* size = new ComboBoxSize(ui->tableWidget);
+    QSpinBox* qty = new QSpinBox(ui->tableWidget);
+    qty->setMaximum(MAX_QUANTITY);
 
     ui->tableWidget->setItem(r,0,new QTableWidgetItem(sa->GetReferenceString()));
     ui->tableWidget->setCellWidget(r,1,categ);
     ui->tableWidget->setCellWidget(r,2,type);
-    ui->tableWidget->setItem(r,3,new QTableWidgetItem(sa->GetModelString()));
+    ui->tableWidget->setCellWidget(r,3,model);
     ui->tableWidget->setCellWidget(r,4,size);
     ui->tableWidget->setCellWidget(r,5,color);
+    ui->tableWidget->setCellWidget(r,6,qty);
+
+    // TODO: set combo boxes to values of sa
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_stock_add_clicked()
 {
-    Enregistrement *w = new Enregistrement(this);
+   //Enregistrement *w = new Enregistrement(this);
+    ajoutStock* w = new ajoutStock(this);
     w->show();
 }

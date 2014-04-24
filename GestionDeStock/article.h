@@ -30,6 +30,7 @@ class Article
 		int GetModelInt();
 		QString GetModelString();
 		int GetStock();
+        QString GetStockString();
 		float GetBuyPrice();
 		float GetSellPrice();
 		int GetDiscountPercent();

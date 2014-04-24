@@ -87,6 +87,11 @@ int Article::GetStock()
     return qty;
 }
 
+QString Article::GetStockString()
+{
+    return QString::number(GetStock());
+}
+
 float Article::GetBuyPrice()
 {
 	return bprice;
