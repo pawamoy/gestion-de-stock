@@ -12,22 +12,25 @@ TARGET = GestionDeStock
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp\
-		article.cpp\
-		stock.cpp\
+SOURCES += main.cpp \
+        mainwindow.cpp \
+		article.cpp \
+		stock.cpp \
 		comboboxcolor.cpp \
     comboboxcategory.cpp \
     comboboxtype.cpp \
-    comboboxsize.cpp
+    comboboxsize.cpp \
+    enregistrement.cpp
 
-HEADERS  += mainwindow.h\
-		article.h\
-		datasets.h\
-		stock.h\
+HEADERS  += mainwindow.h \
+		article.h \
+		datasets.h \
+		stock.h \
 		comboboxcolor.h \
     comboboxcategory.h \
     comboboxtype.h \
-    comboboxsize.h
+    comboboxsize.h \
+    enregistrement.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    enregistrement.ui
