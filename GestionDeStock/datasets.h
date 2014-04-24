@@ -78,6 +78,9 @@
 	} RGB;
 
 
+/************ COULEURS ************/
+#define END_SIZE 21
+
 /************************* DECLARATIONS EXTERNES **********************/
 extern QString category[];
 extern QString subcategory0[];

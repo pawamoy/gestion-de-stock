@@ -4,6 +4,7 @@
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
 #include "comboboxtype.h"
+#include "comboboxsize.h"
 #include <QLabel>
 
 /******************** INITIALISATION DONNEES GLOBALES *****************/
@@ -205,16 +206,25 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->tableWidget->insertRow(i);
 
         sa = stock->GetArticleN(i);
-        QLabel* label = new QLabel(sa->GetReferenceString());
-        ComboBoxColor* color = new ComboBoxColor(ui->tableWidget);
+        //QLabel* ref = new QLabel(sa->GetReferenceString());
         ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget);
         ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt());
+        //QLabel* model = new QLabel(sa->GetModelString());
+        ComboBoxColor* color = new ComboBoxColor(ui->tableWidget);
+        ComboBoxSize* size = new ComboBoxSize(ui->tableWidget);
 
-        ui->tableWidget->setCellWidget(i, 0, label);
+        //ui->tableWidget->setCellWidget(i,0,ref);
+        ui->tableWidget->setItem(i,0,new QTableWidgetItem(sa->GetReferenceString()));
         ui->tableWidget->setCellWidget(i,1,categ);
         ui->tableWidget->setCellWidget(i,2,type);
+        //ui->tableWidget->setCellWidget(i,3,model);
+        ui->tableWidget->setItem(i,3,new QTableWidgetItem(sa->GetModelString()));
+        ui->tableWidget->setCellWidget(i,4,size);
         ui->tableWidget->setCellWidget(i,5,color);
     }
+
+    //ComboBoxCategory* test;
+    //test = dynamic_cast<ComboBoxCategory*>(ui->tableWidget->cellWidget(1,1));
 }
 
 MainWindow::~MainWindow()

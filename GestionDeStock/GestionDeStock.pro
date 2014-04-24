@@ -18,7 +18,8 @@ SOURCES += main.cpp\
 		stock.cpp\
 		comboboxcolor.cpp \
     comboboxcategory.cpp \
-    comboboxtype.cpp
+    comboboxtype.cpp \
+    comboboxsize.cpp
 
 HEADERS  += mainwindow.h\
 		article.h\
@@ -26,6 +27,7 @@ HEADERS  += mainwindow.h\
 		stock.h\
 		comboboxcolor.h \
     comboboxcategory.h \
-    comboboxtype.h
+    comboboxtype.h \
+    comboboxsize.h
 
 FORMS    += mainwindow.ui
