@@ -7,106 +7,283 @@
     <x>0</x>
     <y>0</y>
     <width>1123</width>
-    <height>429</height>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Gestion de stock</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../appdata/kspread.png</normaloff>../appdata/kspread.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>40</y>
-      <width>1121</width>
-      <height>331</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QTableWidget" name="tableWidget">
-       <column>
-        <property name="text">
-         <string>Référence</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Catégorie</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Type</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Modèle</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Taille</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Couleur</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Quantité</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Achat</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Vente</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Rabais (%)</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Livraison</string>
-        </property>
-       </column>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1121</width>
-      <height>41</height>
+      <width>1131</width>
+      <height>411</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>Nouvel enregistrement (ajout au stock)</string>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="enabled">
+        <bool>true</bool>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>Nouvelle vente</string>
+       <property name="currentIndex">
+        <number>0</number>
        </property>
+       <widget class="QWidget" name="onglet_stock">
+        <attribute name="title">
+         <string>Produits en stock</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>30</y>
+           <width>1121</width>
+           <height>341</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QTableWidget" name="tableWidget">
+            <column>
+             <property name="text">
+              <string>Référence</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Catégorie</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Type</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Modèle</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Taille</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Couleur</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Quantité</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Achat</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Vente</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Rabais (%)</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Livraison</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="horizontalLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>-1</x>
+           <y>-1</y>
+           <width>1121</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="stock_add">
+            <property name="text">
+             <string>Ajouter des articles</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../appdata/list-add.png</normaloff>../appdata/list-add.png</iconset>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="stock_del">
+            <property name="text">
+             <string>Supprimer l'article</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../appdata/edit-delete.png</normaloff>../appdata/edit-delete.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="stock_mod">
+            <property name="text">
+             <string>Modifier l'article</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../appdata/go-down.png</normaloff>../appdata/go-down.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="stock_sell">
+            <property name="text">
+             <string>Vendre l'article</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../appdata/edit-redo.png</normaloff>../appdata/edit-redo.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="onglet_vente">
+        <attribute name="title">
+         <string>Ventes effectuées</string>
+        </attribute>
+        <widget class="QWidget" name="horizontalLayoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>-1</x>
+           <y>-1</y>
+           <width>1121</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="sells_add">
+            <property name="text">
+             <string>Nouvelle vente</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../appdata/list-add.png</normaloff>../appdata/list-add.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="sells_cancel">
+            <property name="text">
+             <string>Annuler cette vente</string>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../appdata/edit-undo.png</normaloff>../appdata/edit-undo.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="verticalLayoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>30</y>
+           <width>1121</width>
+           <height>341</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QTableWidget" name="tableWidget_2">
+            <column>
+             <property name="text">
+              <string>Référence</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Catégorie</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Type</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Modèle</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Taille</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Couleur</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Quantité</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Achat</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Vente</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Rabais (%)</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Livraison</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </widget>
      </item>
     </layout>

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLabel>
+#include <QSpinBox>
 
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
@@ -10,6 +11,7 @@
 #include "comboboxsize.h"
 #include "enregistrement.h"
 #include "stock.h"
+#include "ajoutstock.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,7 +33,7 @@ public:
     void InsertRowRW(int r, StockArticle* sa);
     
 private slots:
-    void on_pushButton_2_clicked();
+    void on_stock_add_clicked();
 
 private:
     Ui::MainWindow *ui;
