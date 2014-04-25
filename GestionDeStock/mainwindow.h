@@ -11,6 +11,7 @@
 #include "comboboxsize.h"
 #include "enregistrement.h"
 #include "stock.h"
+#include "sells.h"
 #include "ajoutstock.h"
 
 namespace Ui {
@@ -40,6 +41,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Stock* stock;
+    Sells* sells;
 };
 
 #endif // MAINWINDOW_H
