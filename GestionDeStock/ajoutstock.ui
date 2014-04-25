@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>402</width>
-    <height>531</height>
+    <height>541</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -234,7 +234,7 @@
       <item>
        <layout class="QHBoxLayout" name="field_reference">
         <item>
-         <widget class="QSpinBox" name="spinBox_4">
+         <widget class="QSpinBox" name="refca">
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -247,7 +247,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox_5">
+         <widget class="QSpinBox" name="reft">
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -257,7 +257,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox_3">
+         <widget class="QSpinBox" name="refm">
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -270,7 +270,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox_2">
+         <widget class="QSpinBox" name="refs">
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -280,7 +280,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox">
+         <widget class="QSpinBox" name="refco">
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -300,7 +300,11 @@
       <item>
        <layout class="QHBoxLayout" name="field_modele">
         <item>
-         <widget class="QSpinBox" name="spinBox_6"/>
+         <widget class="QSpinBox" name="model_spin">
+          <property name="maximum">
+           <number>9</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -354,7 +358,7 @@
       <item>
        <layout class="QHBoxLayout" name="field_rabais">
         <item>
-         <widget class="QSpinBox" name="spinBox_8">
+         <widget class="QSpinBox" name="rabais_spin">
           <property name="suffix">
            <string> %</string>
           </property>

@@ -7,7 +7,7 @@ class ComboBoxColor
         : public QComboBox
 {
 public:
-    ComboBoxColor(QWidget *parent);
+    ComboBoxColor(QWidget *parent, int nc);
 };
 
 #endif // COMBOBOXCOLOR_H

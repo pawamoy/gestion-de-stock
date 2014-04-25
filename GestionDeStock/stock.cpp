@@ -78,8 +78,6 @@ void Stock::ReadStockFile(const char* path)
 		return;
 	}
 
-    std::cout << "Start to read " << path << " file" << std::endl;
-
 	// déclaration des variables
 	int ref, qty, discount, year, month, day;
 	float buy, sell;

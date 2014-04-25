@@ -13,21 +13,22 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-        mainwindow.cpp \
-		article.cpp \
-		stock.cpp \
-		comboboxcolor.cpp \
+    mainwindow.cpp \
+	article.cpp \
+	stock.cpp \
+	comboboxcolor.cpp \
     comboboxcategory.cpp \
     comboboxtype.cpp \
     comboboxsize.cpp \
     enregistrement.cpp \
-    ajoutstock.cpp
+    ajoutstock.cpp \
+    datasets.cpp
 
 HEADERS  += mainwindow.h \
-		article.h \
-		datasets.h \
-		stock.h \
-		comboboxcolor.h \
+	article.h \
+	datasets.h \
+	stock.h \
+	comboboxcolor.h \
     comboboxcategory.h \
     comboboxtype.h \
     comboboxsize.h \

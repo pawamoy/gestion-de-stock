@@ -7,7 +7,7 @@ class ComboBoxCategory
         : public QComboBox
 {
 public:
-    ComboBoxCategory(QWidget* parent);
+    ComboBoxCategory(QWidget* parent, int nc);
 };
 
 #endif // COMBOBOXCATEGORY_H

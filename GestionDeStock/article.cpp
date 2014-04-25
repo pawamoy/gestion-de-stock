@@ -107,9 +107,19 @@ float Article::GetSellPrice()
 	return sprice;
 }
 
+QString Article::GetSellPriceString()
+{
+    return QString::number(GetSellPrice());
+}
+
 int Article::GetDiscountPercent()
 {
     return discount;
+}
+
+QString Article::GetDiscountPercentString()
+{
+    return QString::number(GetDiscountPercent());
 }
 
 float Article::GetDiscountPrice()
@@ -117,9 +127,27 @@ float Article::GetDiscountPrice()
 	return GetSellPrice() * (GetDiscountPercent() / 100);
 }
 
+QString Article::GetDiscountPriceString()
+{
+    return QString::number(GetDiscountPrice());
+}
+
 QDate Article::GetDeliveryDate()
 {
 	return delivery;
+}
+
+QString Article::GetDeliveryString(const char *separator)
+{
+    //QString d = delivery.toString(QString("2000/12/01"));
+    //return d;
+    QString y = QString::number(delivery.year());
+    y = y.rightJustified(2, '0');
+    QString m = QString::number(delivery.month());
+    m = m.rightJustified(2, '0');
+    QString d = QString::number(delivery.day());
+    d = d.rightJustified(2, '0');
+    return y.append(separator).append(m).append(separator).append(d);
 }
 
 int Article::GetDaysInStock()

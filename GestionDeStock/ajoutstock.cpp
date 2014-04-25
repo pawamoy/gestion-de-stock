@@ -12,15 +12,15 @@ ajoutStock::ajoutStock(QWidget *parent, Stock *st) :
     //connect(ui->annuler, SIGNAL(clicked()), this, SLOT(on_annuler_clicked()));
     //connect(ui->valider, SIGNAL(clicked()), this, SLOT(on_valider_clicked()));
 
-    ComboBoxCategory* c = new ComboBoxCategory(this);
-    ComboBoxType* t = new ComboBoxType(this, 0);
-    ComboBoxSize* s = new ComboBoxSize(this);
-    ComboBoxColor* o = new ComboBoxColor(this);
+    category_box = new ComboBoxCategory(this, 0);
+    type_box = new ComboBoxType(this, 0, 0);
+    size_box = new ComboBoxSize(this, 0);
+    color_box = new ComboBoxColor(this, 0);
 
-    ui->field_categorie->addWidget(c);
-    ui->field_type->addWidget(t);
-    ui->field_taille->addWidget(s);
-    ui->field_couleur->addWidget(o);
+    ui->field_categorie->addWidget(category_box);
+    ui->field_type->addWidget(type_box);
+    ui->field_taille->addWidget(size_box);
+    ui->field_couleur->addWidget(color_box);
 }
 
 ajoutStock::~ajoutStock()
