@@ -252,5 +252,7 @@ void MainWindow::on_stock_mod_clicked()
         StockArticle* articleCourant = stock->GetArticleN(ui->tableWidget->currentRow());
         modifStock* w = new modifStock(this, stock, articleCourant);
         w->exec();
+
+        SetStockRow(ui->tableWidget->currentRow(), articleCourant);
     }
 }

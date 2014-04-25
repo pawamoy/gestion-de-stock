@@ -85,7 +85,65 @@ void ComboBoxType::SetSelection(int nc, int nt)
         this->setCurrentIndex(0);
 }
 
-int ComboBoxType::GetIndex(std::string type)
+int ComboBoxType::GetIndex(int cat, std::string type)
 {
-    return 0;
+    int t;
+    std::string tmp;
+
+    switch (cat)
+    {
+    case INTERVETEMENT:
+        for (t=0; t<END_TYPE1; t++)
+        {
+            tmp = subcategory1[t].toUtf8().constData();
+            if( ! tmp.compare(type) )
+                return t;
+        }
+        break;
+
+    case VETEMENT1:
+    case VETEMENT2:
+    case VETEMENT3:
+    case VETEMENT4:
+        for (t=0; t<END_TYPE2; t++)
+        {
+            tmp = subcategory2[t].toUtf8().constData();
+            if( ! tmp.compare(type) )
+                return t;
+        }
+        break;
+
+    case SURVETEMENT1:
+    case SURVETEMENT2:
+    case SURVETEMENT3:
+        for (t=0; t<END_TYPE3; t++)
+        {
+            tmp = subcategory3[t].toUtf8().constData();
+            if( ! tmp.compare(type) )
+                return t;
+        }
+        break;
+
+    case ENSEMBLE:
+        for (t=0; t<END_TYPE4; t++)
+        {
+            tmp = subcategory4[t].toUtf8().constData();
+            if( ! tmp.compare(type) )
+                return t;
+        }
+        break;
+
+    case SOUSVETEMENT:
+    default:
+        for (t=0; t<END_TYPE0; t++)
+        {
+            tmp = subcategory0[t].toUtf8().constData();
+            if( ! tmp.compare(type) )
+                return t;
+        }
+        break;
+    }
+
+    return -1;
+
 }
