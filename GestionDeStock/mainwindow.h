@@ -28,6 +28,7 @@ public:
     ~MainWindow();
 
     void OpenStock(const char* s);
+    void OpenSells(const char* s);
     void DeleteStock();
     void FillTableRO();
     void FillTableRW();

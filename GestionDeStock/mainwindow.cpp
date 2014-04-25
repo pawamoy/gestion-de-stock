@@ -31,9 +31,9 @@ void MainWindow::OpenStock(const char* s)
 
 void MainWindow::OpenSells(const char* s)
 {
-    sells = new Stock();
+    sells = new Sells();
     if (s != NULL)
-        stock->ReadStockFile(s);
+        sells->ReadSellsFile(s);
 }
 
 void MainWindow::DeleteStock()
