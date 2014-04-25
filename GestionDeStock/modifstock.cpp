@@ -8,7 +8,6 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     ui->setupUi(this);
 
     stock = st;
-
     article = ac;
 
     category_box = new ComboBoxCategory(this, 0);
@@ -18,6 +17,7 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
 
     connect(category_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCat()));
 
+    /*
     int index = color_box->GetIndex( (std::string)ac->GetColorName().toUtf8().constData() );
     if ( index != -1 )
     { // -1 for not found
@@ -46,7 +46,12 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     { // -1 for not found
        type_box->setCurrentIndex(index);
     }
+    */
 
+    category_box->SetSelection(ac->GetCategoryInt());
+    type_box->SetSelection(ac->GetCategoryInt(), ac->GetTypeInt());
+    size_box->SetSelection(ac->GetSizeInt());
+    color_box->SetSelection(ac->GetColorInt());
 
     ui->field_categorie->addWidget(category_box);
     ui->field_type->addWidget(type_box);
@@ -54,7 +59,7 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     ui->field_couleur->addWidget(color_box);
 
     ui->refca->setValue(ac->GetCategoryInt());
-    ui->reft->setValue(atoi(ac->GetTypeString().toUtf8().constData()));
+    ui->reft->setValue(ac->GetTypeInt());
     ui->refm->setValue(ac->GetModelInt());
     ui->refs->setValue(ac->GetSizeInt());
     ui->refco->setValue(ac->GetColorInt());
@@ -65,8 +70,7 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     ui->vente_spin->setValue(ac->GetSellPrice());
     ui->rabais_spin->setValue(ac->GetDiscountPercent());
 
-    QDate date(ac->GetDeliveryDate().year(), ac->GetDeliveryDate().month(), ac->GetDeliveryDate().day());
-    ui->date_edit->setDate(date);
+    ui->date_edit->setDate(ac->GetDeliveryDate());
 }
 
 modifStock::~modifStock()
@@ -76,8 +80,10 @@ modifStock::~modifStock()
 
 void modifStock::changeCat()
 {
-    ui->field_type->removeWidget(type_box);
-    type_box = new ComboBoxType(this, category_box->currentIndex(), 0);
+    // cette ligne fait totalement délirer la fenetre haha :D
+    //ui->field_type->removeWidget(type_box);
+    delete type_box;
+    type_box = new ComboBoxType(this, GetCategory(), GetRefType());
     ui->field_type->addWidget(type_box);
 }
 

@@ -55,6 +55,15 @@
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
            <widget class="QTableWidget" name="tableWidget">
+            <property name="dragDropOverwriteMode">
+             <bool>false</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
             <column>
              <property name="text">
               <string>Référence</string>
@@ -370,7 +379,7 @@
   </action>
   <action name="actionOuvrir_Stock">
    <property name="text">
-    <string>Ouvrir Stock</string>
+    <string>Ouvrir Stock...</string>
    </property>
   </action>
   <action name="actionEnregistrer_Stock">
@@ -413,7 +422,7 @@
   </action>
   <action name="actionOuvrir_Vente">
    <property name="text">
-    <string>Ouvrir Vente</string>
+    <string>Ouvrir Vente...</string>
    </property>
   </action>
   <action name="actionNouvelle_Vente">
