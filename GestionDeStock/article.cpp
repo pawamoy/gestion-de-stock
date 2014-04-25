@@ -139,8 +139,6 @@ QDate Article::GetDeliveryDate()
 
 QString Article::GetDeliveryString(const char *separator)
 {
-    //QString d = delivery.toString(QString("2000/12/01"));
-    //return d;
     QString y = QString::number(delivery.year());
     y = y.rightJustified(2, '0');
     QString m = QString::number(delivery.month());
@@ -838,6 +836,17 @@ SoldArticle::SoldArticle(StockArticle sa, int quantity, QDate sell_date)
 QDate SoldArticle::GetSellDate()
 {
 	return selldate;
+}
+
+QString SoldArticle::GetSellDateString(const char* separator)
+{
+    QString y = QString::number(selldate.year());
+    y = y.rightJustified(2, '0');
+    QString m = QString::number(selldate.month());
+    m = m.rightJustified(2, '0');
+    QString d = QString::number(selldate.day());
+    d = d.rightJustified(2, '0');
+    return y.append(separator).append(m).append(separator).append(d);
 }
 
 int SoldArticle::GetDaysSinceSold()

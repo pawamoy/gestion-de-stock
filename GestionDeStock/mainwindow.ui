@@ -107,7 +107,7 @@
             </column>
             <column>
              <property name="text">
-              <string>Livraison</string>
+              <string>Livré le</string>
              </property>
             </column>
            </widget>
@@ -279,7 +279,12 @@
             </column>
             <column>
              <property name="text">
-              <string>Livraison</string>
+              <string>Livré le</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Vendu le</string>
              </property>
             </column>
            </widget>

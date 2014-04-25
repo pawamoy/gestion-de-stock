@@ -151,6 +151,7 @@ class SoldArticle: public Article
         SoldArticle(StockArticle sa, int quantity, QDate sell_date=QDate::currentDate());
 		
 		QDate GetSellDate();
+        QString GetSellDateString(const char* separator);
 		int GetDaysSinceSold();
 		int GetDaysToSell();
 		
