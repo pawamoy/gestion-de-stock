@@ -82,14 +82,14 @@ QString Article::GetModelString()
     return QString::number(GetModelInt());
 }
 
-int Article::GetStock()
+int Article::GetQuantity()
 {
     return qty;
 }
 
-QString Article::GetStockString()
+QString Article::GetQuantityString()
 {
-    return QString::number(GetStock());
+    return QString::number(GetQuantity());
 }
 
 float Article::GetBuyPrice()
@@ -380,17 +380,17 @@ bool Article::HasQuantity(int q)
 	if (q == ALL)
 		return true;
 	else
-		return (GetStock() == q);
+		return (GetQuantity() == q);
 }
 
 bool Article::HasMore(int q)
 {
-	return (GetStock() >= q);
+	return (GetQuantity() >= q);
 }
 
 bool Article::HasLess(int q)
 {
-	return (GetStock() < q);
+	return (GetQuantity() < q);
 }
 
 bool Article::Costs(float p)
@@ -474,7 +474,7 @@ bool Article::EquivalentTo(Article a)
 {
 	return (
 		HasReference(a.GetReferenceRef())   &&
-		HasQuantity(a.GetStock())           &&
+		HasQuantity(a.GetQuantity())           &&
 		Bought(a.GetBuyPrice())             &&
 		Costs(a.GetSellPrice())             &&
 		HasDiscount(a.GetDiscountPercent()) &&
@@ -540,7 +540,7 @@ float Article::CompareDiscountPrice(Article sa)
 
 int Article::CompareStock(Article sa)
 {
-	return (GetStock() - sa.GetStock());
+	return (GetQuantity() - sa.GetQuantity());
 }
 
 int Article::CompareDelivery(Article sa)
@@ -597,7 +597,7 @@ bool Article::HasValidColor()
 
 bool Article::HasValidQuantity()
 {
-	return (GetStock() != NR);
+	return (GetQuantity() != NR);
 }
 
 bool Article::HasValidBuyPrice()
@@ -743,12 +743,12 @@ void StockArticle::SetQuantity(int q)
 
 void StockArticle::IncrementQty()
 {
-	SetQuantity(GetStock()+1);
+	SetQuantity(GetQuantity()+1);
 }
 
 void StockArticle::DecrementQty()
 {
-	int q = GetStock()-1;
+	int q = GetQuantity()-1;
 	if (q < 0)
 		SetQuantity(0);
 	else
@@ -757,7 +757,7 @@ void StockArticle::DecrementQty()
 
 void StockArticle::AddQty(int q)
 {
-	SetQuantity(GetStock()+q);
+	SetQuantity(GetQuantity()+q);
 }
 
 void StockArticle::SubQty(int q)
@@ -770,7 +770,7 @@ void StockArticle::SubQty(int q)
     }
     else
     {
-        tq = GetStock()-q;
+        tq = GetQuantity()-q;
         if (tq < 0)
             SetQuantity(0);
         else
@@ -801,7 +801,7 @@ void StockArticle::SetDeliveryDate(QDate d)
 void StockArticle::Replace(StockArticle sa)
 {
 	SetReference(sa.GetReferenceRef());
-	SetQtyAndPrices(sa.GetStock(), sa.GetBuyPrice(), sa.GetSellPrice(), sa.GetDiscountPercent());
+	SetQtyAndPrices(sa.GetQuantity(), sa.GetBuyPrice(), sa.GetSellPrice(), sa.GetDiscountPercent());
 	SetDeliveryDate(sa.GetDeliveryDate());
 }
 
@@ -897,4 +897,9 @@ bool SoldArticle::EquivalentTo(SoldArticle a)
         Article::EquivalentTo((Article)a) &&
 		Sold(a.GetSellDate())
 	);
+}
+
+bool SoldArticle::HasValidSellDate()
+{
+    return ( !GetSellDate().isNull() );
 }

@@ -305,12 +305,17 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actionOuvrir_Stock"/>
-    <addaction name="separator"/>
+    <addaction name="actioNouveau_Stock"/>
     <addaction name="actionNouvelle_Vente"/>
     <addaction name="separator"/>
-    <addaction name="actionSauver_Stock"/>
-    <addaction name="actionEnregistrer_sous"/>
+    <addaction name="actionOuvrir_Stock"/>
+    <addaction name="actionOuvir_Vente"/>
+    <addaction name="separator"/>
+    <addaction name="actionEnregistrer_Stock"/>
+    <addaction name="actionEnregistrer_Vente"/>
+    <addaction name="separator"/>
+    <addaction name="actionEnregistrer_Stock_sous"/>
+    <addaction name="actionEnregistrer_Vente_sous"/>
     <addaction name="separator"/>
     <addaction name="actionQuitter"/>
    </widget>
@@ -321,7 +326,7 @@
     <addaction name="actionEnregistrement"/>
     <addaction name="actionVente"/>
     <addaction name="separator"/>
-    <addaction name="actionPr_f_rences"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -334,27 +339,27 @@
    <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionOuvrir_Stock">
+  <action name="actioNouveau_Stock">
    <property name="text">
-    <string>Nouveau</string>
+    <string>Nouveau Stock</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="actionNouvelle_Vente">
+  <action name="actionOuvrir_Stock">
    <property name="text">
-    <string>Ouvrir</string>
+    <string>Ouvrir Stock</string>
    </property>
   </action>
-  <action name="actionSauver_Stock">
+  <action name="actionEnregistrer_Stock">
    <property name="text">
-    <string>Enregistrer</string>
+    <string>Enregistrer Stock</string>
    </property>
   </action>
-  <action name="actionEnregistrer_sous">
+  <action name="actionEnregistrer_Stock_sous">
    <property name="text">
-    <string>Enregistrer sous...</string>
+    <string>Enregistrer Stock sous...</string>
    </property>
   </action>
   <action name="actionEnregistrement">
@@ -372,7 +377,7 @@
     <string>Quitter</string>
    </property>
   </action>
-  <action name="actionPr_f_rences">
+  <action name="actionPreferences">
    <property name="text">
     <string>Préférences...</string>
    </property>
@@ -380,6 +385,26 @@
   <action name="actionManuel">
    <property name="text">
     <string>Manuel...</string>
+   </property>
+  </action>
+  <action name="actionOuvir_Vente">
+   <property name="text">
+    <string>Ouvir Vente</string>
+   </property>
+  </action>
+  <action name="actionNouvelle_Vente">
+   <property name="text">
+    <string>Nouvelle Vente</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_Vente">
+   <property name="text">
+    <string>Enregistrer Vente</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer_Vente_sous">
+   <property name="text">
+    <string>Enregistrer Vente sous...</string>
    </property>
   </action>
  </widget>
