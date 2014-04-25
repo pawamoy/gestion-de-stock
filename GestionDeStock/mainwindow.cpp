@@ -29,6 +29,13 @@ void MainWindow::OpenStock(const char* s)
         stock->ReadStockFile(s);
 }
 
+void MainWindow::OpenSells(const char* s)
+{
+    sells = new Stock();
+    if (s != NULL)
+        stock->ReadStockFile(s);
+}
+
 void MainWindow::DeleteStock()
 {
     if (stock != NULL)
@@ -83,7 +90,7 @@ void MainWindow::SetRowRO(int r, StockArticle* sa)
     color->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* size = new QLabel(sa->GetSizeName());
     size->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* qty = new QLabel(sa->GetStockString());
+    QLabel* qty = new QLabel(sa->GetQuantityString());
     qty->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* achat = new QLabel(sa->GetBuyPriceString());
     achat->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -121,7 +128,7 @@ void MainWindow::SetRowRW(int r, StockArticle* sa)
     ComboBoxColor* color = new ComboBoxColor(ui->tableWidget, sa->GetColorInt());
     QSpinBox* qty = new QSpinBox(ui->tableWidget);
     qty->setMaximum(MAX_QUANTITY);
-    qty->setValue(sa->GetStock());
+    qty->setValue(sa->GetQuantity());
 
     // affectation aux cellules de la ligne r
     ui->tableWidget->setItem(r,0,new QTableWidgetItem(sa->GetReferenceString()));
