@@ -12,6 +12,7 @@
 #include "enregistrement.h"
 #include "stock.h"
 #include "ajoutstock.h"
+#include "modifstock.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,9 +34,14 @@ public:
     void InsertRowRW(int r, StockArticle* sa);
     void SetRowRO(int r, StockArticle* sa);
     void SetRowRW(int r, StockArticle* sa);
+    void DeleteRowRO(int r, StockArticle* sa);
     
 private slots:
     void on_stock_add_clicked();
+
+    void on_stock_del_clicked();
+
+    void on_stock_mod_clicked();
 
 private:
     Ui::MainWindow *ui;

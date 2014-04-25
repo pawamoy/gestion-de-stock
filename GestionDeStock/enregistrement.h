@@ -2,6 +2,11 @@
 #define ENREGISTREMENT_H
 
 #include <QDialog>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
+#include <stdexcept>
+
 
 namespace Ui {
 class Enregistrement;
@@ -35,6 +40,8 @@ private:
     int getPourcentage();
     int getQuantite();
     void showSelectedItems();
+    bool everythingsAlright();
+    void writeProductFile(const char* path);
 };
 
 #endif // ENREGISTREMENT_H

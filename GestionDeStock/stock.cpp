@@ -630,6 +630,11 @@ void Stock::Replace(StVector sv, StockArticle sb) // exact occurences
 	}
 }
 
+void Stock::Del(int i)
+{
+    stock.Del(i);
+}
+
 
 /************* Testeurs **************/
 /*************************************/

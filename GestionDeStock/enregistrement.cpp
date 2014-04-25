@@ -135,21 +135,62 @@ void Enregistrement::showSelectedItems()
     std::cout << s << std::endl;
 }
 
+bool Enregistrement::everythingsAlright()
+{
+    if( (getCouleur() == -1) || (getRefMod() == -1) || (getRefCoul() == -1) || (getRefTaille() == -1) ||
+         (getPrixAchat() == 0) || getPrixVente() == 0 || getQuantite() == 0)
+        return false;
+
+    return true;
+
+}
+
+void Enregistrement::writeProductFile(const char* path)
+{
+    // if a QString is provided
+    //~ QByteArray ba = file.toUtf8();
+    //~ const char* path = ba.constData();
+
+    std::ofstream fs(path, std::ios::out | std::ios::app);
+
+    if (!fs) {
+        std::cerr << "Unable to open " << path << " in write-mode" << std::endl;
+        return ;
+    }
+
+    fs << getRefMod();
+    fs << getRefCoul();
+    fs << getRefTaille();
+    fs << " ";
+    fs << getQuantite();
+    fs << " ";
+    fs << getPrixAchat();
+    fs << " ";
+    fs << getPrixVente();
+    fs << " ";
+    fs << getPourcentage();
+    fs << " ";
+    fs << getDateYear();
+    fs << " ";
+    fs << getDateMonth();
+    fs << " ";
+    fs << getDateDay();
+    fs << std::endl;
+
+    fs.close();
+}
+
 
 void Enregistrement::on_Valider_clicked()
 {
-    std::cout << "taille : " << getTaille() << std::endl;
-    std::cout << "couleur : " << getCouleur() << std::endl;
-    std::cout << "ref mod " << getRefMod() << std::endl;
-    std::cout << "ref coul " << getRefCoul() << std::endl;
-    std::cout << "ref taille " << getRefTaille() << std::endl;
-    std::cout << "jour " << getDateDay() << std::endl;
-    std::cout << "mois " << getDateMonth() << std::endl;
-    std::cout << "annee " << getDateYear() << std::endl;
-    std::cout << "prix achat " << getPrixAchat() << std::endl;
-    std::cout << "prix vente " << getPrixVente() << std::endl;
-    std::cout << "pourcentage " << getPourcentage() << std::endl;
-    std::cout << "quantite " << getQuantite() << std::endl;
-    showSelectedItems();
+    std::cout << "ici" << std::endl;
+    if ( everythingsAlright() )
+    {
+        std::cout << "on enregistre ! " << std::endl;
+        writeProductFile("../appdata/stock");
+    }
+    parentWidget()->close();
+    parentWidget()->show();
+    close();
 
 }

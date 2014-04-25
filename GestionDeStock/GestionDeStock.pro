@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     comboboxsize.cpp \
     enregistrement.cpp \
     ajoutstock.cpp \
-    datasets.cpp
+    datasets.cpp \
+    modifstock.cpp
 
 HEADERS  += mainwindow.h \
 	article.h \
@@ -33,8 +34,10 @@ HEADERS  += mainwindow.h \
     comboboxtype.h \
     comboboxsize.h \
     enregistrement.h \
-    ajoutstock.h
+    ajoutstock.h \
+    modifstock.h
 
 FORMS    += mainwindow.ui \
     enregistrement.ui \
-    ajoutstock.ui
+    ajoutstock.ui \
+    modifstock.ui

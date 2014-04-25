@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>760</width>
-    <height>713</height>
+    <height>860</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,8 +44,8 @@
     <rect>
      <x>10</x>
      <y>450</y>
-     <width>731</width>
-     <height>231</height>
+     <width>709</width>
+     <height>235</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="TCPP">
@@ -405,15 +405,9 @@
   <zorder>layoutWidget</zorder>
   <zorder>Annuler</zorder>
   <zorder>Valider</zorder>
-  <zorder>labelArticle_2</zorder>
-  <zorder>label_5</zorder>
-  <zorder>prixvente</zorder>
-  <zorder>label_7</zorder>
-  <zorder>quantite</zorder>
+  <zorder>label</zorder>
+  <zorder>CA</zorder>
  </widget>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
 </ui>

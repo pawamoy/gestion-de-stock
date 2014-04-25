@@ -78,6 +78,7 @@ class Stock
 		void Replace(Ref refa, StockArticle sb); //! all occurences
 		void Replace(StockArticle* sa, StockArticle sb); // exact occurence
 		void Replace(StVector sv, StockArticle sb); // exact occurences
+        void Del(int i);
 		
 		bool Contains(int reference);
 		bool Contains(Ref reference);
