@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
-#include <algorithm>
 #include <QByteArray>
 #include <iostream>
 #include <fstream>
@@ -35,8 +34,8 @@ class Sells
 		Sells();
 		~Sells();
 		
-		void ReadSellsFile(const char* path);
-		void WriteSellsFile(const char* path);
+        void ReadSellsFile(QString path);
+        void WriteSellsFile(QString path);
         void Print(SoldArticle* sa);
         void PrintOne(int i);
         void PrintAll();

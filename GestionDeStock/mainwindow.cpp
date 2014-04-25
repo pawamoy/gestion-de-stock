@@ -4,6 +4,8 @@
 #define DEFAULT_APPDATA "../appdata"
 #define DEFAULT_STOCK "../appdata/stock.s"
 #define DEFAULT_SELLS "../appdata/sells.v"
+#define SAVE_AS_STOCK "../appdata/untitled.s"
+#define SAVE_AS_SELLS "../appdata/untitled.v"
 #define MAX_QUANTITY 9999
 #define DEFAULT_DATE_SEP "/"
 
@@ -13,10 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    OpenStock(DEFAULT_STOCK);
+    stockfile = QString(DEFAULT_STOCK);
+    sellsfile = QString(DEFAULT_SELLS);
+
+    OpenStock(stockfile);
     FillStockTable();
 
-    OpenSells(DEFAULT_SELLS);
+    OpenSells(sellsfile);
     FillSellsTable();
 
     ui->etat->setText("Etat: consultation du stock");
@@ -39,17 +44,17 @@ void MainWindow::ClearSellsTable()
         ui->tableWidget_2->removeRow(0);
 }
 
-void MainWindow::OpenStock(const char* s)
+void MainWindow::OpenStock(QString s)
 {
     stock = new Stock();
-    if (s != NULL)
+    if (!s.isNull())
         stock->ReadStockFile(s);
 }
 
-void MainWindow::OpenSells(const char* s)
+void MainWindow::OpenSells(QString s)
 {
     sells = new Sells();
-    if (s != NULL)
+    if (!s.isNull())
         sells->ReadSellsFile(s);
 }
 
@@ -238,52 +243,80 @@ void MainWindow::on_stock_add_clicked()
     int size, old_size = stock->GetStockSize();
 
     ajoutStock* w = new ajoutStock(this, stock);
+    ui->etat->setText("Etat: ajout d'un article au stock");
     w->exec();
 
     size = stock->GetStockSize();
     if (old_size < size)
-        InsertStockRow(size-1, stock->GetArticleN(size-1));
+    {
+        StockArticle* sa = stock->GetArticleN(size-1);
+        InsertStockRow(size-1, sa);
+        QString state = QString("Etat: ajouté l'article ");
+        ui->etat->setText(state.append(sa->GetReferenceString()));
+    }
 }
 
 void MainWindow::on_stock_del_clicked()
 {
-    if( ui->tableWidget->currentColumn() != -1 && ui->tableWidget->currentRow() != -1 )
+    int col = ui->tableWidget->currentColumn();
+    int row = ui->tableWidget->currentRow();
+
+    if(col != -1 && row != -1)
     {
-        std::cout << "ref : " << stock->GetArticleN(ui->tableWidget->currentRow())->GetReferenceString().toUtf8().constData() << std::endl;
-        std::cout << "je suis ici" << std::endl;
-        int tmp = ui->tableWidget->currentRow();
-        stock->Remove(stock->GetArticleN(ui->tableWidget->currentRow()),ALL);
-        DeleteStockRow(ui->tableWidget->currentRow());
-        stock->Del(tmp);
+        StockArticle* sa = stock->GetArticleN(row);
+        DeleteStockRow(row);
+        stock->Del(row);
+
+        QString state = QString("Etat: supprimé l'article ");
+        ui->etat->setText(state.append(sa->GetReferenceString()));
     }
 }
 
 void MainWindow::on_stock_mod_clicked()
 {
-    if( ui->tableWidget->currentColumn() != -1 && ui->tableWidget->currentRow() != -1 )
+    int col = ui->tableWidget->currentColumn();
+    int row = ui->tableWidget->currentRow();
+
+    if(col != -1 && row != -1)
     {
-        StockArticle* articleCourant = stock->GetArticleN(ui->tableWidget->currentRow());
+        StockArticle* articleCourant = stock->GetArticleN(row);
         modifStock* w = new modifStock(this, stock, articleCourant);
+
+        QString state = QString("Etat: modification de l'article ");
+        ui->etat->setText(state.append(articleCourant->GetReferenceString()));
+
         w->exec();
 
-        SetStockRow(ui->tableWidget->currentRow(), articleCourant);
+        SetStockRow(row, articleCourant);
     }
 }
 
 void MainWindow::on_actionEnregistrer_Stock_triggered()
 {
-    stock->WriteStockFile(DEFAULT_STOCK);
-    QString state = QString("Etat: stock enregistré dans le fichier ");
-    QString file = QString(DEFAULT_STOCK);
-    ui->etat->setText(state.append(file));
+    if (!stockfile.isNull())
+    {
+        stock->WriteStockFile(stockfile);
+        QString state = QString("Etat: stock enregistré dans le fichier ");
+        ui->etat->setText(state.append(stockfile));
+    }
+    else
+    {
+        on_actionEnregistrer_Stock_sous_triggered();
+    }
 }
 
 void MainWindow::on_actionEnregistrer_Vente_triggered()
 {
-    sells->WriteSellsFile(DEFAULT_SELLS);
-    QString state = QString("Etat: ventes enregistrées dans le fichier ");
-    QString file = QString(DEFAULT_SELLS);
-    ui->etat->setText(state.append(file));
+    if (!sellsfile.isNull())
+    {
+        sells->WriteSellsFile(sellsfile);
+        QString state = QString("Etat: ventes enregistrées dans le fichier ");
+        ui->etat->setText(state.append(sellsfile));
+    }
+    else
+    {
+        on_actionEnregistrer_Vente_sous_triggered();
+    }
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)
@@ -305,28 +338,32 @@ void MainWindow::on_actionNouveau_Stock_triggered()
 {
     ClearStockTable();
     DeleteStock();
-    OpenStock(NULL);
+    stockfile = QString();
+    OpenStock();
+    ui->etat->setText("Etat: nouveau stock ouvert");
 }
 
 void MainWindow::on_actionNouvelle_Vente_triggered()
 {
     ClearSellsTable();
     DeleteSells();
-    OpenSells(NULL);
+    sellsfile = QString();
+    OpenSells();
+    ui->etat->setText("Etat: nouvelle table de ventes ouverte");
 }
 
 void MainWindow::on_actionOuvrir_Stock_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Ouvrir un fichier Stock"),
                                                      DEFAULT_APPDATA,
-                                                     tr("Fichier Stock (*.s);;Tous les fichiers (*.*)"));
+                                                     tr("Fichier Stock (*.s);;Tous les fichiers (*)"));
     if (!fileName.isNull())
     {
-        QByteArray ba = fileName.toUtf8();
         QString state = QString("Etat: Ouverture du fichier ");
         ui->etat->setText(state.append(fileName));
 
-        OpenStock(ba.constData());
+        stockfile = fileName;
+        OpenStock(fileName);
         FillStockTable();
     }
 }
@@ -335,24 +372,44 @@ void MainWindow::on_actionOuvrir_Vente_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Ouvrir un fichier Vente"),
                                                      DEFAULT_APPDATA,
-                                                     tr("Fichier Vente (*.v);;Tous les fichiers (*.*)"));
+                                                     tr("Fichier Vente (*.v);;Tous les fichiers (*)"));
     if (!fileName.isNull())
     {
-        QByteArray ba = fileName.toUtf8();
         QString state = QString("Etat: Ouverture du fichier ");
         ui->etat->setText(state.append(fileName));
 
-        OpenSells(ba.constData());
+        sellsfile = fileName;
+        OpenSells(fileName);
         FillSellsTable();
     }
 }
 
 void MainWindow::on_actionEnregistrer_Stock_sous_triggered()
 {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Sauvegarder le stock"),
+                                                    SAVE_AS_STOCK,
+                                                    tr("Fichier Stock (*.s);;Tous les fichiers (*)"));
+    if (!fileName.isNull())
+    {
+        QString state = QString("Etat: ventes enregistrées dans le fichier ");
+        ui->etat->setText(state.append(fileName));
 
+        stockfile = fileName;
+        stock->WriteStockFile(fileName);
+    }
 }
 
 void MainWindow::on_actionEnregistrer_Vente_sous_triggered()
 {
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Sauvegarder les ventes"),
+                                                    SAVE_AS_SELLS,
+                                                    tr("Fichier Vente (*.v);;Tous les fichiers (*)"));
+    if (!fileName.isNull())
+    {
+        QString state = QString("Etat: stock enregistré dans le fichier ");
+        ui->etat->setText(state.append(fileName));
 
+        sellsfile = fileName;
+        sells->WriteSellsFile(fileName);
+    }
 }

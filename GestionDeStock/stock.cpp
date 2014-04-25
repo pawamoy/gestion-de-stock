@@ -65,16 +65,16 @@ Stock::~Stock()
     //delete &stock;
 }
 
-void Stock::ReadStockFile(const char* path)
+void Stock::ReadStockFile(QString path)
 {
 	// if a QString is provided
-	//~ QByteArray ba = file.toUtf8();
-	//~ const char* path = ba.constData();
+    QByteArray ba = path.toUtf8();
+    const char* cpath = ba.constData();
 	
-	std::ifstream fo(path, std::ios::in);
+    std::ifstream fo(cpath, std::ios::in);
 	
 	if (!fo) {
-        std::cerr << "Unable to open " << path << " in read-mode" << std::endl;
+        std::cerr << "Unable to open " << cpath << " in read-mode" << std::endl;
 		return;
 	}
 
@@ -93,23 +93,22 @@ void Stock::ReadStockFile(const char* path)
 	fo.close();
 }
 
-void Stock::WriteStockFile(const char* path)
+void Stock::WriteStockFile(QString path)
 {
 	// if a QString is provided
-	//~ QByteArray ba = file.toUtf8();
-	//~ const char* path = ba.constData();
+    QByteArray ba = path.toUtf8();
+    const char* cpath = ba.constData();
 	
-	std::ofstream fs(path, std::ios::out);
+    std::ofstream fs(cpath, std::ios::out);
 	
 	if (!fs) {
-        std::cerr << "Unable to open " << path << " in write-mode" << std::endl;
+        std::cerr << "Unable to open " << cpath << " in write-mode" << std::endl;
 		return ;
 	}
 
 	// déclaration des variables
     int i, s = stock.Size();
-	StockArticle* sa;
-    QByteArray ba;
+    StockArticle* sa;
     QDate date;
    // const char* ref; = ba.constData();
 	// début boucle écriture

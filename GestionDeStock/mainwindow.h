@@ -29,8 +29,8 @@ public:
 
     void ClearStockTable();
     void ClearSellsTable();
-    void OpenStock(const char* s);
-    void OpenSells(const char* s);
+    void OpenStock(QString s=QString());
+    void OpenSells(QString s=QString());
     void DeleteStock();
     void DeleteSells();
     void FillStockTable();
@@ -64,6 +64,8 @@ private:
     Ui::MainWindow *ui;
     Stock* stock;
     Sells* sells;
+    QString stockfile;
+    QString sellsfile;
 };
 
 #endif // MAINWINDOW_H
