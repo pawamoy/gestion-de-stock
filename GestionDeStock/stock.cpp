@@ -10,7 +10,7 @@ StVector::StVector()
 StVector::~StVector()
 {
     // est-ce que ça désalloue les Article ??? (attention)
-	//~ delete stock;
+    //delete stock;
 }
 
 StockArticle* StVector::Get(int i)
@@ -62,7 +62,7 @@ Stock::Stock()
 Stock::~Stock()
 {
 	stock.Clear();
-    delete &stock;
+    //delete &stock;
 }
 
 void Stock::ReadStockFile(const char* path)

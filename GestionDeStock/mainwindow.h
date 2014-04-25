@@ -57,6 +57,8 @@ private slots:
     void on_actionNouvelle_Vente_triggered();
     void on_actionOuvrir_Stock_triggered();
     void on_actionOuvrir_Vente_triggered();
+    void on_actionEnregistrer_Stock_sous_triggered();
+    void on_actionEnregistrer_Vente_sous_triggered();
 
 private:
     Ui::MainWindow *ui;

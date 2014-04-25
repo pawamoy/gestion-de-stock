@@ -10,7 +10,7 @@ SeVector::SeVector()
 SeVector::~SeVector()
 {
     // est-ce que ça désalloue les Article ??? (attention)
-	//~ delete sells;
+    //delete sells;
 }
 
 SoldArticle* SeVector::Get(int i)
@@ -62,7 +62,7 @@ Sells::Sells()
 Sells::~Sells()
 {
 	sells.Clear();
-    delete &sells;
+    //delete &sells;
 }
 
 void Sells::ReadSellsFile(const char* path)

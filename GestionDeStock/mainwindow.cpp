@@ -296,19 +296,23 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 
 void MainWindow::on_actionQuitter_triggered()
 {
-    stock->ClearStock();
-    sells->ClearSells();
+    DeleteStock();
+    DeleteSells();
     this->close();
 }
 
 void MainWindow::on_actionNouveau_Stock_triggered()
 {
-
+    ClearStockTable();
+    DeleteStock();
+    OpenStock(NULL);
 }
 
 void MainWindow::on_actionNouvelle_Vente_triggered()
 {
-
+    ClearSellsTable();
+    DeleteSells();
+    OpenSells(NULL);
 }
 
 void MainWindow::on_actionOuvrir_Stock_triggered()
@@ -343,3 +347,12 @@ void MainWindow::on_actionOuvrir_Vente_triggered()
     }
 }
 
+void MainWindow::on_actionEnregistrer_Stock_sous_triggered()
+{
+
+}
+
+void MainWindow::on_actionEnregistrer_Vente_sous_triggered()
+{
+
+}
