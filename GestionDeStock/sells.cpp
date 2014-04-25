@@ -65,12 +65,16 @@ Sells::~Sells()
     //delete &sells;
 }
 
-void Sells::ReadSellsFile(const char* path)
+void Sells::ReadSellsFile(QString path)
 {
-	std::ifstream fo(path, std::ios::in);
+    // if a QString is provided
+    QByteArray ba = path.toUtf8();
+    const char* cpath = ba.constData();
+
+    std::ifstream fo(cpath, std::ios::in);
 	
 	if (!fo) {
-        std::cerr << "Unable to open " << path << " in read-mode" << std::endl;
+        std::cerr << "Unable to open " << cpath << " in read-mode" << std::endl;
 		return;
 	}
 
@@ -90,19 +94,22 @@ void Sells::ReadSellsFile(const char* path)
 	fo.close();
 }
 
-void Sells::WriteSellsFile(const char* path)
+void Sells::WriteSellsFile(QString path)
 {
-	std::ofstream fs(path, std::ios::out);
+    // if a QString is provided
+    QByteArray ba = path.toUtf8();
+    const char* cpath = ba.constData();
+
+    std::ofstream fs(cpath, std::ios::out);
 	
 	if (!fs) {
-        std::cerr << "Unable to open " << path << " in write-mode" << std::endl;
+        std::cerr << "Unable to open " << cpath << " in write-mode" << std::endl;
 		return ;
 	}
 
 	// déclaration des variables
     int i, s = sells.Size();
-	SoldArticle* sa;
-    QByteArray ba;
+    SoldArticle* sa;
     QDate date_l, date_s;
    // const char* ref; = ba.constData();
 	// début boucle écriture
