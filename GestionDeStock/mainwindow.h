@@ -9,7 +9,6 @@
 #include "comboboxcategory.h"
 #include "comboboxtype.h"
 #include "comboboxsize.h"
-#include "enregistrement.h"
 #include "stock.h"
 #include "sells.h"
 #include "ajoutstock.h"
