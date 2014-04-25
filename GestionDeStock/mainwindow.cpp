@@ -136,6 +136,13 @@ void MainWindow::SetRowRW(int r, StockArticle* sa)
 void MainWindow::on_stock_add_clicked()
 {
     //Enregistrement *w = new Enregistrement(this);
+
+    int size, old_size = stock->GetStockSize();
+
     ajoutStock* w = new ajoutStock(this, stock);
-    w->show();
+    w->exec();
+
+    size = stock->GetStockSize();
+    if (old_size < size)
+        InsertRowRO(size-1, stock->GetArticleN(size-1));
 }

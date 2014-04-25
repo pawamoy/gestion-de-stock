@@ -6,15 +6,6 @@
 
 #include "datasets.h"
 
-#define NO_REF 99999999
-#define NR -1
-#define ALL NR
-
-typedef struct str_ref
-{
-	int c, t, m, s, o;
-} Ref;
-
 class Article
 {
 	public:

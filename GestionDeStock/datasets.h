@@ -3,6 +3,18 @@
 
 #include <QString>
 
+#define NO_REF 99999999
+#define NR -1
+#define ALL NR
+
+#define DEF_NAME "?"
+#define DEF_SIZE "XXL"
+
+typedef struct str_ref
+{
+    int c, t, m, s, o;
+} Ref;
+
 /*********** VETEMENTS ************/
 	/*
 	 * On a 4x VETEMENT
@@ -79,7 +91,8 @@
 
 
 /************ COULEURS ************/
-#define END_SIZE 21
+#define END_SIZE_NAME 21
+#define END_SIZE_NUM 79
 
 /************************* DECLARATIONS EXTERNES **********************/
 extern QString category[];

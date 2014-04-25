@@ -8,6 +8,7 @@ class ComboBoxColor
 {
 public:
     ComboBoxColor(QWidget *parent, int nc);
+    void SetSelection(int nc);
 };
 
 #endif // COMBOBOXCOLOR_H

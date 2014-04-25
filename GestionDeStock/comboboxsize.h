@@ -8,6 +8,7 @@ class ComboBoxSize
 {
 public:
     ComboBoxSize(QWidget *parent, int ns);
+    void SetSelection(int ns);
 };
 
 #endif // COMBOBOXSIZE_H

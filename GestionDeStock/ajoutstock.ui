@@ -277,6 +277,15 @@
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
+          <property name="minimum">
+           <number>4</number>
+          </property>
+          <property name="maximum">
+           <number>80</number>
+          </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
          </widget>
         </item>
         <item>
@@ -317,7 +326,14 @@
       <item>
        <layout class="QHBoxLayout" name="field_quantite">
         <item>
-         <widget class="QSpinBox" name="qty_spin"/>
+         <widget class="QSpinBox" name="qty_spin">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>9999</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -409,12 +425,18 @@
       <property name="text">
        <string>Annuler</string>
       </property>
+      <property name="autoDefault">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="valider">
       <property name="text">
        <string>Valider</string>
+      </property>
+      <property name="default">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

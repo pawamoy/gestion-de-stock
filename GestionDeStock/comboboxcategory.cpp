@@ -8,7 +8,12 @@ ComboBoxCategory::ComboBoxCategory(QWidget* parent, int nc)
     for (c=0; c<END_CATEGORY; c++)
         this->addItem(category[c]);
 
-    if (nc < END_CATEGORY)
+    SetSelection(nc);
+}
+
+void ComboBoxCategory::SetSelection(int nc)
+{
+    if (nc < END_CATEGORY && nc != NR)
         this->setCurrentIndex(nc);
     else
         this->setCurrentIndex(0);

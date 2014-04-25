@@ -8,6 +8,7 @@ class ComboBoxCategory
 {
 public:
     ComboBoxCategory(QWidget* parent, int nc);
+    void SetSelection(int nc);
 };
 
 #endif // COMBOBOXCATEGORY_H

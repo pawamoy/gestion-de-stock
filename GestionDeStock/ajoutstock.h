@@ -20,7 +20,22 @@ class ajoutStock : public QDialog
 public:
     explicit ajoutStock(QWidget *parent = 0, Stock* s = NULL);
     ~ajoutStock();
-    
+    int GetRefCategory();
+    int GetCategory();
+    int GetRefType();
+    int GetType();
+    int GetRefModel();
+    int GetModel();
+    int GetRefSize();
+    int GetSize();
+    int GetRefColor();
+    int GetColor();
+    int GetQuantity();
+    float GetBuyPrice();
+    float GetSellPrice();
+    int GetDiscount();
+    QDate GetDelivery();
+
 private:
     Ui::ajoutStock *ui;
     Stock* stock;
