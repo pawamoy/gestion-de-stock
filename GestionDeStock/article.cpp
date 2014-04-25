@@ -762,11 +762,20 @@ void StockArticle::AddQty(int q)
 
 void StockArticle::SubQty(int q)
 {
-	int tq = GetStock()-q;
-	if (tq < 0)
-		SetQuantity(0);
-	else
-		SetQuantity(tq);
+    int tq;
+
+    if (q == ALL)
+    {
+        SetQuantity(0);
+    }
+    else
+    {
+        tq = GetStock()-q;
+        if (tq < 0)
+            SetQuantity(0);
+        else
+            SetQuantity(tq);
+    }
 }
 
 void StockArticle::SetBuyPrice(float p)
