@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1152</width>
-    <height>476</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -296,6 +296,25 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>409</y>
+      <width>1141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="etat">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -310,11 +329,11 @@
     <property name="title">
      <string>Fichier</string>
     </property>
-    <addaction name="actioNouveau_Stock"/>
+    <addaction name="actionNouveau_Stock"/>
     <addaction name="actionNouvelle_Vente"/>
     <addaction name="separator"/>
     <addaction name="actionOuvrir_Stock"/>
-    <addaction name="actionOuvir_Vente"/>
+    <addaction name="actionOuvrir_Vente"/>
     <addaction name="separator"/>
     <addaction name="actionEnregistrer_Stock"/>
     <addaction name="actionEnregistrer_Vente"/>
@@ -344,12 +363,9 @@
    <addaction name="menuAide"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actioNouveau_Stock">
+  <action name="actionNouveau_Stock">
    <property name="text">
     <string>Nouveau Stock</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionOuvrir_Stock">
@@ -381,6 +397,9 @@
    <property name="text">
     <string>Quitter</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="actionPreferences">
    <property name="text">
@@ -392,9 +411,9 @@
     <string>Manuel...</string>
    </property>
   </action>
-  <action name="actionOuvir_Vente">
+  <action name="actionOuvrir_Vente">
    <property name="text">
-    <string>Ouvir Vente</string>
+    <string>Ouvrir Vente</string>
    </property>
   </action>
   <action name="actionNouvelle_Vente">
