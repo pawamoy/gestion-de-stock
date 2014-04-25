@@ -18,3 +18,17 @@ void ComboBoxColor::SetSelection(int nc)
     else
         this->setCurrentIndex(0);
 }
+
+int ComboBoxColor::GetIndex(std::string color)
+{
+    int c;
+    std::string tmp;
+    for(c=0; c<END_COLOR; c++)
+    {
+        tmp = color_name[c].toUtf8().constData();
+        if( ! tmp.compare(color) )
+            return c;
+    }
+
+    return -1;
+}

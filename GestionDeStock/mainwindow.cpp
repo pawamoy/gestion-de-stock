@@ -249,7 +249,6 @@ void MainWindow::on_stock_mod_clicked()
 {
     if( ui->tableWidget->currentColumn() != -1 && ui->tableWidget->currentRow() != -1 )
     {
-        std::cout << "hey !" << std::endl;
         StockArticle* articleCourant = stock->GetArticleN(ui->tableWidget->currentRow());
         modifStock* w = new modifStock(this, stock, articleCourant);
         w->exec();
