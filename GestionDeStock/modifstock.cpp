@@ -38,7 +38,15 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
        category_box->setCurrentIndex(index);
     }
 
-    std::cout << "type : " << ac->GetTypeInt() << std::endl;
+    std::cout << "cat : " << ac->GetCategoryName().toUtf8().constData() << std::endl;
+    std::cout << "type : " << ac->GetTypeName().toUtf8().constData() << std::endl;
+    index = type_box->GetIndex( ac->GetCategoryInt(), (std::string)ac->GetTypeName().toUtf8().constData());
+    std::cout << "index : "<< index << std::endl;
+    if ( index != -1 )
+    { // -1 for not found
+       type_box->setCurrentIndex(index);
+    }
+
 
     ui->field_categorie->addWidget(category_box);
     ui->field_type->addWidget(type_box);
@@ -92,7 +100,9 @@ void modifStock::on_valider_clicked()
     int di = GetDiscount();
     QDate da = GetDelivery();
 
-    stock->New(new StockArticle((Ref){ca,ty,mo,si,co},qt,bp,sp,di,da));
+    Ref modifiedRef = {ca,ty,mo,si,co};
+    StockArticle modified (modifiedRef, qt, bp, sp, di, da);
+    stock->Modify(article,modified);
 
     this->close();
 }
