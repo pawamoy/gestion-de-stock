@@ -34,9 +34,13 @@ class Article
 		float GetBuyPrice();
         QString GetBuyPriceString();
 		float GetSellPrice();
+        QString GetSellPriceString();
 		int GetDiscountPercent();
+        QString GetDiscountPercentString();
 		float GetDiscountPrice();
+        QString GetDiscountPriceString();
 		QDate GetDeliveryDate();
+        QString GetDeliveryString(const char* separator);
 		int GetDaysInStock();
 		int GetColorInt();
 		QString GetColorString();

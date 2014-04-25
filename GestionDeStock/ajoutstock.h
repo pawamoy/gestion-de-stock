@@ -24,6 +24,10 @@ public:
 private:
     Ui::ajoutStock *ui;
     Stock* stock;
+    ComboBoxCategory* category_box;
+    ComboBoxType* type_box;
+    ComboBoxSize* size_box;
+    ComboBoxColor* color_box;
 
 private slots:
     void on_annuler_clicked();

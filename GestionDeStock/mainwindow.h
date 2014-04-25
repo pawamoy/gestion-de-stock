@@ -31,6 +31,8 @@ public:
     void FillTableRW();
     void InsertRowRO(int r, StockArticle* sa);
     void InsertRowRW(int r, StockArticle* sa);
+    void SetRowRO(int r, StockArticle* sa);
+    void SetRowRW(int r, StockArticle* sa);
     
 private slots:
     void on_stock_add_clicked();
