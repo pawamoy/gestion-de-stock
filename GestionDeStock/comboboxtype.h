@@ -2,6 +2,8 @@
 #define COMBOBOXTYPE_H
 
 #include <QComboBox>
+#include <string>
+#include <iostream>
 
 class ComboBoxType
         : public QComboBox
@@ -9,6 +11,7 @@ class ComboBoxType
 public:
     ComboBoxType(QWidget *parents, int nc, int nt);
     void SetSelection(int nc, int nt);
+    int GetIndex(std::string type);
 };
 
 #endif // COMBOBOXTYPE_H
