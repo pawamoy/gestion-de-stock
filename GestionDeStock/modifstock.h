@@ -48,6 +48,7 @@ private:
 private slots:
     void on_annuler_clicked();
     void on_valider_clicked();
+    void changeCat();
 };
 
 #endif // modifSTOCK_H

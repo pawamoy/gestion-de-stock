@@ -18,3 +18,18 @@ void ComboBoxSize::SetSelection(int ns)
     else
         this->setCurrentIndex(0);
 }
+
+int ComboBoxSize::GetIndex(int size)
+{
+    int c;
+    std::string sizeLook = size_name[size_num[size]].toUtf8().constData();
+    std::string tmp;
+    for(c=0; c<END_SIZE_NAME; c++)
+    {
+        tmp = size_name[c].toUtf8().constData();
+        if( ! tmp.compare(sizeLook) )
+            return c;
+    }
+
+    return -1;
+}

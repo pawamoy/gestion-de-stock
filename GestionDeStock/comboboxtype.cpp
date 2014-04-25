@@ -84,3 +84,8 @@ void ComboBoxType::SetSelection(int nc, int nt)
     else
         this->setCurrentIndex(0);
 }
+
+int ComboBoxType::GetIndex(std::string type)
+{
+    return 0;
+}
