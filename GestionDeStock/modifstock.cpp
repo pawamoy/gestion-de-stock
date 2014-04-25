@@ -11,12 +11,34 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
 
     article = ac;
 
-    std::cout << ac->GetReferenceString().toUtf8().constData() << std::endl;
-
     category_box = new ComboBoxCategory(this, 0);
     type_box = new ComboBoxType(this, 0, 0);
     size_box = new ComboBoxSize(this, 0);
     color_box = new ComboBoxColor(this, 0);
+
+    connect(category_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCat()));
+
+    int index = color_box->GetIndex( (std::string)ac->GetColorName().toUtf8().constData() );
+    if ( index != -1 )
+    { // -1 for not found
+       color_box->setCurrentIndex(index);
+    }
+
+    index = size_box->GetIndex( ac->GetSizeInt() );
+    std::cout << "index : " << index << std::endl;
+    if ( index != -1 )
+    { // -1 for not found
+       size_box->setCurrentIndex(index);
+    }
+
+    index = category_box->GetIndex( (std::string)ac->GetCategoryName().toUtf8().constData() );
+    std::cout << "index : " << index << std::endl;
+    if ( index != -1 )
+    { // -1 for not found
+       category_box->setCurrentIndex(index);
+    }
+
+    std::cout << "type : " << ac->GetTypeInt() << std::endl;
 
     ui->field_categorie->addWidget(category_box);
     ui->field_type->addWidget(type_box);
@@ -37,14 +59,20 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
 
     QDate date(ac->GetDeliveryDate().year(), ac->GetDeliveryDate().month(), ac->GetDeliveryDate().day());
     ui->date_edit->setDate(date);
-
-    //ui->field_categorie
 }
 
 modifStock::~modifStock()
 {
     delete ui;
 }
+
+void modifStock::changeCat()
+{
+    ui->field_type->removeWidget(type_box);
+    type_box = new ComboBoxType(this, category_box->currentIndex(), 0);
+    ui->field_type->addWidget(type_box);
+}
+
 
 void modifStock::on_annuler_clicked()
 {
