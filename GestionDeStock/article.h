@@ -20,8 +20,8 @@ class Article
 		QString GetTypeString();
 		int GetModelInt();
 		QString GetModelString();
-		int GetStock();
-        QString GetStockString();
+		int GetQuantity();
+        QString GetQuantityString();
 		float GetBuyPrice();
         QString GetBuyPriceString();
 		float GetSellPrice();
@@ -163,6 +163,7 @@ class SoldArticle: public Article
 		int CompareSellDay(SoldArticle sa);
 		int CompareSellTime(SoldArticle sa);
 		bool EquivalentTo(SoldArticle a);
+        bool HasValidSellDate();
 		
 	private:
 		QDate selldate;

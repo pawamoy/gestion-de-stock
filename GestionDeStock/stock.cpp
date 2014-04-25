@@ -118,7 +118,7 @@ void Stock::WriteStockFile(const char* path)
 		sa = stock.Get(i);
         ba = sa->GetReferenceString().toUtf8();
         fs << ba.constData() << " ";
-		fs << sa->GetStock() << " ";
+		fs << sa->GetQuantity() << " ";
 		fs << sa->GetBuyPrice() << " ";
 		fs << sa->GetSellPrice() << " ";
         fs << sa->GetDiscountPercent() << " ";
@@ -148,7 +148,7 @@ void Stock::Print(StockArticle* sa)
     std::cout << "Taille   : " << ba.constData() << std::endl;
     ba = sa->GetColorName().toUtf8();
     std::cout << "Couleur  : " << ba.constData() << std::endl;
-    std::cout << "Quantité : " << sa->GetStock() << std::endl;
+    std::cout << "Quantité : " << sa->GetQuantity() << std::endl;
     std::cout << "Achat    : " << sa->GetBuyPrice() << std::endl;
     std::cout << "Vente    : " << sa->GetSellPrice() << std::endl;
     std::cout << "Rabais   : " << sa->GetDiscountPercent() << std::endl;
@@ -291,7 +291,7 @@ int Stock::GetStockSize()
     return stock.Size();
 }
 
-SoldArticle* Stock::GetSellFrom(StockArticle* sa, int qty, QDate d)
+SoldArticle* Stock::ToSell(StockArticle* sa, int qty, QDate d)
 {
 	if (qty > 0)
 	{
@@ -299,11 +299,12 @@ SoldArticle* Stock::GetSellFrom(StockArticle* sa, int qty, QDate d)
         SoldArticle* ns = new SoldArticle(*sa, qty, d);
 		
 		// on retire le nombre d'articles vendus du stock
-		sa->SubQty(qty);
+        //sa->SubQty(qty);
 		
 		// s'il n'y a plus d'articles, on supprime la référence
-		if (sa->GetStock() == 0)
-            stock.Del(GetPosition(sa));
+        // on fera ce traitement au niveau supérieur, pour enlever la ligne du tableau si besoin
+        //if (sa->GetQuantity() == 0)
+        //    stock.Del(GetPosition(sa));
 			
 		// on renvoie la nouvelle vente
 		return ns;
@@ -329,7 +330,7 @@ void Stock::New(StockArticle sa)
 	{
 		StockArticle* na = new StockArticle(
 			sa.GetReferenceRef(),
-			sa.GetStock(),
+			sa.GetQuantity(),
 			sa.GetBuyPrice(),
 			sa.GetSellPrice(),
 			sa.GetDiscountPercent(),
@@ -475,7 +476,7 @@ void Stock::Modify(StockArticle* sa, StockArticle sb) // exact occurence
 	}
 	
 	if (sb.HasValidQuantity())
-		sa->SetQuantity(sb.GetStock());
+		sa->SetQuantity(sb.GetQuantity());
 	
 	if (sb.HasValidBuyPrice())
 		sa->SetBuyPrice(sb.GetBuyPrice());
@@ -542,7 +543,7 @@ void Stock::Modify(StVector sv, StockArticle sb) // exact occurences
 		
 		if (sb.HasValidQuantity())
 		{
-			int q = sb.GetStock();
+			int q = sb.GetQuantity();
 			for (i=0; i<s; i++)
 				sv.Get(i)->SetQuantity(q);
 		}
