@@ -18,13 +18,27 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     size_box = new ComboBoxSize(this, 0);
     color_box = new ComboBoxColor(this, 0);
 
-    //ui->refca->setValue(ac->GetReference);
-    //ui->refca->setValue(ac->GetReferenceInt()() - ac->GetReferenceInt()/10000000);
-
     ui->field_categorie->addWidget(category_box);
     ui->field_type->addWidget(type_box);
     ui->field_taille->addWidget(size_box);
     ui->field_couleur->addWidget(color_box);
+
+    ui->refca->setValue(ac->GetCategoryInt());
+    ui->reft->setValue(atoi(ac->GetTypeString().toUtf8().constData()));
+    ui->refm->setValue(ac->GetModelInt());
+    ui->refs->setValue(ac->GetSizeInt());
+    ui->refco->setValue(ac->GetColorInt());
+
+    ui->model_spin->setValue(ac->GetModelInt());
+    ui->qty_spin->setValue(ac->GetQuantity());
+    ui->achat_spin->setValue(ac->GetBuyPrice());
+    ui->vente_spin->setValue(ac->GetSellPrice());
+    ui->rabais_spin->setValue(ac->GetDiscountPercent());
+
+    QDate date(ac->GetDeliveryDate().year(), ac->GetDeliveryDate().month(), ac->GetDeliveryDate().day());
+    ui->date_edit->setDate(date);
+
+    //ui->field_categorie
 }
 
 modifStock::~modifStock()
