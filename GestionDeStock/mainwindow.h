@@ -29,13 +29,18 @@ public:
     void OpenStock(const char* s);
     void OpenSells(const char* s);
     void DeleteStock();
-    void FillTableRO();
-    void FillTableRW();
-    void InsertRowRO(int r, StockArticle* sa);
-    void InsertRowRW(int r, StockArticle* sa);
-    void SetRowRO(int r, StockArticle* sa);
-    void SetRowRW(int r, StockArticle* sa);
-    void DeleteRowRO(int r, StockArticle* sa);
+    void DeleteSells();
+    void FillStockTable();
+    void FillSellsTable();
+    //void FillTableRW();
+    void InsertStockRow(int r, StockArticle* sa);
+    void InsertSellsRow(int r, SoldArticle* sa);
+    //void InsertRowRW(int r, StockArticle* sa);
+    void SetStockRow(int r, StockArticle* sa);
+    void SetSellsRow(int r, SoldArticle* sa);
+    //void SetRowRW(int r, StockArticle* sa);
+    void DeleteStockRow(int r);
+    void DeleteSellsRow(int r);
     
 private slots:
     void on_stock_add_clicked();
