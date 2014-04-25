@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QSpinBox>
+#include <QFileDialog>
 
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
@@ -26,6 +27,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void ClearStockTable();
+    void ClearSellsTable();
     void OpenStock(const char* s);
     void OpenSells(const char* s);
     void DeleteStock();
@@ -44,10 +47,16 @@ public:
     
 private slots:
     void on_stock_add_clicked();
-
     void on_stock_del_clicked();
-
     void on_stock_mod_clicked();
+    void on_actionEnregistrer_Stock_triggered();
+    void on_actionEnregistrer_Vente_triggered();
+    void on_tabWidget_currentChanged(int index);
+    void on_actionQuitter_triggered();
+    void on_actionNouveau_Stock_triggered();
+    void on_actionNouvelle_Vente_triggered();
+    void on_actionOuvrir_Stock_triggered();
+    void on_actionOuvrir_Vente_triggered();
 
 private:
     Ui::MainWindow *ui;
