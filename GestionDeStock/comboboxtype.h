@@ -8,6 +8,7 @@ class ComboBoxType
 {
 public:
     ComboBoxType(QWidget *parents, int nc, int nt);
+    void SetSelection(int nc, int nt);
 };
 
 #endif // COMBOBOXTYPE_H

@@ -189,22 +189,75 @@ QString Article::GetSizeString()
 
 QString Article::GetCategoryName()
 {
-	return category[GetCategoryInt()];
+    int c = GetCategoryInt();
+    if (c < END_CATEGORY && c != NR)
+        return category[GetCategoryInt()];
+    else
+        return QString(DEF_NAME);
 }
 
 QString Article::GetTypeName()
 {
-	return vetements[GetCategoryInt()][GetTypeInt()];
+    int nt = GetTypeInt();
+
+    if (nt != NR)
+    {
+        switch (GetCategoryInt())
+        {
+        case SOUSVETEMENT:
+            if (nt < END_TYPE0)
+                return subcategory0[nt];
+            break;
+
+        case INTERVETEMENT:
+            if (nt < END_TYPE1)
+                return subcategory1[nt];
+            break;
+
+        case VETEMENT1:
+        case VETEMENT2:
+        case VETEMENT3:
+        case VETEMENT4:
+            if (nt < END_TYPE2)
+                return subcategory2[nt];
+            break;
+
+        case SURVETEMENT1:
+        case SURVETEMENT2:
+        case SURVETEMENT3:
+            if (nt < END_TYPE3)
+                return subcategory3[nt];
+            break;
+
+        case ENSEMBLE:
+            if (nt < END_TYPE4)
+                return subcategory4[nt];
+            break;
+
+        default:
+            return QString(DEF_NAME);
+        }
+    }
+
+    return QString(DEF_NAME);
 }
 
 QString Article::GetSizeName()
 {
-	return size_name[size_num[GetSizeInt()]];
+    int s = GetSizeInt();
+    if (s < END_SIZE_NUM && s != NR)
+        return size_name[size_num[s]];
+    else
+        return QString(DEF_SIZE);
 }
 
 QString Article::GetColorName()
 {
-	return color_name[GetColorInt()];
+    int c = GetColorInt();
+    if (c < END_COLOR && c != NR)
+        return color_name[c];
+    else
+        return QString(DEF_NAME);
 }
 
 
