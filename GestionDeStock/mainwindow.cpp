@@ -67,6 +67,11 @@ void MainWindow::InsertRowRW(int r, StockArticle* sa)
     SetRowRW(r, sa);
 }
 
+void MainWindow::DeleteRowRO(int r, StockArticle* sa)
+{
+    std::cout << "remove row " << r << std::endl;
+    ui->tableWidget->removeRow(r);
+}
 // lecture seule
 void MainWindow::SetRowRO(int r, StockArticle* sa)
 {
@@ -135,8 +140,6 @@ void MainWindow::SetRowRW(int r, StockArticle* sa)
 
 void MainWindow::on_stock_add_clicked()
 {
-    //Enregistrement *w = new Enregistrement(this);
-
     int size, old_size = stock->GetStockSize();
 
     ajoutStock* w = new ajoutStock(this, stock);
@@ -145,4 +148,28 @@ void MainWindow::on_stock_add_clicked()
     size = stock->GetStockSize();
     if (old_size < size)
         InsertRowRO(size-1, stock->GetArticleN(size-1));
+}
+
+void MainWindow::on_stock_del_clicked()
+{
+    if( ui->tableWidget->currentColumn() != -1 && ui->tableWidget->currentRow() != -1 )
+    {
+        std::cout << "ref : " << stock->GetArticleN(ui->tableWidget->currentRow())->GetReferenceString().toUtf8().constData() << std::endl;
+        std::cout << "je suis ici" << std::endl;
+        int tmp = ui->tableWidget->currentRow();
+        stock->Remove(stock->GetArticleN(ui->tableWidget->currentRow()),ALL);
+        DeleteRowRO(ui->tableWidget->currentRow(), stock->GetArticleN(ui->tableWidget->currentRow()));
+        stock->Del(tmp);
+    }
+}
+
+void MainWindow::on_stock_mod_clicked()
+{
+    if( ui->tableWidget->currentColumn() != -1 && ui->tableWidget->currentRow() != -1 )
+    {
+        std::cout << "hey !" << std::endl;
+        StockArticle* articleCourant = stock->GetArticleN(ui->tableWidget->currentRow());
+        modifStock* w = new modifStock(this, stock, articleCourant);
+        w->exec();
+    }
 }
