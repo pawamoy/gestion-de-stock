@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#define DEFAULT_STOCK "../appdata/stock"
-#define DEFAULT_SELLS "../appdata/sells"
+#define DEFAULT_APPDATA "../appdata"
+#define DEFAULT_STOCK "../appdata/stock.s"
+#define DEFAULT_SELLS "../appdata/sells.v"
 #define MAX_QUANTITY 9999
 #define DEFAULT_DATE_SEP "/"
 
@@ -17,13 +18,25 @@ MainWindow::MainWindow(QWidget *parent) :
 
     OpenSells(DEFAULT_SELLS);
     FillSellsTable();
-    //ComboBoxCategory* test;
-    //test = dynamic_cast<ComboBoxCategory*>(ui->tableWidget->cellWidget(1,1));
+
+    ui->etat->setText("Etat: consultation du stock");
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ClearStockTable()
+{
+    while (ui->tableWidget->rowCount() > 0)
+        ui->tableWidget->removeRow(0);
+}
+
+void MainWindow::ClearSellsTable()
+{
+    while (ui->tableWidget_2->rowCount() > 0)
+        ui->tableWidget_2->removeRow(0);
 }
 
 void MainWindow::OpenStock(const char* s)
@@ -255,3 +268,77 @@ void MainWindow::on_stock_mod_clicked()
         w->exec();
     }
 }
+
+void MainWindow::on_actionEnregistrer_Stock_triggered()
+{
+    stock->WriteStockFile(DEFAULT_STOCK);
+    QString state = QString("Etat: stock enregistré dans le fichier ");
+    QString file = QString(DEFAULT_STOCK);
+    ui->etat->setText(state.append(file));
+}
+
+void MainWindow::on_actionEnregistrer_Vente_triggered()
+{
+    sells->WriteSellsFile(DEFAULT_SELLS);
+    QString state = QString("Etat: ventes enregistrées dans le fichier ");
+    QString file = QString(DEFAULT_SELLS);
+    ui->etat->setText(state.append(file));
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    if (index == 0)
+        ui->etat->setText("Etat: consultation du stock ");
+    else
+        ui->etat->setText("Etat: consultation des ventes ");
+}
+
+void MainWindow::on_actionQuitter_triggered()
+{
+    stock->ClearStock();
+    sells->ClearSells();
+    this->close();
+}
+
+void MainWindow::on_actionNouveau_Stock_triggered()
+{
+
+}
+
+void MainWindow::on_actionNouvelle_Vente_triggered()
+{
+
+}
+
+void MainWindow::on_actionOuvrir_Stock_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Ouvrir un fichier Stock"),
+                                                     DEFAULT_APPDATA,
+                                                     tr("Fichier Stock (*.s);;Tous les fichiers (*.*)"));
+    if (!fileName.isNull())
+    {
+        QByteArray ba = fileName.toUtf8();
+        QString state = QString("Etat: Ouverture du fichier ");
+        ui->etat->setText(state.append(fileName));
+
+        OpenStock(ba.constData());
+        FillStockTable();
+    }
+}
+
+void MainWindow::on_actionOuvrir_Vente_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Ouvrir un fichier Vente"),
+                                                     DEFAULT_APPDATA,
+                                                     tr("Fichier Vente (*.v);;Tous les fichiers (*.*)"));
+    if (!fileName.isNull())
+    {
+        QByteArray ba = fileName.toUtf8();
+        QString state = QString("Etat: Ouverture du fichier ");
+        ui->etat->setText(state.append(fileName));
+
+        OpenSells(ba.constData());
+        FillSellsTable();
+    }
+}
+
