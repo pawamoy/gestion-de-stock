@@ -48,11 +48,18 @@ private:
 private slots:
     void on_annuler_clicked();
     void on_valider_clicked();
+
     void changeCat();
     void changeType();
     void changeSize();
     void changeColor();
     void changeModele();
+
+    void changeRefCat();
+    void changeRefType();
+    void changeRefSize();
+    void changeRefColor();
+    void changeRefModele();
 };
 
 #endif // modifSTOCK_H
