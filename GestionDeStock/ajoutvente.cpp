@@ -11,19 +11,7 @@ ajoutVente::ajoutVente(QWidget *parent, Stock* st, Sells* se) :
 
     ui->date_vente->setDate(QDate::currentDate());
 
-    // ligne suivantes lors de la création d'une vente DEPUIS une ligne du stock :)
-//    ui->refca->setValue(ac->GetCategoryInt());
-//    ui->reft->setValue(ac->GetTypeInt());
-//    ui->refm->setValue(ac->GetModelInt());
-//    ui->refs->setValue(ac->GetSizeInt());
-//    ui->refco->setValue(ac->GetColorInt());
 
-//    ui->quantite_spin->setValue(ac->GetQuantity());
-//    ui->achat_spin->setValue(ac->GetBuyPrice());
-//    ui->vente_spin->setValue(ac->GetSellPrice());
-//    ui->rabais_spin->setValue(ac->GetDiscountPercent());
-
-//    ui->date_edit->setDate(ac->GetDeliveryDate());
 }
 
 ajoutVente::~ajoutVente()
@@ -38,20 +26,21 @@ void ajoutVente::on_annuler_clicked()
 
 void ajoutVente::on_valider_clicked()
 {
-//    int ca = GetRefCategory();
-//    int ty = GetRefType();
-//    int mo = GetRefModel();
-//    int si = GetRefSize();
-//    int co = GetRefColor();
-//    int qt = GetQuantity();
-//    float bp = GetBuyPrice();
-//    float sp = GetSellPrice();
-//    int di = GetDiscount();
-//    QDate da = GetDelivery();
+    int ca = GetRefCategory();
+    int ty = GetRefType();
+    int mo = GetRefModel();
+    int si = GetRefSize();
+    int co = GetRefColor();
+    int qt = GetQuantity();
+    float bp = GetBuyPrice();
+    float sp = GetSellPrice();
+    int di = GetDiscount();
+    QDate de = GetDelivery();
+    QDate sd = GetSellDate();
 
-    //Ref modifiedRef = {ca,ty,mo,si,co};
-    //StockArticle modified (modifiedRef, qt, bp, sp, di, da);
-    //stock->Modify(article,modified);
+    Ref ref = {ca,ty,mo,si,co};
+    StockArticle a (ref, qt, bp, sp, di, de);
+    stock->Modify(article,modified);
 
     this->close();
 }
