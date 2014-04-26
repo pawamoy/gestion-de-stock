@@ -454,19 +454,26 @@ void MainWindow::on_ctrl_s()
 
 void MainWindow::on_sells_add_clicked()
 {
+    int size, old_size = sells->GetSellsSize();
+
     ajoutVente* w = new ajoutVente(this, stock, sells);
     ui->etat->setText("Etat: déclaration d'une nouvelle vente");
     w->exec();
 
-//    size = stock->GetStockSize();
-//    if (old_size < size)
-//    {
-//        StockArticle* sa = stock->GetArticleN(size-1);
-//        InsertStockRow(size-1, sa);
-//        QString state = QString("Etat: ajouté l'article ");
-//        ui->etat->setText(state.append(sa->GetReferenceString()));
-//        StockModified(true);
-//    }
+    size = sells->GetSellsSize();
+    if (old_size < size)
+    {
+        SoldArticle* sa = sells->GetArticleN(size-1);
+        InsertSellsRow(size-1, sa);
+        QString state = QString("Etat: ajouté une vente du produit ");
+        ui->etat->setText(state.append(sa->GetReferenceString()));
+        SellsModified(true);
+    }
+    else
+    {
+        QString state = QString("Etat: erreur lors de l'ajout d'une vente: référence inconnue ");
+        ui->etat->setText(state.append(sa->GetReferenceString()));
+    }
 }
 
 void MainWindow::on_stock_sell_clicked()
