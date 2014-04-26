@@ -459,3 +459,20 @@ void MainWindow::on_ctrl_s()
         break;
     }
 }
+
+void MainWindow::on_sells_add_clicked()
+{
+    ajoutVente* w = new ajoutVente(this, stock, sells);
+    ui->etat->setText("Etat: déclaration d'une nouvelle vente");
+    w->exec();
+
+//    size = stock->GetStockSize();
+//    if (old_size < size)
+//    {
+//        StockArticle* sa = stock->GetArticleN(size-1);
+//        InsertStockRow(size-1, sa);
+//        QString state = QString("Etat: ajouté l'article ");
+//        ui->etat->setText(state.append(sa->GetReferenceString()));
+//        StockModified(true);
+//    }
+}
