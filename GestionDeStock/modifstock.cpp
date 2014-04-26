@@ -19,8 +19,13 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
     connect(size_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeSize()));
     connect(color_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeColor()));
-
     connect(ui->model_spin, SIGNAL(valueChanged(int)), this, SLOT(changeModele()));
+
+    connect(ui->refca, SIGNAL(valueChanged(int)), this, SLOT(changeRefCat()));
+    connect(ui->reft, SIGNAL(valueChanged(int)), this, SLOT(changeRefType()));
+    connect(ui->refs, SIGNAL(valueChanged(int)), this, SLOT(changeRefSize()));
+    connect(ui->refco, SIGNAL(valueChanged(int)), this, SLOT(changeRefColor()));
+    connect(ui->refm, SIGNAL(valueChanged(int)), this, SLOT(changeRefModele()));
 
     category_box->SetSelection(ac->GetCategoryInt());
     type_box->SetSelection(ac->GetCategoryInt(), ac->GetTypeInt());
@@ -123,6 +128,30 @@ void modifStock::changeModele()
     ui->refm->setValue(GetModel());
 }
 
+void modifStock::changeRefCat()
+{
+    category_box->setCurrentIndex(GetRefCategory());
+}
+
+void modifStock::changeRefType()
+{
+    type_box->SetSelection(GetRefCategory(),GetRefType());
+}
+
+void modifStock::changeRefSize()
+{
+    size_box->setCurrentIndex(GetRefSize());
+}
+
+void modifStock::changeRefColor()
+{
+    color_box->setCurrentIndex(GetRefColor());
+}
+
+void modifStock::changeRefModele()
+{
+    ui->model_spin->setValue(GetRefModel());
+}
 
 void modifStock::on_annuler_clicked()
 {
