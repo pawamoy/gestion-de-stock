@@ -331,6 +331,10 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         ui->etat->setText("Etat: consultation des ventes ");
         break;
 
+    case 2:
+        ui->etat->setText("Etat: consultation des informations");
+        ui->nb_model->setText(QString::number(stock->GetStockSize()));
+        ui->nb_article->setText(stock->GetTotalArticle());
     default:
         break;
     }
@@ -493,4 +497,44 @@ void MainWindow::on_actionA_Propos_triggered()
 void MainWindow::on_actionA_Propos_de_Qt_triggered()
 {
     QApplication::aboutQt();
+}
+
+void MainWindow::on_lancer_requete1_clicked()
+{
+    // chiffre d'affaire sur livraison jour précis
+    SoldArticle* sa;
+    QDate selected_date = ui->date_requete1->date();
+    int i, s = sells->GetSellsSize();
+    float recette = 0.0;
+
+    ui->date_result1->setText(selected_date.toString());
+
+    for (i=0; i<s; i++)
+    {
+        sa = sells->GetArticleN(i);
+        if (sa->Delivered(selected_date))
+            recette += sa->GetDiscountPrice();
+    }
+
+    ui->recette_result1->setText(QString::number(recette));
+}
+
+void MainWindow::on_lancer_requete2_clicked()
+{
+    // chiffre d'affaire depuis jour précis
+    SoldArticle* sa;
+    QDate selected_date = ui->date_requete1->date();
+    int i, s = sells->GetSellsSize();
+    float recette = 0.0;
+
+    ui->date_result1->setText(selected_date.toString());
+
+    for (i=0; i<s; i++)
+    {
+        sa = sells->GetArticleN(i);
+        if (sa->DeliveredLately(selected_date))
+            recette += sa->GetDiscountPrice();
+    }
+
+    ui->recette_result1->setText(QString::number(recette));
 }

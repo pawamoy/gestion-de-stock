@@ -290,6 +290,17 @@ int Stock::GetStockSize()
     return stock.Size();
 }
 
+int Stock::GetTotalArticle()
+{
+    int i, s = GetStockSize();
+    int total = 0;
+
+    for (i=0; i<s; i++)
+        total += GetArticleN(i)->GetQuantity();
+
+    return total;
+}
+
 SoldArticle* Stock::ToSell(StockArticle* sa, int qty, QDate d)
 {
 	if (qty > 0)

@@ -71,8 +71,10 @@ private slots:
     void on_actionVente_triggered();
     void on_actionA_Propos_triggered();
     void on_actionA_Propos_de_Qt_triggered();
-
     void on_stock_sell_clicked();
+    void on_lancer_requete1_clicked();
+    void on_lancer_requete2_clicked();
+
 
 private:
     Ui::MainWindow *ui;
