@@ -14,6 +14,18 @@ ajoutStock::ajoutStock(QWidget *parent, Stock *st) :
     size_box = new ComboBoxSize(this, 0);
     color_box = new ComboBoxColor(this, 0);
 
+    connect(category_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCat()));
+    connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
+    connect(size_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeSize()));
+    connect(color_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeColor()));
+    connect(ui->model_spin, SIGNAL(valueChanged(int)), this, SLOT(changeModele()));
+
+    connect(ui->refca, SIGNAL(valueChanged(int)), this, SLOT(changeRefCat()));
+    connect(ui->reft, SIGNAL(valueChanged(int)), this, SLOT(changeRefType()));
+    connect(ui->refs, SIGNAL(valueChanged(int)), this, SLOT(changeRefSize()));
+    connect(ui->refco, SIGNAL(valueChanged(int)), this, SLOT(changeRefColor()));
+    connect(ui->refm, SIGNAL(valueChanged(int)), this, SLOT(changeRefModele()));
+
     ui->field_categorie->addWidget(category_box);
     ui->field_type->addWidget(type_box);
     ui->field_taille->addWidget(size_box);
@@ -25,6 +37,102 @@ ajoutStock::ajoutStock(QWidget *parent, Stock *st) :
 ajoutStock::~ajoutStock()
 {
     delete ui;
+}
+
+void ajoutStock::changeCat()
+{
+    ui->refca->setValue(GetCategory());
+
+    delete type_box;
+    type_box = new ComboBoxType(this, GetCategory(), GetRefType());
+    ui->field_type->addWidget(type_box);
+
+    connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
+}
+
+void ajoutStock::changeType()
+{
+    int nc = GetCategory();
+    int nt = GetType();
+
+    bool set = false;
+
+    if (nt != NR)
+    {
+        switch (nc)
+        {
+        case INTERVETEMENT:
+            if (nt < END_TYPE1) set = true;
+            break;
+
+        case VETEMENT1:
+        case VETEMENT2:
+        case VETEMENT3:
+        case VETEMENT4:
+            if (nt < END_TYPE2) set = true;
+            break;
+
+        case SURVETEMENT1:
+        case SURVETEMENT2:
+        case SURVETEMENT3:
+            if (nt < END_TYPE3) set = true;
+            break;
+
+        case ENSEMBLE:
+            if (nt < END_TYPE4) set = true;
+            break;
+
+        case SOUSVETEMENT:
+        default:
+            if (nt < END_TYPE0) set = true;
+            break;
+        }
+    }
+
+    if (set == true)
+        ui->reft->setValue(nt);
+    else
+        ui->reft->setValue(0);
+}
+
+void ajoutStock::changeSize()
+{
+    ui->refs->setValue(GetSize());
+}
+
+void ajoutStock::changeColor()
+{
+    ui->refco->setValue(GetColor());
+}
+
+void ajoutStock::changeModele()
+{
+    ui->refm->setValue(GetModel());
+}
+
+void ajoutStock::changeRefCat()
+{
+    category_box->setCurrentIndex(GetRefCategory());
+}
+
+void ajoutStock::changeRefType()
+{
+    type_box->SetSelection(GetRefCategory(),GetRefType());
+}
+
+void ajoutStock::changeRefSize()
+{
+    size_box->setCurrentIndex(GetRefSize());
+}
+
+void ajoutStock::changeRefColor()
+{
+    color_box->setCurrentIndex(GetRefColor());
+}
+
+void ajoutStock::changeRefModele()
+{
+    ui->model_spin->setValue(GetRefModel());
 }
 
 void ajoutStock::on_annuler_clicked()
