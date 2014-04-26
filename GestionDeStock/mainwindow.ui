@@ -480,14 +480,14 @@
     </property>
     <addaction name="actionEnregistrement"/>
     <addaction name="actionVente"/>
-    <addaction name="separator"/>
-    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
      <string>Aide</string>
     </property>
     <addaction name="actionManuel"/>
+    <addaction name="actionA_Propos"/>
+    <addaction name="actionA_Propos_de_Qt"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEditer"/>
@@ -560,6 +560,16 @@
   <action name="actionEnregistrer_Vente_sous">
    <property name="text">
     <string>Enregistrer Vente sous...</string>
+   </property>
+  </action>
+  <action name="actionA_Propos">
+   <property name="text">
+    <string>A Propos...</string>
+   </property>
+  </action>
+  <action name="actionA_Propos_de_Qt">
+   <property name="text">
+    <string>A Propos de Qt...</string>
    </property>
   </action>
  </widget>
