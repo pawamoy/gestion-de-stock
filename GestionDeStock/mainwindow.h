@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QTableWidget>
 #include <QShortcut>
+#include <QMessageBox>
 
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
@@ -67,6 +68,10 @@ private slots:
     void on_actionEnregistrer_Vente_sous_triggered();
     void on_ctrl_s();
     void on_sells_add_clicked();
+    void on_actionEnregistrement_triggered();
+    void on_actionVente_triggered();
+    void on_actionA_Propos_triggered();
+    void on_actionA_Propos_de_Qt_triggered();
 
 private:
     Ui::MainWindow *ui;
