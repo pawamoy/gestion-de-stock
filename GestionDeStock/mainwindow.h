@@ -39,10 +39,8 @@ public:
     void DeleteSells();
     void FillStockTable();
     void FillSellsTable();
-    //void FillTableRW();
     void InsertStockRow(int r, StockArticle* sa);
     void InsertSellsRow(int r, SoldArticle* sa);
-    //void InsertRowRW(int r, StockArticle* sa);
     void SetStockRow(int r, StockArticle* sa);
     void SetSellsRow(int r, SoldArticle* sa);
     //void SetRowRW(int r, StockArticle* sa);
