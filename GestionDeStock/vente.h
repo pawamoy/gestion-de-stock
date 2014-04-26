@@ -2,6 +2,7 @@
 #define VENTE_H
 
 #include <QDialog>
+#include <QString>
 
 #include "stock.h"
 #include "sells.h"
@@ -22,6 +23,8 @@ private slots:
     void on_valider_clicked();
 
     void on_annuler_clicked();
+
+    void on_spinBox_valueChanged(int arg1);
 
 private:
     Ui::vente *ui;

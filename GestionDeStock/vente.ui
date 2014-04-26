@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>209</height>
+    <width>339</width>
+    <height>303</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="annuler">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>170</y>
+     <x>80</x>
+     <y>260</y>
      <width>91</width>
      <height>27</height>
     </rect>
@@ -29,8 +29,8 @@
   <widget class="QPushButton" name="valider">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>170</y>
+     <x>190</x>
+     <y>260</y>
      <width>91</width>
      <height>27</height>
     </rect>
@@ -69,6 +69,13 @@
        <widget class="QSpinBox" name="spinBox"/>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
