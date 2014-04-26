@@ -306,22 +306,18 @@ int Sells::GetTotalArticle()
     return total;
 }
 
-
+// attention, penser à stocker les infos de sa avant d'appeler cette fonction
 StockArticle Sells::ToStock(SoldArticle* sa)
 {
     StockArticle a = StockArticle(
                 sa->GetReferenceRef(),
-                sa->GetQuantity(),
+                NR,
                 sa->GetBuyPrice(),
                 sa->GetSellPrice(),
                 sa->GetDiscountPercent(),
                 sa->GetDeliveryDate());
 
     sells.Del(GetPosition(sa));
-    // traitement supplémentaire à effectuer après le renvoi:
-    // vérifier si a existe déjà dans le stock (Stock::EquivalentTo)
-    //  si oui, lui ajouter la quantité de l'objet renvoyé par cette fonction
-    //  si non, ajouter l'objet renvoyé au stock
     return a;
 }
 
