@@ -56,6 +56,8 @@ void modifStock::changeCat()
     delete type_box;
     type_box = new ComboBoxType(this, GetCategory(), GetRefType());
     ui->field_type->addWidget(type_box);
+
+    connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
 }
 
 void modifStock::changeType()
