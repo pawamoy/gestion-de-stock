@@ -465,6 +465,16 @@ void MainWindow::on_sells_add_clicked()
 //    }
 }
 
+void MainWindow::on_stock_sell_clicked()
+{
+    int row = ui->tableWidget->currentRow();
+    StockArticle* articleCourant = stock->GetArticleN(row);
+
+    vente* w = new vente(this, articleCourant);
+    ui->etat->setText("Etat: vente en cours");
+    w->exec();
+}
+
 void MainWindow::on_actionEnregistrement_triggered()
 {
     on_stock_add_clicked();
