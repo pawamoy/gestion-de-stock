@@ -51,6 +51,7 @@ class Stock
 		StVector GetArticles(Ref ref);
 		StVector GetArticles(StockArticle sa);
         int GetStockSize();
+        int GetTotalArticle();
         SoldArticle* ToSell(StockArticle* sa, int qty, QDate d=QDate::currentDate());
 		
 		void ClearStock();
