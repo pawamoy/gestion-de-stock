@@ -6,7 +6,6 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     ui(new Ui::modifStock)
 {
     ui->setupUi(this);
-
     stock = st;
     article = ac;
 
@@ -57,127 +56,6 @@ modifStock::~modifStock()
     delete ui;
 }
 
-void modifStock::changeCat()
-{
-    ui->refca->setValue(GetCategory());
-
-    delete type_box;
-    type_box = new ComboBoxType(this, GetCategory(), GetRefType());
-    ui->field_type->addWidget(type_box);
-
-    connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
-}
-
-void modifStock::changeType()
-{
-    int nc = GetCategory();
-    int nt = GetType();
-
-    bool set = false;
-
-    if (nt != NR)
-    {
-        switch (nc)
-        {
-        case INTERVETEMENT:
-            if (nt < END_TYPE1) set = true;
-            break;
-
-        case VETEMENT1:
-        case VETEMENT2:
-        case VETEMENT3:
-        case VETEMENT4:
-            if (nt < END_TYPE2) set = true;
-            break;
-
-        case SURVETEMENT1:
-        case SURVETEMENT2:
-        case SURVETEMENT3:
-            if (nt < END_TYPE3) set = true;
-            break;
-
-        case ENSEMBLE:
-            if (nt < END_TYPE4) set = true;
-            break;
-
-        case SOUSVETEMENT:
-        default:
-            if (nt < END_TYPE0) set = true;
-            break;
-        }
-    }
-
-    if (set == true)
-        ui->reft->setValue(nt);
-    else
-        ui->reft->setValue(0);
-}
-
-void modifStock::changeSize()
-{
-    ui->refs->setValue(GetSize());
-}
-
-void modifStock::changeColor()
-{
-    ui->refco->setValue(GetColor());
-}
-
-void modifStock::changeModele()
-{
-    ui->refm->setValue(GetModel());
-}
-
-void modifStock::changeRefCat()
-{
-    category_box->setCurrentIndex(GetRefCategory());
-}
-
-void modifStock::changeRefType()
-{
-    type_box->SetSelection(GetRefCategory(),GetRefType());
-}
-
-void modifStock::changeRefSize()
-{
-    size_box->setCurrentIndex(GetRefSize());
-}
-
-void modifStock::changeRefColor()
-{
-    color_box->setCurrentIndex(GetRefColor());
-}
-
-void modifStock::changeRefModele()
-{
-    ui->model_spin->setValue(GetRefModel());
-}
-
-void modifStock::on_annuler_clicked()
-{
-    this->close();
-}
-
-void modifStock::on_valider_clicked()
-{
-    int ca = GetRefCategory();
-    int ty = GetRefType();
-    int mo = GetRefModel();
-    int si = GetRefSize();
-    int co = GetRefColor();
-    int qt = GetQuantity();
-    float bp = GetBuyPrice();
-    float sp = GetSellPrice();
-    int di = GetDiscount();
-    QDate da = GetDelivery();
-
-    Ref modifiedRef = {ca,ty,mo,si,co};
-    StockArticle modified (modifiedRef, qt, bp, sp, di, da);
-    stock->Modify(article,modified);
-
-    this->close();
-}
-
 int modifStock::GetRefCategory()
 {
     return ui->refca->value();
@@ -215,7 +93,7 @@ int modifStock::GetRefSize()
 
 int modifStock::GetSize()
 {
-    return size_box->currentIndex();
+    return size_box->GetIndex(size_box->currentIndex());
 }
 
 int modifStock::GetRefColor()
@@ -251,4 +129,93 @@ int modifStock::GetDiscount()
 QDate modifStock::GetDelivery()
 {
     return ui->date_edit->date();
+}
+
+void modifStock::on_annuler_clicked()
+{
+    this->close();
+}
+
+void modifStock::on_valider_clicked()
+{
+    int ca = GetRefCategory();
+    int ty = GetRefType();
+    int mo = GetRefModel();
+    int si = GetRefSize();
+    int co = GetRefColor();
+    int qt = GetQuantity();
+    float bp = GetBuyPrice();
+    float sp = GetSellPrice();
+    int di = GetDiscount();
+    QDate da = GetDelivery();
+
+    Ref modifiedRef = {ca,ty,mo,si,co};
+    StockArticle modified (modifiedRef, qt, bp, sp, di, da);
+    stock->Modify(article,modified);
+
+    this->close();
+}
+
+
+
+
+
+
+
+
+
+void modifStock::changeCat()
+{
+    ui->refca->setValue(GetCategory());
+
+    delete type_box;
+    type_box = new ComboBoxType(this, GetCategory(), GetRefType());
+    ui->field_type->addWidget(type_box);
+
+    connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
+}
+
+void modifStock::changeType()
+{
+    ui->reft->setValue(GetType());
+}
+
+void modifStock::changeSize()
+{
+    ui->refs->setValue(GetSize());
+}
+
+void modifStock::changeColor()
+{
+    ui->refco->setValue(GetColor());
+}
+
+void modifStock::changeModele()
+{
+    ui->refm->setValue(GetModel());
+}
+
+void modifStock::changeRefCat()
+{
+    category_box->SetSelection(GetRefCategory());
+}
+
+void modifStock::changeRefType()
+{
+    type_box->SetSelection(GetRefCategory(),GetRefType());
+}
+
+void modifStock::changeRefSize()
+{
+    size_box->SetSelection(GetRefSize());
+}
+
+void modifStock::changeRefColor()
+{
+    color_box->SetSelection(GetRefColor());
+}
+
+void modifStock::changeRefModele()
+{
+    ui->model_spin->setValue(GetRefModel());
 }

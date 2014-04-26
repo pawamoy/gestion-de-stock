@@ -11,7 +11,7 @@ ajoutVente::ajoutVente(QWidget *parent, Stock* st, Sells* se) :
 
     ui->date_vente->setDate(QDate::currentDate());
 
-
+    UpdateFinalPrice(0);
 }
 
 ajoutVente::~ajoutVente()
@@ -39,10 +39,32 @@ void ajoutVente::on_valider_clicked()
     QDate sd = GetSellDate();
 
     Ref ref = {ca,ty,mo,si,co};
-    StockArticle a (ref, qt, bp, sp, di, de);
-    stock->Modify(article,modified);
+    StockArticle a(ref, NR, bp, sp, di, de);
+    StockArticle *na = stock->GetArticle(a);
 
-    this->close();
+    if (na != NULL)
+    {
+        SoldArticle* nsa = stock->ToSell(na, qt, sd);
+        if (nsa != NULL)
+        {
+            sells->New(nsa);
+            this->close();
+        }
+        else
+        {
+            QString msg = QString("Quantité trop importante (maximum ");
+            msg = msg.append(QString::number(na->GetQuantity()));
+            msg = msg.append(QString(") !"));
+            QMessageBox messageBox;
+            messageBox.critical(0,"Erreur", msg);
+        }
+    }
+    else
+    {
+        QString msg = QString("Aucun article correspondant dans le stock !");
+        QMessageBox messageBox;
+        messageBox.critical(0,"Erreur", msg);
+    }
 }
 
 int ajoutVente::GetRefCategory()
@@ -100,3 +122,31 @@ QDate ajoutVente::GetSellDate()
     return ui->date_vente->date();
 }
 
+void ajoutVente::on_vente_spin_valueChanged()
+{
+    UpdateFinalPrice();
+}
+
+void ajoutVente::on_rabais_spin_valueChanged()
+{
+    UpdateFinalPrice();
+}
+
+void ajoutVente::on_quantite_spin_valueChanged()
+{
+    UpdateFinalPrice();
+}
+
+void ajoutVente::UpdateFinalPrice(float montant)
+{
+    QString euros = QString(" euros");
+
+    if (montant == -1)
+    {
+        montant = GetSellPrice();
+        montant -= ((montant * GetDiscount()) / 100);
+        montant *= GetQuantity();
+    }
+
+    ui->montant_final->setText(QString::number(montant).append(euros));
+}

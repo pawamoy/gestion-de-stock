@@ -16,20 +16,19 @@ void ComboBoxSize::SetSelection(int ns)
     if (ns < END_SIZE_NUM && ns != NR)
         this->setCurrentIndex(size_num[ns]);
     else
-        this->setCurrentIndex(0);
+        this->setCurrentIndex(size_num[END_SIZE_NUM-1]);
 }
 
-int ComboBoxSize::GetIndex(int size)
+int ComboBoxSize::GetIndex(int selection)
 {
-    int c;
-    std::string sizeLook = size_name[size_num[size]].toUtf8().constData();
-    std::string tmp;
-    for(c=0; c<END_SIZE_NAME; c++)
+    int i, res = -1;
+    for (i=0; i<END_SIZE_NUM; i++)
     {
-        tmp = size_name[c].toUtf8().constData();
-        if( ! tmp.compare(sizeLook) )
-            return c;
+        if (size_num[i] == selection)
+        {
+            res = i;
+            break;
+        }
     }
-
-    return -1;
+    return res;
 }

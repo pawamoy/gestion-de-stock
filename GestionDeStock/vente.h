@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QString>
+#include <QMessageBox>
 
 #include "stock.h"
 #include "sells.h"

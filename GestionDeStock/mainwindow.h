@@ -67,6 +67,7 @@ private slots:
     void on_actionEnregistrer_Vente_sous_triggered();
     void on_ctrl_s();
     void on_sells_add_clicked();
+    void on_sells_cancel_clicked();
     void on_actionEnregistrement_triggered();
     void on_actionVente_triggered();
     void on_actionA_Propos_triggered();
@@ -74,7 +75,7 @@ private slots:
     void on_stock_sell_clicked();
     void on_lancer_requete1_clicked();
     void on_lancer_requete2_clicked();
-
+    void on_tabulation();
 
 private:
     Ui::MainWindow *ui;

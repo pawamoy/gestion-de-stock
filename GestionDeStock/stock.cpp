@@ -303,7 +303,7 @@ int Stock::GetTotalArticle()
 
 SoldArticle* Stock::ToSell(StockArticle* sa, int qty, QDate d)
 {
-	if (qty > 0)
+    if (qty > 0 && sa->HasMore(qty))
 	{
 		// on crée le nouvel article vendu à partir l'article en stock
         SoldArticle* ns = new SoldArticle(*sa, qty, d);

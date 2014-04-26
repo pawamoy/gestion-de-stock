@@ -16,7 +16,7 @@ void ComboBoxColor::SetSelection(int nc)
     if (nc < END_COLOR && nc != NR)
         this->setCurrentIndex(nc);
     else
-        this->setCurrentIndex(0);
+        this->setCurrentIndex(END_COLOR-1);
 }
 
 int ComboBoxColor::GetIndex(std::string color)

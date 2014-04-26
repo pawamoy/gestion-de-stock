@@ -15,13 +15,23 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // connexion raccourci CTRL-S aux fonctions de sauvegarde
+    // connexion raccourcis
     QShortcut *scCtrlS = new QShortcut(QKeySequence("Ctrl+S"), this);
     connect(scCtrlS, SIGNAL(activated()), this, SLOT(on_ctrl_s()));
-
-    // stock et ventes non modifiées de base
-    stockmodified = false;
-    sellsmodified = false;
+    QShortcut *scDel = new QShortcut(QKeySequence("Del"), this);
+    connect(scDel, SIGNAL(activated()), this, SLOT(on_stock_del_clicked()));
+    QShortcut *scAdd = new QShortcut(QKeySequence("a"), this);
+    connect(scAdd, SIGNAL(activated()), this, SLOT(on_stock_add_clicked()));
+    QShortcut *scMod = new QShortcut(QKeySequence("m"), this);
+    connect(scMod, SIGNAL(activated()), this, SLOT(on_stock_mod_clicked()));
+    QShortcut *scVend = new QShortcut(QKeySequence("v"), this);
+    connect(scVend, SIGNAL(activated()), this, SLOT(on_stock_sell_clicked()));
+    QShortcut *scNewVente = new QShortcut(QKeySequence("n"), this);
+    connect(scNewVente, SIGNAL(activated()), this, SLOT(on_sells_add_clicked()));
+    QShortcut *scCancel = new QShortcut(QKeySequence("c"), this);
+    connect(scCancel, SIGNAL(activated()), this, SLOT(on_sells_cancel_clicked()));
+    QShortcut *scTab = new QShortcut(QKeySequence("Tab"), this);
+    connect(scTab, SIGNAL(activated()), this, SLOT(on_tabulation()));
 
     // chemins fichiers stock et vente initialisés aux valeurs par défaut
     stockfile = QString(DEFAULT_STOCK);
@@ -30,16 +40,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // coloration du 3ème onglet en noir
     ui->tabWidget->tabBar()->setTabTextColor(2,QColor("Black"));
 
-    // lecture stock et remplissage table
+    // lecture fichiers et remplissage tables
     OpenStock(stockfile);
-    FillStockTable();
-
-    // lecture ventes et remplissage table
     OpenSells(sellsfile);
-    FillSellsTable();
 
     // affichage de l'état
-    ui->etat->setText("Etat: consultation du stock");
+    ui->etat->setText("Etat: ");
 }
 
 MainWindow::~MainWindow()
@@ -64,7 +70,11 @@ void MainWindow::OpenStock(QString s)
     stock = new Stock();
     StockModified(false);
     if (!s.isNull())
+    {
         stock->ReadStockFile(s);
+        FillStockTable();
+        ui->tableWidget->setCurrentCell(0,0);
+    }
 }
 
 void MainWindow::OpenSells(QString s)
@@ -72,7 +82,11 @@ void MainWindow::OpenSells(QString s)
     sells = new Sells();
     SellsModified(false);
     if (!s.isNull())
+    {
         sells->ReadSellsFile(s);
+        FillSellsTable();
+        ui->tableWidget_2->setCurrentCell(0,0);
+    }
 }
 
 void MainWindow::DeleteStock()
@@ -231,12 +245,14 @@ void MainWindow::SellsModified(bool m)
 void MainWindow::on_stock_add_clicked()
 {
     int size, old_size = stock->GetStockSize();
+    int art, old_art = stock->GetTotalArticle();
 
     ajoutStock* w = new ajoutStock(this, stock);
     ui->etat->setText("Etat: ajout d'un article au stock");
     w->exec();
 
     size = stock->GetStockSize();
+    art = stock->GetTotalArticle();
     if (old_size < size)
     {
         StockArticle* sa = stock->GetArticleN(size-1);
@@ -245,16 +261,26 @@ void MainWindow::on_stock_add_clicked()
         ui->etat->setText(state.append(sa->GetReferenceString()));
         StockModified(true);
     }
-
-    FillStockTable();
+    else if (old_art < art)
+    {
+        ui->etat->setText("Etat: quantité ajoutée à un article existant");
+        FillStockTable();
+        StockModified(true);
+    }
+    else
+    {
+        ui->etat->setText("Etat: ajout annulé");
+    }
 }
 
 void MainWindow::on_stock_del_clicked()
 {
-    int col = ui->tableWidget->currentColumn();
+    if (ui->tabWidget->currentIndex() != 0)
+        return;
+
     int row = ui->tableWidget->currentRow();
 
-    if(col != -1 && row != -1)
+    if (row != -1)
     {
         StockArticle* sa = stock->GetArticleN(row);
         DeleteStockRow(row);
@@ -268,23 +294,31 @@ void MainWindow::on_stock_del_clicked()
 
 void MainWindow::on_stock_mod_clicked()
 {
-    int col = ui->tableWidget->currentColumn();
-    int row = ui->tableWidget->currentRow();
+    if (ui->tabWidget->currentIndex() != 0)
+        return;
 
-    if(col != -1 && row != -1)
+    int row = ui->tableWidget->currentRow();
+    if (row != -1)
     {
         StockArticle* articleCourant = stock->GetArticleN(row);
         StockArticle old_article = *articleCourant;
         modifStock* w = new modifStock(this, stock, articleCourant);
 
+        QString state = QString("Etat: modification de l'article ");
+        ui->etat->setText(state.append(articleCourant->GetReferenceString()));
+
         w->exec();
 
         if ( !articleCourant->EquivalentTo(old_article) )
         {
-            QString state = QString("Etat: modification de l'article ");
+            QString state = QString("Etat: modifié article ");
             ui->etat->setText(state.append(articleCourant->GetReferenceString()));
             SetStockRow(row, articleCourant);
             StockModified(true);
+        }
+        else
+        {
+            ui->etat->setText("Etat: modification annulée");
         }
     }
 }
@@ -324,17 +358,17 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     switch (index)
     {
     case 0:
-        ui->etat->setText("Etat: consultation du stock ");
+        //ui->etat->setText("Etat: consultation du stock ");
         break;
 
     case 1:
-        ui->etat->setText("Etat: consultation des ventes ");
+        //ui->etat->setText("Etat: consultation des ventes ");
         break;
 
     case 2:
-        ui->etat->setText("Etat: consultation des informations");
-        ui->nb_model->setText(QString::number(stock->GetStockSize()));
-        ui->nb_article->setText(QString::number(stock->GetTotalArticle()));
+        //ui->etat->setText("Etat: consultation des informations");
+        ui->nb_model->setText(QString::number(stock->GetStockSize()).append(QString(" modèles")));
+        ui->nb_article->setText(QString::number(stock->GetTotalArticle()).append(QString(" articles")));
     default:
         break;
     }
@@ -455,6 +489,7 @@ void MainWindow::on_ctrl_s()
 void MainWindow::on_sells_add_clicked()
 {
     int size, old_size = sells->GetSellsSize();
+    SoldArticle* sa;
 
     ajoutVente* w = new ajoutVente(this, stock, sells);
     ui->etat->setText("Etat: déclaration d'une nouvelle vente");
@@ -463,30 +498,80 @@ void MainWindow::on_sells_add_clicked()
     size = sells->GetSellsSize();
     if (old_size < size)
     {
-        SoldArticle* sa = sells->GetArticleN(size-1);
+        sa = sells->GetArticleN(size-1);
         InsertSellsRow(size-1, sa);
+        FillStockTable();
         QString state = QString("Etat: ajouté une vente du produit ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
         SellsModified(true);
+        StockModified(true);
     }
     else
     {
-        QString state = QString("Etat: erreur lors de l'ajout d'une vente: référence inconnue ");
+        ui->etat->setText("Etat: vente annulée");
+    }
+}
+
+void MainWindow::on_sells_cancel_clicked()
+{
+    if (ui->tabWidget->currentIndex() != 1)
+        return;
+
+    int size, old_size = sells->GetSellsSize();
+    SoldArticle* sa;
+
+    ajoutVente* w = new ajoutVente(this, stock, sells);
+    ui->etat->setText("Etat: déclaration d'une nouvelle vente");
+    w->exec();
+
+    size = sells->GetSellsSize();
+    if (old_size < size)
+    {
+        sa = sells->GetArticleN(size-1);
+        InsertSellsRow(size-1, sa);
+        FillStockTable();
+        QString state = QString("Etat: ajouté une vente du produit ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
+        SellsModified(true);
+        StockModified(true);
+    }
+    else
+    {
+        ui->etat->setText("Etat: vente annulée");
     }
 }
 
 void MainWindow::on_stock_sell_clicked()
 {
+    if (ui->tabWidget->currentIndex() != 0)
+            return;
+
     int row = ui->tableWidget->currentRow();
-    StockArticle* articleCourant = stock->GetArticleN(row);
+    if (row != -1)
+    {
+        int size, old_size = sells->GetTotalArticle();
+        StockArticle* articleCourant = stock->GetArticleN(row);
 
-    vente* w = new vente(this, stock, sells, articleCourant);
-    ui->etat->setText("Etat: vente en cours");
-    w->exec();
+        vente* w = new vente(this, stock, sells, articleCourant);
+        QString state = QString("Etat: vente de l'article ");
+        ui->etat->setText(state.append(articleCourant->GetReferenceString()));
+        w->exec();
 
-    FillStockTable();
-    FillSellsTable();
+        size = sells->GetTotalArticle();
+        if (old_size < size)
+        {
+            QString state = QString("Etat: vendu l'article ");
+            ui->etat->setText(state.append(articleCourant->GetReferenceString()));
+            FillStockTable();
+            FillSellsTable();
+            StockModified(true);
+            SellsModified(true);
+        }
+        else
+        {
+            ui->etat->setText("Etat: vente annulée");
+        }
+    }
 }
 
 void MainWindow::on_actionEnregistrement_triggered()
@@ -555,4 +640,9 @@ void MainWindow::on_lancer_requete2_clicked()
     }
 
     ui->recette_result2->setText(QString::number(recette).append(QString(" euros")));
+}
+
+void MainWindow::on_tabulation()
+{
+    ui->tabWidget->setCurrentIndex((ui->tabWidget->currentIndex()+1)%3);
 }

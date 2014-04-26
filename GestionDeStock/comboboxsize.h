@@ -11,7 +11,7 @@ class ComboBoxSize
 public:
     ComboBoxSize(QWidget *parent, int ns);
     void SetSelection(int ns);
-    int GetIndex(int size);
+    int GetIndex(int selection);
 };
 
 #endif // COMBOBOXSIZE_H

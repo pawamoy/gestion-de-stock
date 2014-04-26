@@ -147,7 +147,7 @@ QString Article::GetDeliveryString(const char *separator)
     m = m.rightJustified(2, '0');
     QString d = QString::number(delivery.day());
     d = d.rightJustified(2, '0');
-    return y.append(separator).append(m).append(separator).append(d);
+    return d.append(separator).append(m).append(separator).append(y);
 }
 
 int Article::GetDaysInStock()
@@ -848,7 +848,7 @@ QString SoldArticle::GetSellDateString(const char* separator)
     m = m.rightJustified(2, '0');
     QString d = QString::number(selldate.day());
     d = d.rightJustified(2, '0');
-    return y.append(separator).append(m).append(separator).append(d);
+    return d.append(separator).append(m).append(separator).append(y);
 }
 
 int SoldArticle::GetDaysSinceSold()
