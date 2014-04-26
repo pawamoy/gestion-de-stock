@@ -334,7 +334,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     case 2:
         ui->etat->setText("Etat: consultation des informations");
         ui->nb_model->setText(QString::number(stock->GetStockSize()));
-        ui->nb_article->setText(stock->GetTotalArticle());
+        ui->nb_article->setText(QString::number(stock->GetTotalArticle()));
     default:
         break;
     }
@@ -526,11 +526,11 @@ void MainWindow::on_lancer_requete2_clicked()
 {
     // chiffre d'affaire depuis jour précis
     SoldArticle* sa;
-    QDate selected_date = ui->date_requete1->date();
+    QDate selected_date = ui->date_requete2->date();
     int i, s = sells->GetSellsSize();
     float recette = 0.0;
 
-    ui->date_result1->setText(selected_date.toString());
+    ui->date_result2->setText(selected_date.toString());
 
     for (i=0; i<s; i++)
     {
@@ -539,5 +539,5 @@ void MainWindow::on_lancer_requete2_clicked()
             recette += sa->GetDiscountPrice();
     }
 
-    ui->recette_result1->setText(QString::number(recette));
+    ui->recette_result2->setText(QString::number(recette));
 }
