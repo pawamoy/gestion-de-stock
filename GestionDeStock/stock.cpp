@@ -298,12 +298,12 @@ SoldArticle* Stock::ToSell(StockArticle* sa, int qty, QDate d)
         SoldArticle* ns = new SoldArticle(*sa, qty, d);
 		
 		// on retire le nombre d'articles vendus du stock
-        //sa->SubQty(qty);
+        sa->SubQty(qty);
 		
 		// s'il n'y a plus d'articles, on supprime la référence
         // on fera ce traitement au niveau supérieur, pour enlever la ligne du tableau si besoin
-        //if (sa->GetQuantity() == 0)
-        //    stock.Del(GetPosition(sa));
+        if (sa->GetQuantity() == 0)
+            stock.Del(GetPosition(sa));
 			
 		// on renvoie la nouvelle vente
 		return ns;
