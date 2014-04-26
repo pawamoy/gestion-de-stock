@@ -124,9 +124,9 @@ QString Article::GetDiscountPercentString()
 
 float Article::GetDiscountPrice()
 {
-    float result = GetSellPrice() / 100;
-    return result * GetDiscountPercent();
-    //return GetSellPrice() * (GetDiscountPercent() / 100);
+    float price = GetSellPrice();
+    float result = price / 100;
+    return price - (result * GetDiscountPercent());
 }
 
 QString Article::GetDiscountPriceString()
