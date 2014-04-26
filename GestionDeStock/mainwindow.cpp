@@ -474,9 +474,12 @@ void MainWindow::on_stock_sell_clicked()
     int row = ui->tableWidget->currentRow();
     StockArticle* articleCourant = stock->GetArticleN(row);
 
-    vente* w = new vente(this, articleCourant);
+    vente* w = new vente(this, stock, sells, articleCourant);
     ui->etat->setText("Etat: vente en cours");
     w->exec();
+
+    FillStockTable();
+    FillSellsTable();
 }
 
 void MainWindow::on_actionEnregistrement_triggered()
