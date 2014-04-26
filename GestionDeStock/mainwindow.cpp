@@ -476,3 +476,23 @@ void MainWindow::on_sells_add_clicked()
 //        StockModified(true);
 //    }
 }
+
+void MainWindow::on_actionEnregistrement_triggered()
+{
+    on_stock_add_clicked();
+}
+
+void MainWindow::on_actionVente_triggered()
+{
+    on_sells_add_clicked();
+}
+
+void MainWindow::on_actionA_Propos_triggered()
+{
+    QMessageBox::about(this, QString("A propos"), QString("Interface graphique et logiciel conçus dans le cadre d'un projet de licence d'Informatique à Strasbourg. Concepteurs: Mohammed Yassine Jazouani, Timothée Mazzucotelli"));
+}
+
+void MainWindow::on_actionA_Propos_de_Qt_triggered()
+{
+    QApplication::aboutQt();
+}
