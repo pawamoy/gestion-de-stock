@@ -18,6 +18,8 @@ ajoutStock::ajoutStock(QWidget *parent, Stock *st) :
     ui->field_type->addWidget(type_box);
     ui->field_taille->addWidget(size_box);
     ui->field_couleur->addWidget(color_box);
+
+    ui->date_edit->setDate(QDate::currentDate());
 }
 
 ajoutStock::~ajoutStock()

@@ -16,6 +16,7 @@
 #include "sells.h"
 #include "ajoutstock.h"
 #include "modifstock.h"
+#include "ajoutvente.h"
 
 namespace Ui {
 class MainWindow;
@@ -65,6 +66,7 @@ private slots:
     void on_actionEnregistrer_Stock_sous_triggered();
     void on_actionEnregistrer_Vente_sous_triggered();
     void on_ctrl_s();
+    void on_sells_add_clicked();
 
 private:
     Ui::MainWindow *ui;
