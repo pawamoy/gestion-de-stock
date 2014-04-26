@@ -15,6 +15,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QShortcut *scCtrlS = new QShortcut(QKeySequence("Ctrl+S"), this);
+    connect(scCtrlS, SIGNAL(activated()), this, SLOT(on_ctrl_s()));
+
+    stockmodified = false;
+    sellsmodified = false;
+
     stockfile = QString(DEFAULT_STOCK);
     sellsfile = QString(DEFAULT_SELLS);
 
@@ -47,6 +53,7 @@ void MainWindow::ClearSellsTable()
 void MainWindow::OpenStock(QString s)
 {
     stock = new Stock();
+    StockModified(false);
     if (!s.isNull())
         stock->ReadStockFile(s);
 }
@@ -54,6 +61,7 @@ void MainWindow::OpenStock(QString s)
 void MainWindow::OpenSells(QString s)
 {
     sells = new Sells();
+    SellsModified(false);
     if (!s.isNull())
         sells->ReadSellsFile(s);
 }
@@ -79,14 +87,16 @@ void MainWindow::FillStockTable()
         InsertStockRow(i, stock->GetArticleN(i));
 }
 
-//void MainWindow::FillTableRW()
-//{
-//    int i,s = stock->GetStockSize();
+/*
+void MainWindow::FillTableRW()
+{
+    int i,s = stock->GetStockSize();
 
-//    ui->tableWidget->setRowCount(0);
-//    for (i=0; i<s; i++)
-//        InsertRowRW(i, stock->GetArticleN(i));
-//}
+    ui->tableWidget->setRowCount(0);
+    for (i=0; i<s; i++)
+        InsertRowRW(i, stock->GetArticleN(i));
+}
+*/
 
 void MainWindow::FillSellsTable()
 {
@@ -105,11 +115,13 @@ void MainWindow::InsertStockRow(int r, StockArticle* sa)
 }
 
 // valeurs modifiables
-//void MainWindow::InsertRowRW(int r, StockArticle* sa)
-//{
-//    ui->tableWidget->insertRow(r);
-//    SetRowRW(r, sa);
-//}
+/*
+void MainWindow::InsertRowRW(int r, StockArticle* sa)
+{
+    ui->tableWidget->insertRow(r);
+    SetRowRW(r, sa);
+}
+*/
 
 void MainWindow::InsertSellsRow(int r, SoldArticle* sa)
 {
@@ -119,124 +131,116 @@ void MainWindow::InsertSellsRow(int r, SoldArticle* sa)
 
 void MainWindow::DeleteStockRow(int r)
 {
-    std::cout << "remove row " << r << std::endl;
+    //std::cout << "remove row " << r << std::endl;
     ui->tableWidget->removeRow(r);
 }
 
 void MainWindow::DeleteSellsRow(int r)
 {
-    std::cout << "remove row " << r << std::endl;
+    //std::cout << "remove row " << r << std::endl;
     ui->tableWidget_2->removeRow(r);
 }
 
 // lecture seule
 void MainWindow::SetStockRow(int r, StockArticle* sa)
 {
+    SetTableRow(ui->tableWidget, r, sa);
+}
+
+// valeurs modifiables
+/*
+void MainWindow::SetRowRW(int r, StockArticle* sa)
+{
     // déclaration des widgets
-    QLabel* ref = new QLabel(sa->GetReferenceString());
-    ref->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* categ = new QLabel(sa->GetCategoryName());
-    categ->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* type = new QLabel(sa->GetTypeName());
-    type->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* model = new QLabel(sa->GetModelString());
-    model->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* color = new QLabel(sa->GetColorName());
-    color->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* size = new QLabel(sa->GetSizeName());
-    size->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* qty = new QLabel(sa->GetQuantityString());
-    qty->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* achat = new QLabel(sa->GetBuyPriceString());
-    achat->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* vente = new QLabel(sa->GetSellPriceString());
-    vente->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
-    QLabel* rabais = new QLabel(sa->GetDiscountPercentString());
-    rabais->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
-    QLabel* date = new QLabel(sa->GetDeliveryString(DEFAULT_DATE_SEP));
-    date->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
+    ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget, sa->GetCategoryInt());
+    ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt(), sa->GetCategoryInt());
+    QSpinBox* model = new QSpinBox(ui->tableWidget);
+    model->setMaximum(9);
+    model->setValue(sa->GetModelInt());
+    ComboBoxSize* size = new ComboBoxSize(ui->tableWidget, sa->GetSizeInt());
+    ComboBoxColor* color = new ComboBoxColor(ui->tableWidget, sa->GetColorInt());
+    QSpinBox* qty = new QSpinBox(ui->tableWidget);
+    qty->setMaximum(MAX_QUANTITY);
+    qty->setValue(sa->GetQuantity());
 
     // affectation aux cellules de la ligne r
-    ui->tableWidget->setCellWidget(r,0,ref);
+    ui->tableWidget->setItem(r,0,new QTableWidgetItem(sa->GetReferenceString()));
     ui->tableWidget->setCellWidget(r,1,categ);
     ui->tableWidget->setCellWidget(r,2,type);
     ui->tableWidget->setCellWidget(r,3,model);
     ui->tableWidget->setCellWidget(r,4,size);
     ui->tableWidget->setCellWidget(r,5,color);
     ui->tableWidget->setCellWidget(r,6,qty);
-    ui->tableWidget->setCellWidget(r,7,achat);
-    ui->tableWidget->setCellWidget(r,8,vente);
-    ui->tableWidget->setCellWidget(r,9,rabais);
-    ui->tableWidget->setCellWidget(r,10,date);
 }
-
-// valeurs modifiables
-//void MainWindow::SetRowRW(int r, StockArticle* sa)
-//{
-//    // déclaration des widgets
-//    ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget, sa->GetCategoryInt());
-//    ComboBoxType* type = new ComboBoxType(ui->tableWidget, sa->GetCategoryInt(), sa->GetCategoryInt());
-//    QSpinBox* model = new QSpinBox(ui->tableWidget);
-//    model->setMaximum(9);
-//    model->setValue(sa->GetModelInt());
-//    ComboBoxSize* size = new ComboBoxSize(ui->tableWidget, sa->GetSizeInt());
-//    ComboBoxColor* color = new ComboBoxColor(ui->tableWidget, sa->GetColorInt());
-//    QSpinBox* qty = new QSpinBox(ui->tableWidget);
-//    qty->setMaximum(MAX_QUANTITY);
-//    qty->setValue(sa->GetQuantity());
-
-//    // affectation aux cellules de la ligne r
-//    ui->tableWidget->setItem(r,0,new QTableWidgetItem(sa->GetReferenceString()));
-//    ui->tableWidget->setCellWidget(r,1,categ);
-//    ui->tableWidget->setCellWidget(r,2,type);
-//    ui->tableWidget->setCellWidget(r,3,model);
-//    ui->tableWidget->setCellWidget(r,4,size);
-//    ui->tableWidget->setCellWidget(r,5,color);
-//    ui->tableWidget->setCellWidget(r,6,qty);
-//}
+*/
 
 void MainWindow::SetSellsRow(int r, SoldArticle* sa)
 {
-    // déclaration des widgets
-    QLabel* ref = new QLabel(sa->GetReferenceString());
-    ref->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* categ = new QLabel(sa->GetCategoryName());
-    categ->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* type = new QLabel(sa->GetTypeName());
-    type->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* model = new QLabel(sa->GetModelString());
-    model->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* color = new QLabel(sa->GetColorName());
-    color->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* size = new QLabel(sa->GetSizeName());
-    size->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* qty = new QLabel(sa->GetQuantityString());
-    qty->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* achat = new QLabel(sa->GetBuyPriceString());
-    achat->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    QLabel* vente = new QLabel(sa->GetSellPriceString());
-    vente->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
-    QLabel* rabais = new QLabel(sa->GetDiscountPercentString());
-    rabais->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
-    QLabel* date_l = new QLabel(sa->GetDeliveryString(DEFAULT_DATE_SEP));
-    date_l->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
+    SetTableRow(ui->tableWidget_2, r, sa);
+
     QLabel* date_s = new QLabel(sa->GetSellDateString(DEFAULT_DATE_SEP));
     date_s->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
-
-    // affectation aux cellules de la ligne r
-    ui->tableWidget_2->setCellWidget(r,0,ref);
-    ui->tableWidget_2->setCellWidget(r,1,categ);
-    ui->tableWidget_2->setCellWidget(r,2,type);
-    ui->tableWidget_2->setCellWidget(r,3,model);
-    ui->tableWidget_2->setCellWidget(r,4,size);
-    ui->tableWidget_2->setCellWidget(r,5,color);
-    ui->tableWidget_2->setCellWidget(r,6,qty);
-    ui->tableWidget_2->setCellWidget(r,7,achat);
-    ui->tableWidget_2->setCellWidget(r,8,vente);
-    ui->tableWidget_2->setCellWidget(r,9,rabais);
-    ui->tableWidget_2->setCellWidget(r,10,date_l);
     ui->tableWidget_2->setCellWidget(r,11,date_s);
 }
+
+void MainWindow::SetTableRow(QTableWidget* table, int row, Article* a)
+{
+    QLabel* ref = new QLabel(a->GetReferenceString());
+    ref->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* categ = new QLabel(a->GetCategoryName());
+    categ->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* type = new QLabel(a->GetTypeName());
+    type->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* model = new QLabel(a->GetModelString());
+    model->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* color = new QLabel(a->GetColorName());
+    color->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* size = new QLabel(a->GetSizeName());
+    size->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* qty = new QLabel(a->GetQuantityString());
+    qty->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* achat = new QLabel(a->GetBuyPriceString());
+    achat->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    QLabel* vente = new QLabel(a->GetSellPriceString());
+    vente->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
+    QLabel* rabais = new QLabel(a->GetDiscountPercentString());
+    rabais->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
+    QLabel* date_l = new QLabel(a->GetDeliveryString(DEFAULT_DATE_SEP));
+    date_l->setAlignment((Qt::AlignHCenter | Qt::AlignVCenter));
+
+    // affectation aux cellules de la ligne r
+    table->setCellWidget(row,0,ref);
+    table->setCellWidget(row,1,categ);
+    table->setCellWidget(row,2,type);
+    table->setCellWidget(row,3,model);
+    table->setCellWidget(row,4,size);
+    table->setCellWidget(row,5,color);
+    table->setCellWidget(row,6,qty);
+    table->setCellWidget(row,7,achat);
+    table->setCellWidget(row,8,vente);
+    table->setCellWidget(row,9,rabais);
+    table->setCellWidget(row,10,date_l);
+}
+
+void MainWindow::StockModified(bool m)
+{
+    stockmodified = m;
+    if (m == true)
+        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Red"));
+    else
+        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Black"));
+}
+
+void MainWindow::SellsModified(bool m)
+{
+    sellsmodified = m;
+    if (m == true)
+        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Red"));
+    else
+        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Black"));
+}
+
+/** ************ SLOTS ************* **/
 
 void MainWindow::on_stock_add_clicked()
 {
@@ -253,6 +257,7 @@ void MainWindow::on_stock_add_clicked()
         InsertStockRow(size-1, sa);
         QString state = QString("Etat: ajouté l'article ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
+        StockModified(true);
     }
 }
 
@@ -269,6 +274,7 @@ void MainWindow::on_stock_del_clicked()
 
         QString state = QString("Etat: supprimé l'article ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
+        StockModified(true);
     }
 }
 
@@ -280,14 +286,18 @@ void MainWindow::on_stock_mod_clicked()
     if(col != -1 && row != -1)
     {
         StockArticle* articleCourant = stock->GetArticleN(row);
+        StockArticle old_article = *articleCourant;
         modifStock* w = new modifStock(this, stock, articleCourant);
-
-        QString state = QString("Etat: modification de l'article ");
-        ui->etat->setText(state.append(articleCourant->GetReferenceString()));
 
         w->exec();
 
-        SetStockRow(row, articleCourant);
+        if ( !articleCourant->EquivalentTo(old_article) )
+        {
+            QString state = QString("Etat: modification de l'article ");
+            ui->etat->setText(state.append(articleCourant->GetReferenceString()));
+            SetStockRow(row, articleCourant);
+            StockModified(true);
+        }
     }
 }
 
@@ -298,6 +308,7 @@ void MainWindow::on_actionEnregistrer_Stock_triggered()
         stock->WriteStockFile(stockfile);
         QString state = QString("Etat: stock enregistré dans le fichier ");
         ui->etat->setText(state.append(stockfile));
+        StockModified(false);
     }
     else
     {
@@ -312,6 +323,7 @@ void MainWindow::on_actionEnregistrer_Vente_triggered()
         sells->WriteSellsFile(sellsfile);
         QString state = QString("Etat: ventes enregistrées dans le fichier ");
         ui->etat->setText(state.append(sellsfile));
+        SellsModified(false);
     }
     else
     {
@@ -321,10 +333,19 @@ void MainWindow::on_actionEnregistrer_Vente_triggered()
 
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
-    if (index == 0)
+    switch (index)
+    {
+    case 0:
         ui->etat->setText("Etat: consultation du stock ");
-    else
+        break;
+
+    case 1:
         ui->etat->setText("Etat: consultation des ventes ");
+        break;
+
+    default:
+        break;
+    }
 }
 
 void MainWindow::on_actionQuitter_triggered()
@@ -341,6 +362,7 @@ void MainWindow::on_actionNouveau_Stock_triggered()
     stockfile = QString();
     OpenStock();
     ui->etat->setText("Etat: nouveau stock ouvert");
+    StockModified(false);
 }
 
 void MainWindow::on_actionNouvelle_Vente_triggered()
@@ -350,6 +372,7 @@ void MainWindow::on_actionNouvelle_Vente_triggered()
     sellsfile = QString();
     OpenSells();
     ui->etat->setText("Etat: nouvelle table de ventes ouverte");
+    SellsModified(false);
 }
 
 void MainWindow::on_actionOuvrir_Stock_triggered()
@@ -362,9 +385,11 @@ void MainWindow::on_actionOuvrir_Stock_triggered()
         QString state = QString("Etat: Ouverture du fichier ");
         ui->etat->setText(state.append(fileName));
 
+        ui->tabWidget->setCurrentIndex(0);
         stockfile = fileName;
         OpenStock(fileName);
         FillStockTable();
+        StockModified(false);
     }
 }
 
@@ -378,9 +403,11 @@ void MainWindow::on_actionOuvrir_Vente_triggered()
         QString state = QString("Etat: Ouverture du fichier ");
         ui->etat->setText(state.append(fileName));
 
+        ui->tabWidget->setCurrentIndex(1);
         sellsfile = fileName;
         OpenSells(fileName);
         FillSellsTable();
+        SellsModified(false);
     }
 }
 
@@ -396,6 +423,7 @@ void MainWindow::on_actionEnregistrer_Stock_sous_triggered()
 
         stockfile = fileName;
         stock->WriteStockFile(fileName);
+        StockModified(false);
     }
 }
 
@@ -411,5 +439,23 @@ void MainWindow::on_actionEnregistrer_Vente_sous_triggered()
 
         sellsfile = fileName;
         sells->WriteSellsFile(fileName);
+        SellsModified(false);
+    }
+}
+
+void MainWindow::on_ctrl_s()
+{
+    switch (ui->tabWidget->currentIndex())
+    {
+    case 0:
+        on_actionEnregistrer_Stock_triggered();
+        break;
+
+    case 1:
+        on_actionEnregistrer_Vente_triggered();
+        break;
+
+    default:
+        break;
     }
 }
