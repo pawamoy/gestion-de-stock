@@ -45,7 +45,13 @@ void ajoutStock::on_valider_clicked()
     int di = GetDiscount();
     QDate da = GetDelivery();
 
-    stock->New(new StockArticle((Ref){ca,ty,mo,si,co},qt,bp,sp,di,da));
+    StockArticle sa((Ref){ca,ty,mo,si,co},NR,bp,sp,di,da);
+    StockArticle *nsa = stock->GetArticle(sa);
+
+    if (nsa != NULL)
+        stock->Add(nsa, qt);
+    else
+        stock->New(new StockArticle((Ref){ca,ty,mo,si,co},qt,bp,sp,di,da));
 
     this->close();
 }
