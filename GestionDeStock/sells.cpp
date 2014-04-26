@@ -305,6 +305,11 @@ StockArticle Sells::ToStock(SoldArticle* sa)
                 sa->GetDiscountPercent(),
                 sa->GetDeliveryDate());
 
+    sells.Del(GetPosition(sa));
+    // traitement supplémentaire à effectuer après le renvoi:
+    // vérifier si a existe déjà dans le stock (Stock::EquivalentTo)
+    //  si oui, lui ajouter la quantité de l'objet renvoyé par cette fonction
+    //  si non, ajouter l'objet renvoyé au stock
     return a;
 }
 
