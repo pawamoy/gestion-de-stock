@@ -52,14 +52,11 @@ void vente::on_annuler_clicked()
 
 void vente::on_spinBox_valueChanged(int arg1)
 {
-    std::string text ="";
+    std::cout << a->GetDiscountPercent() << std::endl;
 
-    int montantTotal = (a->GetSellPrice() - a->GetSellPrice()*(float)a->GetDiscountPercent())*arg1;
-    std::string mT = "";
-    mT = mT + QString::number(montantTotal);
+    int montantTotal = (a->GetSellPrice() - a->GetSellPrice()*(float)a->GetDiscountPercent()/100)*arg1;
 
-    std::cout << mT << std::endl;
-
-    text = text + "Montant total de la vente : " + mT + " €";
-    ui->label_3->setText(QString(text.c_str()));
+    QString text ("Montant total de la vente : ");
+    text.append(QString::number(montantTotal));
+    ui->label_3->setText(text);
 }
