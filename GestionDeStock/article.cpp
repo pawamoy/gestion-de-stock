@@ -124,7 +124,9 @@ QString Article::GetDiscountPercentString()
 
 float Article::GetDiscountPrice()
 {
-	return GetSellPrice() * (GetDiscountPercent() / 100);
+    float result = GetSellPrice() / 100;
+    return result * GetDiscountPercent();
+    //return GetSellPrice() * (GetDiscountPercent() / 100);
 }
 
 QString Article::GetDiscountPriceString()
@@ -450,17 +452,17 @@ bool Article::Delivered(QDate d)
 	if (d.isNull())
 		return true;
 	else
-		return (GetDeliveryDate().operator==(d));
+        return (GetDeliveryDate() == d);
 }
 
 bool Article::DeliveredEarly(QDate d)
 {
-	return (GetDeliveryDate().operator<=(d));
+    return (GetDeliveryDate() <= d);
 }
 
 bool Article::DeliveredLately(QDate d)
 {
-	return (GetDeliveryDate().operator>=(d));
+    return (GetDeliveryDate() >= d);
 }
 
 bool Article::InStockFor(int days)

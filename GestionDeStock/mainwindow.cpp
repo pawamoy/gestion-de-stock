@@ -519,7 +519,7 @@ void MainWindow::on_lancer_requete1_clicked()
             recette += sa->GetDiscountPrice();
     }
 
-    ui->recette_result1->setText(QString::number(recette));
+    ui->recette_result1->setText(QString::number(recette).append(QString(" euros")));
 }
 
 void MainWindow::on_lancer_requete2_clicked()
@@ -539,5 +539,5 @@ void MainWindow::on_lancer_requete2_clicked()
             recette += sa->GetDiscountPrice();
     }
 
-    ui->recette_result2->setText(QString::number(recette));
+    ui->recette_result2->setText(QString::number(recette).append(QString(" euros")));
 }
