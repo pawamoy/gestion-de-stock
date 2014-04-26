@@ -15,21 +15,30 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // connexion raccourci CTRL-S aux fonctions de sauvegarde
     QShortcut *scCtrlS = new QShortcut(QKeySequence("Ctrl+S"), this);
     connect(scCtrlS, SIGNAL(activated()), this, SLOT(on_ctrl_s()));
 
+    // stock et ventes non modifiées de base
     stockmodified = false;
     sellsmodified = false;
 
+    // chemins fichiers stock et vente initialisés aux valeurs par défaut
     stockfile = QString(DEFAULT_STOCK);
     sellsfile = QString(DEFAULT_SELLS);
 
+    // coloration du 3ème onglet en noir
+    ui->tabWidget->tabBar()->setTabTextColor(2,QColor("Black"));
+
+    // lecture stock et remplissage table
     OpenStock(stockfile);
     FillStockTable();
 
+    // lecture ventes et remplissage table
     OpenSells(sellsfile);
     FillSellsTable();
 
+    // affichage de l'état
     ui->etat->setText("Etat: consultation du stock");
 }
 
@@ -87,17 +96,6 @@ void MainWindow::FillStockTable()
         InsertStockRow(i, stock->GetArticleN(i));
 }
 
-/*
-void MainWindow::FillTableRW()
-{
-    int i,s = stock->GetStockSize();
-
-    ui->tableWidget->setRowCount(0);
-    for (i=0; i<s; i++)
-        InsertRowRW(i, stock->GetArticleN(i));
-}
-*/
-
 void MainWindow::FillSellsTable()
 {
     int i,s = sells->GetSellsSize();
@@ -107,21 +105,11 @@ void MainWindow::FillSellsTable()
         InsertSellsRow(i, sells->GetArticleN(i));
 }
 
-// lecture seule
 void MainWindow::InsertStockRow(int r, StockArticle* sa)
 {
     ui->tableWidget->insertRow(r);
     SetStockRow(r, sa);
 }
-
-// valeurs modifiables
-/*
-void MainWindow::InsertRowRW(int r, StockArticle* sa)
-{
-    ui->tableWidget->insertRow(r);
-    SetRowRW(r, sa);
-}
-*/
 
 void MainWindow::InsertSellsRow(int r, SoldArticle* sa)
 {
@@ -131,17 +119,14 @@ void MainWindow::InsertSellsRow(int r, SoldArticle* sa)
 
 void MainWindow::DeleteStockRow(int r)
 {
-    //std::cout << "remove row " << r << std::endl;
     ui->tableWidget->removeRow(r);
 }
 
 void MainWindow::DeleteSellsRow(int r)
 {
-    //std::cout << "remove row " << r << std::endl;
     ui->tableWidget_2->removeRow(r);
 }
 
-// lecture seule
 void MainWindow::SetStockRow(int r, StockArticle* sa)
 {
     SetTableRow(ui->tableWidget, r, sa);
@@ -185,6 +170,7 @@ void MainWindow::SetSellsRow(int r, SoldArticle* sa)
 
 void MainWindow::SetTableRow(QTableWidget* table, int row, Article* a)
 {
+    // déclaration des labels
     QLabel* ref = new QLabel(a->GetReferenceString());
     ref->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     QLabel* categ = new QLabel(a->GetCategoryName());
@@ -259,6 +245,8 @@ void MainWindow::on_stock_add_clicked()
         ui->etat->setText(state.append(sa->GetReferenceString()));
         StockModified(true);
     }
+
+    FillStockTable();
 }
 
 void MainWindow::on_stock_del_clicked()

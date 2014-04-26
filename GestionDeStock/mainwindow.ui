@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1164</width>
-    <height>504</height>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,7 +58,7 @@
        </property>
        <widget class="QWidget" name="onglet_stock">
         <property name="focusPolicy">
-         <enum>Qt::TabFocus</enum>
+         <enum>Qt::NoFocus</enum>
         </property>
         <attribute name="title">
          <string>Produits en stock</string>
@@ -423,6 +423,22 @@
          </layout>
         </widget>
        </widget>
+       <widget class="QWidget" name="onglet_info">
+        <attribute name="title">
+         <string>Informations et Requêtes</string>
+        </attribute>
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>9</x>
+           <y>9</y>
+           <width>1141</width>
+           <height>361</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout"/>
+        </widget>
+       </widget>
       </widget>
      </item>
     </layout>
@@ -431,7 +447,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>420</y>
+      <y>410</y>
       <width>1151</width>
       <height>31</height>
      </rect>
