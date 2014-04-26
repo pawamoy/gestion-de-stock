@@ -18,6 +18,7 @@
 #include "ajoutstock.h"
 #include "modifstock.h"
 #include "ajoutvente.h"
+#include "vente.h"
 
 namespace Ui {
 class MainWindow;
@@ -70,6 +71,8 @@ private slots:
     void on_actionVente_triggered();
     void on_actionA_Propos_triggered();
     void on_actionA_Propos_de_Qt_triggered();
+
+    void on_stock_sell_clicked();
 
 private:
     Ui::MainWindow *ui;
