@@ -509,6 +509,7 @@ void MainWindow::on_lancer_requete1_clicked()
     QDate selected_date = ui->date_requete1->date();
     int i, s = sells->GetSellsSize();
     float recette = 0.0;
+    float tmp;
 
     ui->date_result1->setText(selected_date.toString());
 
@@ -516,7 +517,10 @@ void MainWindow::on_lancer_requete1_clicked()
     {
         sa = sells->GetArticleN(i);
         if (sa->Delivered(selected_date))
-            recette += sa->GetDiscountPrice();
+        {
+            tmp = sa->GetDiscountPrice() - sa->GetBuyPrice();
+            recette += tmp * sa->GetQuantity();
+        }
     }
 
     ui->recette_result1->setText(QString::number(recette).append(QString(" euros")));
@@ -529,6 +533,7 @@ void MainWindow::on_lancer_requete2_clicked()
     QDate selected_date = ui->date_requete2->date();
     int i, s = sells->GetSellsSize();
     float recette = 0.0;
+    float tmp;
 
     ui->date_result2->setText(selected_date.toString());
 
@@ -536,7 +541,10 @@ void MainWindow::on_lancer_requete2_clicked()
     {
         sa = sells->GetArticleN(i);
         if (sa->DeliveredLately(selected_date))
-            recette += sa->GetDiscountPrice();
+        {
+            tmp = sa->GetDiscountPrice() - sa->GetBuyPrice();
+            recette += tmp * sa->GetQuantity();
+        }
     }
 
     ui->recette_result2->setText(QString::number(recette).append(QString(" euros")));
