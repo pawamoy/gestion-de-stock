@@ -17,6 +17,10 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
 
     connect(category_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCat()));
     connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
+    connect(size_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeSize()));
+    connect(color_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeColor()));
+
+    connect(ui->model_spin, SIGNAL(valueChanged(int)), this, SLOT(changeModele()));
 
     category_box->SetSelection(ac->GetCategoryInt());
     type_box->SetSelection(ac->GetCategoryInt(), ac->GetTypeInt());
@@ -50,7 +54,6 @@ modifStock::~modifStock()
 
 void modifStock::changeCat()
 {
-    std::cout << "hahahaha" << std::endl;
     ui->refca->setValue(GetCategory());
 
     delete type_box;
@@ -62,7 +65,6 @@ void modifStock::changeCat()
 
 void modifStock::changeType()
 {
-    std::cout << "coucou" << std::endl;
     int nc = GetCategory();
     int nt = GetType();
 
@@ -104,6 +106,21 @@ void modifStock::changeType()
         ui->reft->setValue(nt);
     else
         ui->reft->setValue(0);
+}
+
+void modifStock::changeSize()
+{
+    ui->refs->setValue(GetSize());
+}
+
+void modifStock::changeColor()
+{
+    ui->refco->setValue(GetColor());
+}
+
+void modifStock::changeModele()
+{
+    ui->refm->setValue(GetModel());
 }
 
 

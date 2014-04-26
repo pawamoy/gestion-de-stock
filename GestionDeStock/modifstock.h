@@ -50,6 +50,9 @@ private slots:
     void on_valider_clicked();
     void changeCat();
     void changeType();
+    void changeSize();
+    void changeColor();
+    void changeModele();
 };
 
 #endif // modifSTOCK_H
