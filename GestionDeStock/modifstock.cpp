@@ -16,37 +16,7 @@ modifStock::modifStock(QWidget *parent, Stock *st, StockArticle* ac) :
     color_box = new ComboBoxColor(this, 0);
 
     connect(category_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCat()));
-
-    /*
-    int index = color_box->GetIndex( (std::string)ac->GetColorName().toUtf8().constData() );
-    if ( index != -1 )
-    { // -1 for not found
-       color_box->setCurrentIndex(index);
-    }
-
-    index = size_box->GetIndex( ac->GetSizeInt() );
-    std::cout << "index : " << index << std::endl;
-    if ( index != -1 )
-    { // -1 for not found
-       size_box->setCurrentIndex(index);
-    }
-
-    index = category_box->GetIndex( (std::string)ac->GetCategoryName().toUtf8().constData() );
-    std::cout << "index : " << index << std::endl;
-    if ( index != -1 )
-    { // -1 for not found
-       category_box->setCurrentIndex(index);
-    }
-
-    std::cout << "cat : " << ac->GetCategoryName().toUtf8().constData() << std::endl;
-    std::cout << "type : " << ac->GetTypeName().toUtf8().constData() << std::endl;
-    index = type_box->GetIndex( ac->GetCategoryInt(), (std::string)ac->GetTypeName().toUtf8().constData());
-    std::cout << "index : "<< index << std::endl;
-    if ( index != -1 )
-    { // -1 for not found
-       type_box->setCurrentIndex(index);
-    }
-    */
+    connect(type_box, SIGNAL(currentIndexChanged(int)), this, SLOT(changeType()));
 
     category_box->SetSelection(ac->GetCategoryInt());
     type_box->SetSelection(ac->GetCategoryInt(), ac->GetTypeInt());
@@ -80,11 +50,58 @@ modifStock::~modifStock()
 
 void modifStock::changeCat()
 {
-    // cette ligne fait totalement délirer la fenetre haha :D
-    //ui->field_type->removeWidget(type_box);
+    std::cout << "hahahaha" << std::endl;
+    ui->refca->setValue(GetCategory());
+
     delete type_box;
     type_box = new ComboBoxType(this, GetCategory(), GetRefType());
     ui->field_type->addWidget(type_box);
+}
+
+void modifStock::changeType()
+{
+    std::cout << "coucou" << std::endl;
+    int nc = GetCategory();
+    int nt = GetType();
+
+    bool set = false;
+
+    if (nt != NR)
+    {
+        switch (nc)
+        {
+        case INTERVETEMENT:
+            if (nt < END_TYPE1) set = true;
+            break;
+
+        case VETEMENT1:
+        case VETEMENT2:
+        case VETEMENT3:
+        case VETEMENT4:
+            if (nt < END_TYPE2) set = true;
+            break;
+
+        case SURVETEMENT1:
+        case SURVETEMENT2:
+        case SURVETEMENT3:
+            if (nt < END_TYPE3) set = true;
+            break;
+
+        case ENSEMBLE:
+            if (nt < END_TYPE4) set = true;
+            break;
+
+        case SOUSVETEMENT:
+        default:
+            if (nt < END_TYPE0) set = true;
+            break;
+        }
+    }
+
+    if (set == true)
+        ui->reft->setValue(nt);
+    else
+        ui->reft->setValue(0);
 }
 
 
