@@ -22,6 +22,11 @@ vente::vente(QWidget *parent,  Stock *st, Sells *se, StockArticle* ac) :
     text = text + "Quantité à vendre (maximum : " + ac->GetQuantityString().toUtf8().constData() + ") : ";
     ui->label_2->setText(QString(text.c_str()));
 
+
+    text ="";
+    text = text + "Montant total de la vente : 0 €";
+    ui->label_3->setText(QString(text.c_str()));
+
     ui->spinBox->setMaximum(ac->GetQuantity());
 }
 
@@ -43,4 +48,18 @@ void vente::on_valider_clicked()
 void vente::on_annuler_clicked()
 {
     this->close();
+}
+
+void vente::on_spinBox_valueChanged(int arg1)
+{
+    std::string text ="";
+
+    int montantTotal = (a->GetSellPrice() - a->GetSellPrice()*(float)a->GetDiscountPercent())*arg1;
+    std::string mT = "";
+    mT = mT + QString::number(montantTotal);
+
+    std::cout << mT << std::endl;
+
+    text = text + "Montant total de la vente : " + mT + " €";
+    ui->label_3->setText(QString(text.c_str()));
 }
