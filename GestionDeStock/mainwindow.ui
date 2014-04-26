@@ -540,7 +540,7 @@
                  <number>60</number>
                 </property>
                 <item>
-                 <widget class="QDateEdit" name="date_requete">
+                 <widget class="QDateEdit" name="date_requete1">
                   <property name="calendarPopup">
                    <bool>true</bool>
                   </property>
@@ -554,7 +554,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="lancer_requete">
+                 <widget class="QPushButton" name="lancer_requete1">
                   <property name="text">
                    <string>Lancer la requête</string>
                   </property>
@@ -586,7 +586,7 @@
                  <number>60</number>
                 </property>
                 <item>
-                 <widget class="QDateEdit" name="dateEdit">
+                 <widget class="QDateEdit" name="date_requete2">
                   <property name="calendarPopup">
                    <bool>true</bool>
                   </property>
@@ -600,7 +600,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton">
+                 <widget class="QPushButton" name="lancer_requete2">
                   <property name="text">
                    <string>Lancer la requête</string>
                   </property>
@@ -647,7 +647,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="date_result">
+                 <widget class="QLabel" name="date_result1">
                   <property name="text">
                    <string/>
                   </property>
@@ -656,7 +656,7 @@
                </layout>
               </item>
               <item>
-               <widget class="QLabel" name="recette_result">
+               <widget class="QLabel" name="recette_result1">
                 <property name="text">
                  <string>0 euros</string>
                 </property>
@@ -682,7 +682,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="label_11">
+                 <widget class="QLabel" name="date_result2">
                   <property name="text">
                    <string/>
                   </property>
@@ -691,7 +691,7 @@
                </layout>
               </item>
               <item>
-               <widget class="QLabel" name="label_9">
+               <widget class="QLabel" name="recette_result2">
                 <property name="text">
                  <string>0 euros</string>
                 </property>
