@@ -295,6 +295,18 @@ int Sells::GetSellsSize()
     return sells.Size();
 }
 
+int Sells::GetTotalArticle()
+{
+    int i, s = GetSellsSize();
+    int total = 0;
+
+    for (i=0; i<s; i++)
+        total += GetArticleN(i)->GetQuantity();
+
+    return total;
+}
+
+
 StockArticle Sells::ToStock(SoldArticle* sa)
 {
     StockArticle a = StockArticle(

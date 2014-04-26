@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>402</width>
-    <height>428</height>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Nouvelle vente</string>
   </property>
   <widget class="QWidget" name="horizontalLayoutWidget_12">
    <property name="geometry">
@@ -175,7 +175,7 @@
            <number>80</number>
           </property>
           <property name="singleStep">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="value">
            <number>0</number>
@@ -270,9 +270,9 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>370</y>
-     <width>381</width>
+     <x>120</x>
+     <y>450</y>
+     <width>271</width>
      <height>41</height>
     </rect>
    </property>
@@ -345,6 +345,9 @@
    <layout class="QVBoxLayout" name="field_quantite">
     <item>
      <widget class="QSpinBox" name="quantite_spin">
+      <property name="minimum">
+       <number>1</number>
+      </property>
       <property name="maximum">
        <number>9999</number>
       </property>
@@ -442,6 +445,83 @@
         <month>1</month>
         <day>1</day>
        </date>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>360</y>
+     <width>381</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>390</y>
+     <width>141</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="layout_quantite_3">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="label_quantite_3">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>Montant final</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_6">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>390</y>
+     <width>231</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="field_quantite_2">
+    <item>
+     <widget class="QLabel" name="montant_final">
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>

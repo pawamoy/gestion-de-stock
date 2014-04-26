@@ -51,6 +51,7 @@ class Sells
 		SeVector GetArticles(Ref ref);
 		SeVector GetArticles(SoldArticle sa);
         int GetSellsSize();
+        int GetTotalArticle();
         StockArticle ToStock(SoldArticle* sa);
 		
 		void ClearSells();

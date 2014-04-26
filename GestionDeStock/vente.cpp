@@ -11,21 +11,16 @@ vente::vente(QWidget *parent,  Stock *st, Sells *se, StockArticle* ac) :
     this->se = se;
     a = ac;
 
-    std::cout << ac->GetReferenceString().toUtf8().constData() << std::endl;
+    QString state = QString("Vente de l'article ");
+    state = state.append(ac->GetReferenceString());
+    ui->label->setText(state);
 
-    std::string text = "";
-    text = text + "Vente en cours de l'article " + ac->GetReferenceString().toUtf8().constData();
-    ui->label->setText(QString(text.c_str()));
+    state = QString("Quantité vendue (maximum: ");
+    state = state.append(ac->GetQuantityString());
+    state = state.append(QString(")"));
+    ui->label_2->setText(state);
 
-
-    text = "";
-    text = text + "Quantité à vendre (maximum : " + ac->GetQuantityString().toUtf8().constData() + ") : ";
-    ui->label_2->setText(QString(text.c_str()));
-
-
-    text ="";
-    text = text + "Montant total de la vente : 0 €";
-    ui->label_3->setText(QString(text.c_str()));
+    on_spinBox_valueChanged(1);
 
     ui->spinBox->setMaximum(ac->GetQuantity());
 }
@@ -37,10 +32,20 @@ vente::~vente()
 
 void vente::on_valider_clicked()
 {
-    std::cout << ui->spinBox->value() << std::endl;
+    SoldArticle* sa = s->ToSell(a,ui->spinBox->value());
 
-    s->ToSell(a,ui->spinBox->value());
-    se->New(a->GetReferenceRef(),ui->spinBox->value(),a->GetBuyPrice(),a->GetSellPrice(), a->GetDiscountPercent(), a->GetDeliveryDate());
+    if (sa != NULL)
+    {
+        se->New(sa);
+    }
+    else
+    {
+        QString msg = QString("Quantité trop importante (maximum ");
+        msg = msg.append(QString::number(a->GetQuantity()));
+        msg = msg.append(QString(") !"));
+        QMessageBox messageBox;
+        messageBox.critical(0,"Erreur", msg);
+    }
 
     this->close();
 }
@@ -53,7 +58,7 @@ void vente::on_annuler_clicked()
 void vente::on_spinBox_valueChanged(int arg1)
 {
 
-    int montantTotal = (a->GetSellPrice() - a->GetSellPrice()*(float)a->GetDiscountPercent()/100)*arg1;
+    float montantTotal = (a->GetDiscountPrice())*arg1;
 
     QString text ("Montant total de la vente : ");
     QString text2 (" €");

@@ -46,6 +46,7 @@ ComboBoxType::ComboBoxType(QWidget *parent, int nc, int nt)
 void ComboBoxType::SetSelection(int nc, int nt)
 {
     bool set = false;
+    int max;
 
     if (nt != NR)
     {
@@ -53,6 +54,7 @@ void ComboBoxType::SetSelection(int nc, int nt)
         {
         case INTERVETEMENT:
             if (nt < END_TYPE1) set = true;
+            else max = END_TYPE1-1;
             break;
 
         case VETEMENT1:
@@ -60,21 +62,25 @@ void ComboBoxType::SetSelection(int nc, int nt)
         case VETEMENT3:
         case VETEMENT4:
             if (nt < END_TYPE2) set = true;
+            else max = END_TYPE2-1;
             break;
 
         case SURVETEMENT1:
         case SURVETEMENT2:
         case SURVETEMENT3:
             if (nt < END_TYPE3) set = true;
+            else max = END_TYPE3-1;
             break;
 
         case ENSEMBLE:
             if (nt < END_TYPE4) set = true;
+            else max = END_TYPE4-1;
             break;
 
         case SOUSVETEMENT:
         default:
             if (nt < END_TYPE0) set = true;
+            else max = END_TYPE0-1;
             break;
         }
     }
@@ -82,7 +88,7 @@ void ComboBoxType::SetSelection(int nc, int nt)
     if (set == true)
         this->setCurrentIndex(nt);
     else
-        this->setCurrentIndex(0);
+        this->setCurrentIndex(max);
 }
 
 int ComboBoxType::GetIndex(int cat, std::string type)

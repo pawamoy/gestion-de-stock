@@ -2,6 +2,7 @@
 #define AJOUTVENTE_H
 
 #include <QDialog>
+#include <QMessageBox>
 
 #include "stock.h"
 #include "sells.h"
@@ -28,6 +29,7 @@ public:
     int GetDiscount();
     QDate GetDelivery();
     QDate GetSellDate();
+    void UpdateFinalPrice(float montant=-1);
     
 private:
     Ui::ajoutVente *ui;
@@ -37,6 +39,9 @@ private:
 private slots:
     void on_annuler_clicked();
     void on_valider_clicked();
+    void on_vente_spin_valueChanged();
+    void on_rabais_spin_valueChanged();
+    void on_quantite_spin_valueChanged();
 };
 
 #endif // AJOUTVENTE_H
