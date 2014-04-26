@@ -16,10 +16,6 @@
   <property name="windowTitle">
    <string>Ajout d'articles</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>../appdata/list-add-big.png</normaloff>../appdata/list-add-big.png</iconset>
-  </property>
   <widget class="QWidget" name="horizontalLayoutWidget_12">
    <property name="geometry">
     <rect>
