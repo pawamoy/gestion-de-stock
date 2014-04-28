@@ -13,22 +13,10 @@ ComboBoxColor::ComboBoxColor(QWidget *parent, int nc)
 
 void ComboBoxColor::SetSelection(int nc)
 {
-    if (nc < END_COLOR && nc != NR)
+    if (nc == NR)
+        this->setCurrentIndex(END_COLOR);
+    else if (nc < END_COLOR)
         this->setCurrentIndex(nc);
     else
         this->setCurrentIndex(END_COLOR-1);
-}
-
-int ComboBoxColor::GetIndex(std::string color)
-{
-    int c;
-    std::string tmp;
-    for(c=0; c<END_COLOR; c++)
-    {
-        tmp = color_name[c].toUtf8().constData();
-        if( ! tmp.compare(color) )
-            return c;
-    }
-
-    return -1;
 }

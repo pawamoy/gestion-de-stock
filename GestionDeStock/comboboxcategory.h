@@ -9,7 +9,6 @@ class ComboBoxCategory
 public:
     ComboBoxCategory(QWidget* parent, int nc);
     void SetSelection(int nc);
-    int GetIndex(std::string cat);
 };
 
 #endif // COMBOBOXCATEGORY_H

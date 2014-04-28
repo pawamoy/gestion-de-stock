@@ -11,7 +11,6 @@ class ComboBoxType
 public:
     ComboBoxType(QWidget *parents, int nc, int nt);
     void SetSelection(int nc, int nt);
-    int GetIndex(int cat, std::string type);
 };
 
 #endif // COMBOBOXTYPE_H

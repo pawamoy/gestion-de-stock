@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1164</width>
-    <height>495</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,7 +48,7 @@
         <enum>QTabWidget::Triangular</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="elideMode">
         <enum>Qt::ElideNone</enum>
@@ -105,6 +105,17 @@
              <property name="icon">
               <iconset>
                <normaloff>../appdata/go-down.png</normaloff>../appdata/go-down.png</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="stock_search">
+             <property name="text">
+              <string>Chercher des articles</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>../appdata/edit-find.png</normaloff>../appdata/edit-find.png</iconset>
              </property>
             </widget>
            </item>
@@ -714,6 +725,10 @@
      </item>
     </layout>
    </widget>
+   <zorder>horizontalLayoutWidget</zorder>
+   <zorder>horizontalLayoutWidget_4</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>pushButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

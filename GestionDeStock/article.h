@@ -6,6 +6,12 @@
 
 #include "datasets.h"
 
+enum EQ {
+    EQUAL=0,
+    INFERIOR,
+    SUPERIOR
+};
+
 class Article
 {
 	public:
@@ -47,18 +53,14 @@ class Article
 		void ApplyDiscount(bool apply);
 		
 		bool HasReference(int r);
-		bool HasReference(Ref r);
-		//~ bool HasReference(QString r);
-		bool HasCategory(int c);
-		//~ bool HasCategory(QString c);
-		bool HasType(int t);
-		//~ bool HasType(QString t);
-		bool HasModel(int m);
-		//~ bool HasModel(QString m);
-		bool HasSize(int s);
-		//~ bool HasSize(QString s);
-		bool HasColor(int c);
-		//~ bool HasColor(QString c);
+        bool HasReference(Ref r);
+        bool HasCategory(int c);
+        bool HasType(int t);
+        bool HasModel(int m);
+        bool HasSize(int s);
+        bool HasSmallerSize(int s);
+        bool HasGreaterSize(int s);
+        bool HasColor(int c);
 		bool HasQuantity(int q);
 		bool HasMore(int q);
 		bool HasLess(int q);
@@ -88,6 +90,7 @@ class Article
 		int CompareStock(Article sa);
 		int CompareDelivery(Article sa);
 		bool EquivalentTo(Article a);
+        bool CustomEquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da);
 		bool IsValid();
 		bool HasValidReference();
 		bool HasValidCategory();
@@ -119,15 +122,12 @@ class StockArticle: public Article
 	public:
         StockArticle(int reference, int quantity, float buyprice, float sellprice, int discount_p, QDate delivery=QDate::currentDate());
         StockArticle(Ref reference, int quantity, float buyprice, float sellprice, int discount_p, QDate delivery=QDate::currentDate());
-        //~ StockArticle(QString reference, int quantity, int buyprice, int sellprice, int discount_p, QDate delivery);
-		
+
         void SetArticle(int reference, int quantity, float buyprice, float sellprice, int discount_p, QDate delivery=QDate::currentDate());
         void SetArticle(Ref reference, int quantity, float buyprice, float sellprice, int discount_p, QDate delivery=QDate::currentDate());
-        //~ void SetArticle(QString reference, int quantity, float buyprice, float sellprice, int discount_p, QDate delivery);
         void SetQtyAndPrices(int q, float bp, float sp, int d);
 		void SetReference(int r);
-		void SetReference(Ref r);
-		//~ void SetReference(QString r);
+        void SetReference(Ref r);
 		void SetCategory(int c);
 		void SetType(int t);
 		void SetModel(int m);
@@ -165,6 +165,7 @@ class SoldArticle: public Article
 		int CompareSellTime(SoldArticle sa);
 		bool EquivalentTo(SoldArticle a);
         bool HasValidSellDate();
+        bool CustomEquivalentTo(SoldArticle a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da, EQ se);
 		
 	private:
 		QDate selldate;
