@@ -490,7 +490,7 @@ bool Article::EquivalentTo(Article a)
 {
 	return (
 		HasReference(a.GetReferenceRef())   &&
-		HasQuantity(a.GetQuantity())           &&
+        HasQuantity(a.GetQuantity())        &&
 		Bought(a.GetBuyPrice())             &&
 		Costs(a.GetSellPrice())             &&
 		HasDiscount(a.GetDiscountPercent()) &&
@@ -498,9 +498,10 @@ bool Article::EquivalentTo(Article a)
 	);
 }
 
-bool Article::CustomEquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da)
+bool Article::EquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da)
 {
     bool result = true;
+    result &= EquivalentTo(a);
     switch (size)
     {
     case INFERIOR:
@@ -1015,9 +1016,9 @@ bool SoldArticle::HasValidSellDate()
     return ( !GetSellDate().isNull() );
 }
 
-bool SoldArticle::CustomEquivalentTo(SoldArticle a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da, EQ se)
+bool SoldArticle::EquivalentTo(SoldArticle a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da, EQ se)
 {
-    bool result = Article::CustomEquivalentTo((Article)a,size,qty,bp,sp,di,da);
+    bool result = Article::EquivalentTo((Article)a,size,qty,bp,sp,di,da);
     switch (se)
     {
     case INFERIOR:

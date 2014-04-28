@@ -6,11 +6,11 @@
 
 #include "datasets.h"
 
-enum EQ {
-    EQUAL=0,
-    INFERIOR,
-    SUPERIOR
-};
+typedef int EQ;
+
+#define EQUAL 0
+#define INFERIOR 1
+#define SUPERIOR 2
 
 class Article
 {
@@ -90,7 +90,7 @@ class Article
 		int CompareStock(Article sa);
 		int CompareDelivery(Article sa);
 		bool EquivalentTo(Article a);
-        bool CustomEquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da);
+        bool EquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da);
 		bool IsValid();
 		bool HasValidReference();
 		bool HasValidCategory();
@@ -165,7 +165,7 @@ class SoldArticle: public Article
 		int CompareSellTime(SoldArticle sa);
 		bool EquivalentTo(SoldArticle a);
         bool HasValidSellDate();
-        bool CustomEquivalentTo(SoldArticle a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da, EQ se);
+        bool EquivalentTo(SoldArticle a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da, EQ se);
 		
 	private:
 		QDate selldate;

@@ -38,7 +38,8 @@ void StVector::Del(int i)
 
 void StVector::Clear()
 {
-	stock->clear();
+    if (stock != NULL)
+        stock->clear();
 }
 
 int StVector::Size()
@@ -283,6 +284,27 @@ StVector Stock::GetArticles(StockArticle sa)
 	}
 	
 	return v;
+}
+
+StVector Stock::GetArticles(StockArticle sa, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da)
+{
+    StVector v = StVector();
+    indexes = std::vector<int>();
+
+    int i, s = stock.Size();
+    StockArticle* a;
+
+    for (i=0; i<s; i++)
+    {
+        a = stock.Get(i);
+        if (a->EquivalentTo(sa,size,qty,bp,sp,di,da))
+        {
+            indexes.push_back(i);
+            v.Add(a);
+        }
+    }
+
+    return v;
 }
 
 int Stock::GetStockSize()
