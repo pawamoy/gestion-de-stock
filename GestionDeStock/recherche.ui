@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>recherche</class>
+ <widget class="QDialog" name="recherche">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>577</width>
+    <height>454</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Recherche d'articles</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>400</y>
+     <width>401</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="boutons_ok">
+    <item>
+     <widget class="QPushButton" name="annuler">
+      <property name="text">
+       <string>Annuler</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../appdata/edit-delete.png</normaloff>../appdata/edit-delete.png</iconset>
+      </property>
+      <property name="autoDefault">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="reinit">
+      <property name="text">
+       <string>Réinitialiser</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../appdata/edit-clear-locationbar-rtl.png</normaloff>../appdata/edit-clear-locationbar-rtl.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="valider">
+      <property name="text">
+       <string>Rechercher</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../appdata/layer-visible-on.png</normaloff>../appdata/layer-visible-on.png</iconset>
+      </property>
+      <property name="default">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>9</y>
+     <width>551</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <item row="8" column="0">
+     <widget class="QCheckBox" name="check_buy">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Prix achat</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QCheckBox" name="check_discount">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Rabais</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QCheckBox" name="check_size">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Taille</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QSpinBox" name="model_spin">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>9</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QComboBox" name="equ_size">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Strictement égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-equal-icon.png</normaloff>../appdata/Math-equal-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Inférieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-lower-than-icon.png</normaloff>../appdata/Math-lower-than-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supérieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-greater-than-icon.png</normaloff>../appdata/Math-greater-than-icon.png</iconset>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLabel" name="label_cat">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>&lt;Strictement égal&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="indent">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLabel" name="label_type">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>&lt;Strictement égal&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="indent">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_ref">
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Référence  </string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <layout class="QHBoxLayout" name="field_reference">
+      <item>
+       <widget class="QSpinBox" name="refca">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>9</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="reft">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="refm">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>9</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="refs">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>80</number>
+        </property>
+        <property name="singleStep">
+         <number>2</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="refco">
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="2">
+     <widget class="QLabel" name="label_model">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>&lt;Strictement égal&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="indent">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QCheckBox" name="check_type">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Type</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QCheckBox" name="check_sell">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Prix vente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QCheckBox" name="check_qty">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Quantité</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="check_cat">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Catégorie</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QCheckBox" name="check_model">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Modèle</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>&lt;Strictement égal&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="indent">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QCheckBox" name="check_color">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Couleur</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0">
+     <widget class="QCheckBox" name="check_delivery">
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="text">
+       <string>Date de livraison</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="2">
+     <widget class="QComboBox" name="equ_qty">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Strictement égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-equal-icon.png</normaloff>../appdata/Math-equal-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Inférieur strict</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-lower-than-icon.png</normaloff>../appdata/Math-lower-than-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supérieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-greater-than-icon.png</normaloff>../appdata/Math-greater-than-icon.png</iconset>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="8" column="2">
+     <widget class="QComboBox" name="equ_buy">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Strictement égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-equal-icon.png</normaloff>../appdata/Math-equal-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Inférieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-lower-than-icon.png</normaloff>../appdata/Math-lower-than-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supérieur strict</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-greater-than-icon.png</normaloff>../appdata/Math-greater-than-icon.png</iconset>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="9" column="2">
+     <widget class="QComboBox" name="equ_sell">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Strictement égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-equal-icon.png</normaloff>../appdata/Math-equal-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Inférieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-lower-than-icon.png</normaloff>../appdata/Math-lower-than-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supérieur strict</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-greater-than-icon.png</normaloff>../appdata/Math-greater-than-icon.png</iconset>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="10" column="2">
+     <widget class="QComboBox" name="equ_discount">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Strictement égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-equal-icon.png</normaloff>../appdata/Math-equal-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Inférieur strict</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-lower-than-icon.png</normaloff>../appdata/Math-lower-than-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supérieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-greater-than-icon.png</normaloff>../appdata/Math-greater-than-icon.png</iconset>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="11" column="2">
+     <widget class="QComboBox" name="equ_delivery">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Strictement égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-equal-icon.png</normaloff>../appdata/Math-equal-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Inférieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-lower-than-icon.png</normaloff>../appdata/Math-lower-than-icon.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Supérieur ou égal</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../appdata/Math-greater-than-icon.png</normaloff>../appdata/Math-greater-than-icon.png</iconset>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QSpinBox" name="qty_spin">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>9999</number>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QDoubleSpinBox" name="achat_spin">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string> euros</string>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>9999.989999999999782</double>
+      </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QDoubleSpinBox" name="vente_spin">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string> euros</string>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>9999.989999999999782</double>
+      </property>
+      <property name="singleStep">
+       <double>0.010000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QSpinBox" name="rabais_spin">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="suffix">
+       <string> %</string>
+      </property>
+      <property name="minimum">
+       <number>0</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="1">
+     <widget class="QDateEdit" name="date_edit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="currentSection">
+       <enum>QDateTimeEdit::DaySection</enum>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="date">
+       <date>
+        <year>2014</year>
+        <month>1</month>
+        <day>1</day>
+       </date>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <layout class="QHBoxLayout" name="field_couleur"/>
+    </item>
+    <item row="5" column="1">
+     <layout class="QHBoxLayout" name="field_taille"/>
+    </item>
+    <item row="3" column="1">
+     <layout class="QHBoxLayout" name="field_type"/>
+    </item>
+    <item row="2" column="1">
+     <layout class="QHBoxLayout" name="field_categorie"/>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLabel" name="label_color">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>&lt;Strictement égal&gt;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="indent">
+       <number>-1</number>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
