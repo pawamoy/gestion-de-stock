@@ -13,9 +13,7 @@ ComboBoxColor::ComboBoxColor(QWidget *parent, int nc)
 
 void ComboBoxColor::SetSelection(int nc)
 {
-    if (nc == NR)
-        this->setCurrentIndex(END_COLOR);
-    else if (nc < END_COLOR)
+    if (nc < END_COLOR && nc != NR)
         this->setCurrentIndex(nc);
     else
         this->setCurrentIndex(END_COLOR-1);

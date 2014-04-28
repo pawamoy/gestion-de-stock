@@ -13,9 +13,7 @@ ComboBoxCategory::ComboBoxCategory(QWidget* parent, int nc)
 
 void ComboBoxCategory::SetSelection(int nc)
 {
-    if (nc == NR)
-        this->setCurrentIndex(END_CATEGORY);
-    else if (nc < END_CATEGORY)
+    if (nc < END_CATEGORY && nc != NR)
         this->setCurrentIndex(nc);
     else
         this->setCurrentIndex(END_CATEGORY-1);

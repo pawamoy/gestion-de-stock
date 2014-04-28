@@ -48,62 +48,45 @@ void ComboBoxType::SetSelection(int nc, int nt)
     bool set = false;
     int max;
 
-    switch (nc)
+    if (nt != NR)
     {
-    case INTERVETEMENT:
-        if (nt < END_TYPE1)
+        switch (nc)
         {
-            if (nt != NR) set = true;
-            else max = END_TYPE1;
-        }
-        else max = END_TYPE1-1;
-        break;
+        case INTERVETEMENT:
+            if (nt < END_TYPE1) set = true;
+            else max = END_TYPE1-1;
+            break;
 
-    case VETEMENT1:
-    case VETEMENT2:
-    case VETEMENT3:
-    case VETEMENT4:
-        if (nt < END_TYPE2)
-        {
-            if (nt != NR) set = true;
-            else max = END_TYPE2;
-        }
-        else max = END_TYPE2-1;
-        break;
+        case VETEMENT1:
+        case VETEMENT2:
+        case VETEMENT3:
+        case VETEMENT4:
+            if (nt < END_TYPE2) set = true;
+            else max = END_TYPE2-1;
+            break;
 
-    case SURVETEMENT1:
-    case SURVETEMENT2:
-    case SURVETEMENT3:
-        if (nt < END_TYPE3)
-        {
-            if (nt != NR) set = true;
-            else max = END_TYPE3;
-        }
-        else max = END_TYPE3-1;
-        break;
+        case SURVETEMENT1:
+        case SURVETEMENT2:
+        case SURVETEMENT3:
+            if (nt < END_TYPE3) set = true;
+            else max = END_TYPE3-1;
+            break;
 
-    case ENSEMBLE:
-        if (nt < END_TYPE4)
-        {
-            if (nt != NR) set = true;
-            else max = END_TYPE4;
-        }
-        else max = END_TYPE4-1;
-        break;
+        case ENSEMBLE:
+            if (nt < END_TYPE4) set = true;
+            else max = END_TYPE4-1;
+            break;
 
-    case SOUSVETEMENT:
-    default:
-        if (nt < END_TYPE0)
-        {
-            if (nt != NR) set = true;
-            else max = END_TYPE0;
+        case SOUSVETEMENT:
+        default:
+            if (nt < END_TYPE0) set = true;
+            else max = END_TYPE0-1;
+            break;
         }
-        else max = END_TYPE0-1;
-        break;
+
+        if (set == true)
+            this->setCurrentIndex(nt);
+        else
+            this->setCurrentIndex(max);
     }
-
-    if (set == true)
-        this->setCurrentIndex(nt);
-    else
-        this->setCurrentIndex(max);
 }
