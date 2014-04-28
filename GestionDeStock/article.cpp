@@ -305,11 +305,6 @@ bool Article::HasReference(Ref r)
 	);
 }
 
-//~ bool Article::HasReference(QString r)
-//~ {
-	//~ return (GetReferenceString().compare(r) == 0);
-//~ }
-
 bool Article::HasCategory(int c)
 {
 	if (c == NR)
@@ -317,11 +312,6 @@ bool Article::HasCategory(int c)
 	else
 		return (GetCategoryInt() == c);
 }
-
-//~ bool Article::HasCategory(QString c)
-//~ {
-	//~ return (GetCategoryString().compare(c) == 0);
-//~ }
 
 bool Article::HasType(int t)
 {
@@ -331,11 +321,6 @@ bool Article::HasType(int t)
 		return (GetTypeInt() == t);
 }
 
-//~ bool Article::HasType(QString t)
-//~ {
-	//~ return (GetTypeString().compare(t) == 0);
-//~ }
-
 bool Article::HasModel(int m)
 {
 	if (m == NR)
@@ -343,11 +328,6 @@ bool Article::HasModel(int m)
 	else
 		return (GetModelInt() == m);
 }
-
-//~ bool Article::HasModel(QString m)
-//~ {
-	//~ return (GetModelString().compare(m) == 0);
-//~ }
 
 bool Article::HasSize(int s)
 {
@@ -357,11 +337,6 @@ bool Article::HasSize(int s)
 		return (GetSizeInt() == s);
 }
 
-//~ bool Article::HasSize(QString s)
-//~ {
-	//~ return (GetSizeString().compare(s) == 0);
-//~ }
-
 bool Article::HasColor(int c)
 {
 	if (c == NR)
@@ -370,10 +345,21 @@ bool Article::HasColor(int c)
 		return (GetColorInt() == c);
 }
 
-//~ bool Article::HasColor(QString c)
-//~ {
-	//~ return (GetColorString().compare(c) == 0);
-//~ }
+bool Article::HasSmallerSize(int s)
+{
+    if (s == NR)
+        return true;
+    else
+        return (GetSizeInt() <= s);
+}
+
+bool Article::HasGreaterSize(int s)
+{
+    if (s == NR)
+        return true;
+    else
+        return (GetSizeInt() >= s);
+}
 
 bool Article::HasQuantity(int q)
 {
@@ -385,12 +371,18 @@ bool Article::HasQuantity(int q)
 
 bool Article::HasMore(int q)
 {
-	return (GetQuantity() >= q);
+    if (q == ALL)
+        return true;
+    else
+        return (GetQuantity() >= q);
 }
 
 bool Article::HasLess(int q)
 {
-	return (GetQuantity() < q);
+    if (q == ALL)
+        return true;
+    else
+        return (GetQuantity() < q);
 }
 
 bool Article::Costs(float p)
@@ -403,12 +395,18 @@ bool Article::Costs(float p)
 
 bool Article::CostsMore(float p)
 {
-	return (GetSellPrice() > p);
+    if (p == NR)
+        return true;
+    else
+        return (GetSellPrice() > p);
 }
 
 bool Article::CostsLess(float p)
 {
-	return (GetSellPrice() <= p);
+    if (p == NR)
+        return true;
+    else
+        return (GetSellPrice() <= p);
 }
 
 bool Article::Bought(float p)
@@ -421,12 +419,18 @@ bool Article::Bought(float p)
 
 bool Article::BoughtMore(float p)
 {
-	return (GetBuyPrice() > p);
+    if (p == NR)
+        return true;
+    else
+        return (GetBuyPrice() > p);
 }
 
 bool Article::BoughtLess(float p)
 {
-	return (GetBuyPrice() <= p);
+    if (p == NR)
+        return true;
+    else
+        return (GetBuyPrice() <= p);
 }
 
 bool Article::HasDiscount(int d)
@@ -439,12 +443,18 @@ bool Article::HasDiscount(int d)
 
 bool Article::HasDiscountMore(int d)
 {
-	return (GetDiscountPercent() >= d);
+    if (d == NR)
+        return true;
+    else
+        return (GetDiscountPercent() >= d);
 }
 
 bool Article::HasDiscountLess(int d)
 {
-	return (GetDiscountPercent() < d);
+    if (d == NR)
+        return true;
+    else
+        return (GetDiscountPercent() < d);
 }
 
 bool Article::Delivered(QDate d)
@@ -457,12 +467,18 @@ bool Article::Delivered(QDate d)
 
 bool Article::DeliveredEarly(QDate d)
 {
-    return (GetDeliveryDate() <= d);
+    if (d.isNull())
+        return true;
+    else
+        return (GetDeliveryDate() <= d);
 }
 
 bool Article::DeliveredLately(QDate d)
 {
-    return (GetDeliveryDate() >= d);
+    if (d.isNull())
+        return true;
+    else
+        return (GetDeliveryDate() >= d);
 }
 
 bool Article::InStockFor(int days)
@@ -480,6 +496,90 @@ bool Article::EquivalentTo(Article a)
 		HasDiscount(a.GetDiscountPercent()) &&
 		Delivered(a.GetDeliveryDate())
 	);
+}
+
+bool Article::CustomEquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da)
+{
+    bool result = true;
+    switch (size)
+    {
+    case INFERIOR:
+        result &= HasSmallerSize(a.GetSizeInt());
+        break;
+    case SUPERIOR:
+        result &= HasGreaterSize(a.GetSizeInt());
+        break;
+    case EQUAL:
+    default:
+        result &= HasSize(a.GetSizeInt());
+        break;
+    }
+    switch (qty)
+    {
+    case INFERIOR:
+        result &= HasLess(a.GetQuantity());
+        break;
+    case SUPERIOR:
+        result &= HasMore(a.GetQuantity());
+        break;
+    case EQUAL:
+    default:
+        result &= HasQuantity(a.GetQuantity());
+        break;
+    }
+    switch (bp)
+    {
+    case INFERIOR:
+        result &= BoughtLess(a.GetBuyPrice());
+        break;
+    case SUPERIOR:
+        result &= BoughtMore(a.GetBuyPrice());
+        break;
+    case EQUAL:
+    default:
+        result &= Bought(a.GetBuyPrice());
+        break;
+    }
+    switch (sp)
+    {
+    case INFERIOR:
+        result &= CostsLess(a.GetSellPrice());
+        break;
+    case SUPERIOR:
+        result &= CostsMore(a.GetSellPrice());
+        break;
+    case EQUAL:
+    default:
+        result &= Costs(a.GetSellPrice());
+        break;
+    }
+    switch (di)
+    {
+    case INFERIOR:
+        result &= HasDiscountLess(a.GetDiscountPercent());
+        break;
+    case SUPERIOR:
+        result &= HasDiscountMore(a.GetDiscountPercent());
+        break;
+    case EQUAL:
+    default:
+        result &= HasDiscount(a.GetDiscountPercent());
+        break;
+    }
+    switch (da)
+    {
+    case INFERIOR:
+        result &= DeliveredEarly(a.GetDeliveryDate());
+        break;
+    case SUPERIOR:
+        result &= DeliveredLately(a.GetDeliveryDate());
+        break;
+    case EQUAL:
+    default:
+        result &= Delivered(a.GetDeliveryDate());
+        break;
+    }
+    return result;
 }
 
 bool Article::SameAs(Article sa)
@@ -913,4 +1013,23 @@ bool SoldArticle::EquivalentTo(SoldArticle a)
 bool SoldArticle::HasValidSellDate()
 {
     return ( !GetSellDate().isNull() );
+}
+
+bool SoldArticle::CustomEquivalentTo(SoldArticle a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da, EQ se)
+{
+    bool result = Article::CustomEquivalentTo((Article)a,size,qty,bp,sp,di,da);
+    switch (se)
+    {
+    case INFERIOR:
+        result &= SoldEarly(a.GetSellDate());
+        break;
+    case SUPERIOR:
+        result &= SoldLately(a.GetSellDate());
+        break;
+    case EQUAL:
+    default:
+        result &= Sold(a.GetSellDate());
+        break;
+    }
+    return result;
 }

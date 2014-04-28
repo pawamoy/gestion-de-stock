@@ -13,10 +13,12 @@ ComboBoxSize::ComboBoxSize(QWidget *parent, int ns)
 
 void ComboBoxSize::SetSelection(int ns)
 {
-    if (ns < END_SIZE_NUM && ns != NR)
+    if (ns == NR)
+        this->setCurrentIndex(END_SIZE_NAME);
+    else if (ns < END_SIZE_NUM)
         this->setCurrentIndex(size_num[ns]);
     else
-        this->setCurrentIndex(size_num[END_SIZE_NUM-1]);
+        this->setCurrentIndex(END_SIZE_NAME-1);
 }
 
 int ComboBoxSize::GetIndex(int selection)

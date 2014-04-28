@@ -48,108 +48,62 @@ void ComboBoxType::SetSelection(int nc, int nt)
     bool set = false;
     int max;
 
-    if (nt != NR)
-    {
-        switch (nc)
-        {
-        case INTERVETEMENT:
-            if (nt < END_TYPE1) set = true;
-            else max = END_TYPE1-1;
-            break;
-
-        case VETEMENT1:
-        case VETEMENT2:
-        case VETEMENT3:
-        case VETEMENT4:
-            if (nt < END_TYPE2) set = true;
-            else max = END_TYPE2-1;
-            break;
-
-        case SURVETEMENT1:
-        case SURVETEMENT2:
-        case SURVETEMENT3:
-            if (nt < END_TYPE3) set = true;
-            else max = END_TYPE3-1;
-            break;
-
-        case ENSEMBLE:
-            if (nt < END_TYPE4) set = true;
-            else max = END_TYPE4-1;
-            break;
-
-        case SOUSVETEMENT:
-        default:
-            if (nt < END_TYPE0) set = true;
-            else max = END_TYPE0-1;
-            break;
-        }
-    }
-
-    if (set == true)
-        this->setCurrentIndex(nt);
-    else
-        this->setCurrentIndex(max);
-}
-
-int ComboBoxType::GetIndex(int cat, std::string type)
-{
-    int t;
-    std::string tmp;
-
-    switch (cat)
+    switch (nc)
     {
     case INTERVETEMENT:
-        for (t=0; t<END_TYPE1; t++)
+        if (nt < END_TYPE1)
         {
-            tmp = subcategory1[t].toUtf8().constData();
-            if( ! tmp.compare(type) )
-                return t;
+            if (nt != NR) set = true;
+            else max = END_TYPE1;
         }
+        else max = END_TYPE1-1;
         break;
 
     case VETEMENT1:
     case VETEMENT2:
     case VETEMENT3:
     case VETEMENT4:
-        for (t=0; t<END_TYPE2; t++)
+        if (nt < END_TYPE2)
         {
-            tmp = subcategory2[t].toUtf8().constData();
-            if( ! tmp.compare(type) )
-                return t;
+            if (nt != NR) set = true;
+            else max = END_TYPE2;
         }
+        else max = END_TYPE2-1;
         break;
 
     case SURVETEMENT1:
     case SURVETEMENT2:
     case SURVETEMENT3:
-        for (t=0; t<END_TYPE3; t++)
+        if (nt < END_TYPE3)
         {
-            tmp = subcategory3[t].toUtf8().constData();
-            if( ! tmp.compare(type) )
-                return t;
+            if (nt != NR) set = true;
+            else max = END_TYPE3;
         }
+        else max = END_TYPE3-1;
         break;
 
     case ENSEMBLE:
-        for (t=0; t<END_TYPE4; t++)
+        if (nt < END_TYPE4)
         {
-            tmp = subcategory4[t].toUtf8().constData();
-            if( ! tmp.compare(type) )
-                return t;
+            if (nt != NR) set = true;
+            else max = END_TYPE4;
         }
+        else max = END_TYPE4-1;
         break;
 
     case SOUSVETEMENT:
     default:
-        for (t=0; t<END_TYPE0; t++)
+        if (nt < END_TYPE0)
         {
-            tmp = subcategory0[t].toUtf8().constData();
-            if( ! tmp.compare(type) )
-                return t;
+            if (nt != NR) set = true;
+            else max = END_TYPE0;
         }
+        else max = END_TYPE0-1;
         break;
     }
 
-    return -1;
-
+    if (set == true)
+        this->setCurrentIndex(nt);
+    else
+        this->setCurrentIndex(max);
 }

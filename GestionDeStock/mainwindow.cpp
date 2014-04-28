@@ -44,6 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     OpenStock(stockfile);
     OpenSells(sellsfile);
 
+    // instance fenetre recherche
+    search = new recherche(this, stock);
+
     // affichage de l'état
     ui->etat->setText("Dernière action: ");
 }
@@ -148,7 +151,7 @@ void MainWindow::SetStockRow(int r, StockArticle* sa)
 
 // valeurs modifiables
 /*
-void MainWindow::SetRowRW(int r, StockArticle* sa)
+void MainWindow::SetSearchRow(QTableWidget* table, int row)
 {
     // déclaration des widgets
     ComboBoxCategory* categ = new ComboBoxCategory(ui->tableWidget, sa->GetCategoryInt());
@@ -653,4 +656,9 @@ void MainWindow::on_lancer_requete2_clicked()
 void MainWindow::on_tabulation()
 {
     ui->tabWidget->setCurrentIndex((ui->tabWidget->currentIndex()+1)%3);
+}
+
+void MainWindow::on_stock_search_clicked()
+{
+    search->exec();
 }

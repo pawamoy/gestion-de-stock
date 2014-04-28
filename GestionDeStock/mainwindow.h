@@ -19,6 +19,7 @@
 #include "modifstock.h"
 #include "ajoutvente.h"
 #include "vente.h"
+#include "recherche.h"
 
 namespace Ui {
 class MainWindow;
@@ -76,9 +77,11 @@ private slots:
     void on_lancer_requete1_clicked();
     void on_lancer_requete2_clicked();
     void on_tabulation();
+    void on_stock_search_clicked();
 
 private:
     Ui::MainWindow *ui;
+    recherche* search;
     Stock* stock;
     Sells* sells;
     QString stockfile;

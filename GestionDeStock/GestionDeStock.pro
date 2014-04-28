@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     modifstock.cpp \
     sells.cpp \
     ajoutvente.cpp \
-    vente.cpp
+    vente.cpp \
+    recherche.cpp
 
 HEADERS  += mainwindow.h \
 	article.h \
@@ -39,10 +40,12 @@ HEADERS  += mainwindow.h \
 	modifstock.h \
     sells.h \
     ajoutvente.h \
-    vente.h
+    vente.h \
+    recherche.h
 
 FORMS    += mainwindow.ui \
     ajoutstock.ui \
     modifstock.ui \
     ajoutvente.ui \
-    vente.ui
+    vente.ui \
+    recherche.ui
