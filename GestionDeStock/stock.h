@@ -50,6 +50,7 @@ class Stock
 		StVector GetArticles(int ref);
 		StVector GetArticles(Ref ref);
 		StVector GetArticles(StockArticle sa);
+        StVector GetArticles(StockArticle sa, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da);
         int GetStockSize();
         int GetTotalArticle();
         SoldArticle* ToSell(StockArticle* sa, int qty, QDate d=QDate::currentDate());
@@ -84,9 +85,11 @@ class Stock
 		bool Contains(Ref reference);
 		bool Contains(StockArticle sa);
 		bool Contains(StockArticle* sa);
+
+        std::vector<int> indexes;
 		
 	private:
-		StVector stock;
+        StVector stock;
 		
 		// vector operations
 		StVector VNew();

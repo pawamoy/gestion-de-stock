@@ -46,9 +46,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // instance fenetre recherche
     search = new recherche(this, stock);
-
-    // affichage de l'état
-    ui->etat->setText("Dernière action: ");
 }
 
 MainWindow::~MainWindow()
@@ -251,7 +248,7 @@ void MainWindow::on_stock_add_clicked()
     int art, old_art = stock->GetTotalArticle();
 
     ajoutStock* w = new ajoutStock(this, stock);
-    ui->etat->setText("Dernière action: ajout d'un article au stock");
+    ui->etat->setText("ajout d'un article au stock");
     w->exec();
 
     size = stock->GetStockSize();
@@ -260,19 +257,19 @@ void MainWindow::on_stock_add_clicked()
     {
         StockArticle* sa = stock->GetArticleN(size-1);
         InsertStockRow(size-1, sa);
-        QString state = QString("Dernière action: ajouté l'article ");
+        QString state = QString("ajouté l'article ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
         StockModified(true);
     }
     else if (old_art < art)
     {
-        ui->etat->setText("Dernière action: quantité ajoutée à un article existant");
+        ui->etat->setText("quantité ajoutée à un article existant");
         FillStockTable();
         StockModified(true);
     }
     else
     {
-        ui->etat->setText("Dernière action: ajout annulé");
+        ui->etat->setText("ajout annulé");
     }
 }
 
@@ -289,7 +286,7 @@ void MainWindow::on_stock_del_clicked()
         DeleteStockRow(row);
         stock->Del(row);
 
-        QString state = QString("Dernière action: supprimé l'article ");
+        QString state = QString("supprimé l'article ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
         StockModified(true);
     }
@@ -307,21 +304,21 @@ void MainWindow::on_stock_mod_clicked()
         StockArticle old_article = *articleCourant;
         modifStock* w = new modifStock(this, stock, articleCourant);
 
-        QString state = QString("Dernière action: modification de l'article ");
+        QString state = QString("modification de l'article ");
         ui->etat->setText(state.append(articleCourant->GetReferenceString()));
 
         w->exec();
 
         if ( !articleCourant->EquivalentTo(old_article) )
         {
-            QString state = QString("Dernière action: modifié article ");
+            QString state = QString("modifié article ");
             ui->etat->setText(state.append(articleCourant->GetReferenceString()));
             SetStockRow(row, articleCourant);
             StockModified(true);
         }
         else
         {
-            ui->etat->setText("Dernière action: modification annulée");
+            ui->etat->setText("modification annulée");
         }
     }
 }
@@ -331,7 +328,7 @@ void MainWindow::on_actionEnregistrer_Stock_triggered()
     if (!stockfile.isNull())
     {
         stock->WriteStockFile(stockfile);
-        QString state = QString("Dernière action: stock enregistré dans le fichier ");
+        QString state = QString("stock enregistré dans le fichier ");
         ui->etat->setText(state.append(stockfile));
         StockModified(false);
     }
@@ -346,7 +343,7 @@ void MainWindow::on_actionEnregistrer_Vente_triggered()
     if (!sellsfile.isNull())
     {
         sells->WriteSellsFile(sellsfile);
-        QString state = QString("Dernière action: ventes enregistrées dans le fichier ");
+        QString state = QString("ventes enregistrées dans le fichier ");
         ui->etat->setText(state.append(sellsfile));
         SellsModified(false);
     }
@@ -361,15 +358,15 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     switch (index)
     {
     case 0:
-        //ui->etat->setText("Dernière action: consultation du stock ");
+        //ui->etat->setText("consultation du stock ");
         break;
 
     case 1:
-        //ui->etat->setText("Dernière action: consultation des ventes ");
+        //ui->etat->setText("consultation des ventes ");
         break;
 
     case 2:
-        //ui->etat->setText("Dernière action: consultation des informations");
+        //ui->etat->setText("consultation des informations");
         ui->nb_model->setText(QString::number(stock->GetStockSize()).append(QString(" modèles")));
         ui->nb_article->setText(QString::number(stock->GetTotalArticle()).append(QString(" articles")));
     default:
@@ -390,7 +387,7 @@ void MainWindow::on_actionNouveau_Stock_triggered()
     DeleteStock();
     stockfile = QString();
     OpenStock();
-    ui->etat->setText("Dernière action: nouveau stock ouvert");
+    ui->etat->setText("nouveau stock ouvert");
     StockModified(false);
     ui->tabWidget->setCurrentIndex(0);
 }
@@ -401,7 +398,7 @@ void MainWindow::on_actionNouvelle_Vente_triggered()
     DeleteSells();
     sellsfile = QString();
     OpenSells();
-    ui->etat->setText("Dernière action: nouvelle table de ventes ouverte");
+    ui->etat->setText("nouvelle table de ventes ouverte");
     SellsModified(false);
     ui->tabWidget->setCurrentIndex(1);
 }
@@ -413,7 +410,7 @@ void MainWindow::on_actionOuvrir_Stock_triggered()
                                                      tr("Fichier Stock (*.s);;Tous les fichiers (*)"));
     if (!fileName.isNull())
     {
-        QString state = QString("Dernière action: Ouverture du fichier ");
+        QString state = QString("Ouverture du fichier ");
         ui->etat->setText(state.append(fileName));
 
         ui->tabWidget->setCurrentIndex(0);
@@ -431,7 +428,7 @@ void MainWindow::on_actionOuvrir_Vente_triggered()
                                                      tr("Fichier Vente (*.v);;Tous les fichiers (*)"));
     if (!fileName.isNull())
     {
-        QString state = QString("Dernière action: Ouverture du fichier ");
+        QString state = QString("Ouverture du fichier ");
         ui->etat->setText(state.append(fileName));
 
         ui->tabWidget->setCurrentIndex(1);
@@ -449,7 +446,7 @@ void MainWindow::on_actionEnregistrer_Stock_sous_triggered()
                                                     tr("Fichier Stock (*.s);;Tous les fichiers (*)"));
     if (!fileName.isNull())
     {
-        QString state = QString("Dernière action: ventes enregistrées dans le fichier ");
+        QString state = QString("ventes enregistrées dans le fichier ");
         ui->etat->setText(state.append(fileName));
 
         stockfile = fileName;
@@ -465,7 +462,7 @@ void MainWindow::on_actionEnregistrer_Vente_sous_triggered()
                                                     tr("Fichier Vente (*.v);;Tous les fichiers (*)"));
     if (!fileName.isNull())
     {
-        QString state = QString("Dernière action: stock enregistré dans le fichier ");
+        QString state = QString("stock enregistré dans le fichier ");
         ui->etat->setText(state.append(fileName));
 
         sellsfile = fileName;
@@ -497,7 +494,7 @@ void MainWindow::on_sells_add_clicked()
     SoldArticle* sa;
 
     ajoutVente* w = new ajoutVente(this, stock, sells);
-    ui->etat->setText("Dernière action: déclaration d'une nouvelle vente");
+    ui->etat->setText("déclaration d'une nouvelle vente");
     w->exec();
 
     size = sells->GetSellsSize();
@@ -506,14 +503,14 @@ void MainWindow::on_sells_add_clicked()
         sa = sells->GetArticleN(size-1);
         InsertSellsRow(size-1, sa);
         FillStockTable();
-        QString state = QString("Dernière action: ajouté une vente du produit ");
+        QString state = QString("ajouté une vente du produit ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
         SellsModified(true);
         StockModified(true);
     }
     else
     {
-        ui->etat->setText("Dernière action: nouvelle vente annulée");
+        ui->etat->setText("nouvelle vente annulée");
     }
 }
 
@@ -542,7 +539,7 @@ void MainWindow::on_sells_cancel_clicked()
             stock->New(a);
         }
 
-        QString state = QString("Dernière action: annulé la vente ");
+        QString state = QString("annulé la vente ");
         ui->etat->setText(state.append(ref));
 
         FillStockTable();
@@ -564,14 +561,14 @@ void MainWindow::on_stock_sell_clicked()
         StockArticle* articleCourant = stock->GetArticleN(row);
 
         vente* w = new vente(this, stock, sells, articleCourant);
-        QString state = QString("Dernière action: vente de l'article ");
+        QString state = QString("vente de l'article ");
         ui->etat->setText(state.append(articleCourant->GetReferenceString()));
         w->exec();
 
         size = sells->GetTotalArticle();
         if (old_size < size)
         {
-            QString state = QString("Dernière action: vendu l'article ");
+            QString state = QString("vendu l'article ");
             ui->etat->setText(state.append(articleCourant->GetReferenceString()));
             FillStockTable();
             FillSellsTable();
@@ -580,7 +577,7 @@ void MainWindow::on_stock_sell_clicked()
         }
         else
         {
-            ui->etat->setText("Dernière action: vente annulée");
+            ui->etat->setText("vente annulée");
         }
     }
 }
@@ -660,5 +657,22 @@ void MainWindow::on_tabulation()
 
 void MainWindow::on_stock_search_clicked()
 {
+    ui->etat->setText("application d'un filtre sur les articles (recherche)");
     search->exec();
+
+    if (search->Empty())
+    {
+        if (search->ReInit())
+            ui->etat->setText("filtre désactivé");
+        else
+            ui->etat->setText("recherche annulée");
+    }
+    else
+    {
+        QString state = QString("recherche finie avec succès: ");
+        state = state.append(QString::number(search->vect.Size()));
+        state = state.append(QString(" articles trouvés "));
+        state = state.append("(Rechercher->Réinitialiser->Annuler pour afficher tous les produits)");
+        ui->etat->setText(state);
+    }
 }
