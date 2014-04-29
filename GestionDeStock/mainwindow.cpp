@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     sellsfile = QString(DEFAULT_SELLS);
 
     // coloration du 3ème onglet en noir
-    ui->tabWidget->tabBar()->setTabTextColor(2,QColor("Black"));
+    //ui->tabWidget->tabBar()->setTabTextColor(2,QColor("Black"));
 
     // lecture fichiers et remplissage tables
     OpenStock(stockfile);
@@ -374,7 +374,7 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     }
 }
 
-void MainWindow::on_actionQuitter_triggered()
+int MainWindow::Quitter()
 {
     if (stockmodified == true)
     {
@@ -398,7 +398,7 @@ void MainWindow::on_actionQuitter_triggered()
               break;
           case QMessageBox::Cancel:
               // Cancel was clicked
-              return;
+              return 1;
           default:
               // should never be reached
               break;
@@ -427,16 +427,23 @@ void MainWindow::on_actionQuitter_triggered()
               break;
           case QMessageBox::Cancel:
               // Cancel was clicked
-              return;
+              return 1;
           default:
               // should never be reached
               break;
         }
     }
+    return 0;
+}
 
-    DeleteStock();
-    DeleteSells();
-    this->close();
+void MainWindow::on_actionQuitter_triggered()
+{
+    if (Quitter() == 0)
+    {
+        DeleteStock();
+        DeleteSells();
+        this->close();
+    }
 }
 
 void MainWindow::on_actionNouveau_Stock_triggered()
@@ -733,4 +740,12 @@ void MainWindow::on_stock_search_clicked()
         state = state.append("(Rechercher->Réinitialiser->Annuler pour afficher tous les produits)");
         ui->etat->setText(state);
     }
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (Quitter() == 1)
+        event->ignore();
+    else
+        event->accept();
 }

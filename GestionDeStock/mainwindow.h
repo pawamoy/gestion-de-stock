@@ -8,6 +8,7 @@
 #include <QTableWidget>
 #include <QShortcut>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 #include "comboboxcolor.h"
 #include "comboboxcategory.h"
@@ -51,6 +52,7 @@ public:
     void DeleteSellsRow(int r);
     void StockModified(bool m);
     void SellsModified(bool m);
+    int Quitter();
     
 private slots:
     void on_stock_add_clicked();
@@ -78,6 +80,7 @@ private slots:
     void on_lancer_requete2_clicked();
     void on_tabulation();
     void on_stock_search_clicked();
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::MainWindow *ui;
