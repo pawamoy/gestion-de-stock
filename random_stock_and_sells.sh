@@ -24,7 +24,7 @@ prices() {
 }
 
 discount() {
-	echo -n "$(($RANDOM%101)) "
+	echo -n "$(($RANDOM%15)) "
 }
 
 date() {
@@ -32,7 +32,7 @@ date() {
 }
 
 generate_stock_article() {
-	ref; qty; prices; echo -n "0 "; date
+	ref; qty; prices; discount; date
 }
 
 generate_sold_article() {

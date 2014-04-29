@@ -81,6 +81,7 @@ private slots:
     void on_lancer_requete2_clicked();
     void on_tabulation();
     void on_stock_search_clicked();
+    void on_actionManuel_triggered();
 
 private:
     Ui::MainWindow *ui;
