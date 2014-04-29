@@ -53,6 +53,7 @@ public:
     void StockModified(bool m);
     void SellsModified(bool m);
     int Quitter();
+    bool SearchMode();
     
 private slots:
     void on_stock_add_clicked();

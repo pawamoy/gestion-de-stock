@@ -40,7 +40,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // coloration du 3ème onglet en noir
     //ui->tabWidget->tabBar()->setTabTextColor(2,QColor("Black"));
 
+    // date d'aujourd'hui pour requete 1
+    ui->date_requete1->setDate(QDate::currentDate());
+
     // lecture fichiers et remplissage tables
+    search = NULL;
     OpenStock(stockfile);
     OpenSells(sellsfile);
 
@@ -103,11 +107,21 @@ void MainWindow::DeleteSells()
 
 void MainWindow::FillStockTable()
 {
-    int i,s = stock->GetStockSize();
-
     ui->tableWidget->setRowCount(0);
-    for (i=0; i<s; i++)
-        InsertStockRow(i, stock->GetArticleN(i));
+    int i,s;
+
+    if (SearchMode())
+    {
+        s = search->vect.Size();
+        for (i=0; i<s; i++)
+            InsertStockRow(i,search->vect.Get(i));
+    }
+    else
+    {
+        s = stock->GetStockSize();
+        for (i=0; i<s; i++)
+            InsertStockRow(i, stock->GetArticleN(i));
+    }
 }
 
 void MainWindow::FillSellsTable()
@@ -282,9 +296,20 @@ void MainWindow::on_stock_del_clicked()
 
     if (row != -1)
     {
-        StockArticle* sa = stock->GetArticleN(row);
-        DeleteStockRow(row);
-        stock->Del(row);
+        StockArticle* sa;
+        if (SearchMode())
+        {
+            sa = search->vect.Get(row);
+            DeleteStockRow(row);
+            search->vect.Del(row);
+            stock->Del(stock->indexes.at(row));
+        }
+        else
+        {
+            sa = stock->GetArticleN(row);
+            DeleteStockRow(row);
+            stock->Del(row);
+        }
 
         QString state = QString("supprimé l'article ");
         ui->etat->setText(state.append(sa->GetReferenceString()));
@@ -298,12 +323,18 @@ void MainWindow::on_stock_mod_clicked()
         return;
 
     int row = ui->tableWidget->currentRow();
+
     if (row != -1)
     {
-        StockArticle* articleCourant = stock->GetArticleN(row);
+        StockArticle* articleCourant;
+
+        if (SearchMode())
+            articleCourant = search->vect.Get(row);
+        else
+            articleCourant = stock->GetArticleN(row);
+
         StockArticle old_article = *articleCourant;
         modifStock* w = new modifStock(this, stock, articleCourant);
-
         QString state = QString("modification de l'article ");
         ui->etat->setText(state.append(articleCourant->GetReferenceString()));
 
@@ -367,8 +398,10 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 
     case 2:
         //ui->etat->setText("consultation des informations");
-        ui->nb_model->setText(QString::number(stock->GetStockSize()).append(QString(" modèles")));
+        ui->nb_model->setText(QString::number(stock->GetStockSize()).append(QString(" livraisons")));
         ui->nb_article->setText(QString::number(stock->GetTotalArticle()).append(QString(" articles")));
+        ui->nb_model_vente->setText(QString::number(sells->GetSellsSize()).append(QString(" ventes")));
+        ui->nb_article_vente->setText(QString::number(sells->GetTotalArticle()).append(QString(" articles")));
     default:
         break;
     }
@@ -620,10 +653,20 @@ void MainWindow::on_stock_sell_clicked()
             return;
 
     int row = ui->tableWidget->currentRow();
+
     if (row != -1)
     {
         int size, old_size = sells->GetTotalArticle();
-        StockArticle* articleCourant = stock->GetArticleN(row);
+        StockArticle* articleCourant;
+
+        if (SearchMode())
+        {
+            articleCourant = search->vect.Get(row);
+        }
+        else
+        {
+            articleCourant = stock->GetArticleN(row);
+        }
 
         vente* w = new vente(this, stock, sells, articleCourant);
         QString state = QString("vente de l'article ");
@@ -728,9 +771,14 @@ void MainWindow::on_stock_search_clicked()
     if (search->Empty())
     {
         if (search->ReInit())
+        {
             ui->etat->setText("filtre désactivé");
+            FillStockTable();
+        }
         else
+        {
             ui->etat->setText("recherche annulée");
+        }
     }
     else
     {
@@ -739,5 +787,14 @@ void MainWindow::on_stock_search_clicked()
         state = state.append(QString(" articles trouvés "));
         state = state.append("(Rechercher->Réinitialiser->Annuler pour afficher tous les produits)");
         ui->etat->setText(state);
+        FillStockTable();
     }
+}
+
+bool MainWindow::SearchMode()
+{
+    if (search == NULL)
+        return false;
+    else
+        return (!search->ReInit() && !search->Empty());
 }
