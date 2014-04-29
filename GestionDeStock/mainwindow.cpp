@@ -225,19 +225,19 @@ void MainWindow::SetTableRow(QTableWidget* table, int row, Article* a)
 void MainWindow::StockModified(bool m)
 {
     stockmodified = m;
-    if (m == true)
-        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Red"));
-    else
-        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Black"));
+//    if (m == true)
+//        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Red"));
+//    else
+//        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Black"));
 }
 
 void MainWindow::SellsModified(bool m)
 {
     sellsmodified = m;
-    if (m == true)
-        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Red"));
-    else
-        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Black"));
+//    if (m == true)
+//        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Red"));
+//    else
+//        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Black"));
 }
 
 /** ************ SLOTS ************* **/
