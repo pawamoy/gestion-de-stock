@@ -1,45 +1,46 @@
 #include <QString>
+#include <QObject>
 
 #include "datasets.h"
 
 /*********** VETEMENTS ************/
 
 QString category[] = {
-"Sous-vêtement",
-"Inter-vêtement",
-"Vêtement (1)",
-"Vêtement (2)",
-"Vêtement (3)",
-"Vêtement (4)",
-"Sur-Vêtement (1)",
-"Sur-Vêtement (2)",
-"Sur-Vêtement (3)",
+QObject::trUtf8("Sous-vêtement"),
+QObject::trUtf8("Inter-vêtement"),
+QObject::trUtf8("Vêtement (1)"),
+QObject::trUtf8("Vêtement (2)"),
+QObject::trUtf8("Vêtement (3)"),
+QObject::trUtf8("Vêtement (4)"),
+QObject::trUtf8("Sur-Vêtement (1)"),
+QObject::trUtf8("Sur-Vêtement (2)"),
+QObject::trUtf8("Sur-Vêtement (3)"),
 "Ensemble"
 };
 
 QString subcategory0[] = {
 "Culotte", "Tanga", "String", "Slip", "Tai", "Maillot de bain",
-"Caleçon", "Boxer", "Soutien-gorge", "Bustier", "Flanelle", "Justaucorps",
-"Chaussettes","Bas", "Collant", "Guêtres", "Socquette"
+QObject::trUtf8("Caleçon"), "Boxer", "Soutien-gorge", "Bustier", "Flanelle", "Justaucorps",
+"Chaussettes","Bas", "Collant", QObject::trUtf8("Guêtres"), "Socquette"
 };
 
-QString subcategory1[] = {"Jupon", "Guêpière", "Gaine"};
+QString subcategory1[] = {"Jupon", QObject::trUtf8("Guêpière"), "Gaine"};
 
 QString subcategory2[] = {
 "Short", "Bermuda", "Pantalon", "Corsaire", "Jupe", "Kilt", "Jupe-culotte",
-"Taille haute", "Taille basse", "Chemise", "T-shirt", "Débardeur", "Bustier",
-"Chemisier", "Déshabillé", "Chemise-culotte", "Corsage", "Dos nu",
-"Cache coeur", "Robe 1 pièce", "Robe 2 pièces", "Robe 3 pièces", "Kimono",
-"Peignoir", "Pyjama 1 pièce", "Pyjama 2 pièces", "Gants", "Mitaines",
+"Taille haute", "Taille basse", "Chemise", "T-shirt", QObject::trUtf8("Débardeur"), "Bustier",
+"Chemisier", QObject::trUtf8("Déshabillé"), "Chemise-culotte", "Corsage", "Dos nu",
+"Cache coeur", QObject::trUtf8("Robe 1 pièce"), QObject::trUtf8("Robe 2 pièces"), QObject::trUtf8("Robe 3 pièces"), "Kimono",
+"Peignoir", QObject::trUtf8("Pyjama 1 pièce"), QObject::trUtf8("Pyjama 2 pièces"), "Gants", "Mitaines",
 "Chaussures", "Mocassin", "Mule", "Babouche", "Sandale", "Spartiate",
 "Ballerine", "Espadrille", "Chausson", "Tennis", "Derby", "Bottine", "Botte",
 "Galoche", "Sabot", "Pantoufle", "Brodequin", "Chapeau", "Casquette", "Bonnet",
-"Châle", "Capuchon", "Cagoule", "Foulard", "Turban", "Bandana", "Bandeau",
-"Voile", "Béret", "Couvre-oreilles", "Capuche", "Fichu"
+QObject::trUtf8("Châle"), "Capuchon", "Cagoule", "Foulard", "Turban", "Bandana", "Bandeau",
+"Voile", QObject::trUtf8("Béret"), "Couvre-oreilles", "Capuche", "Fichu"
 };
 
 QString subcategory3[] = {
-"Blouson", "Veste", "Veston", "Vareuse", "Pèlerine", "Surchemise", "Camisole",
+"Blouson", "Veste", "Veston", "Vareuse", QObject::trUtf8("Pèlerine"), "Surchemise", "Camisole",
 "Tricot", "Pull-over", "Molleton", "Sweat-shirt", "Cardigan", "Gilet", "Jaquette",
 "Blouse", "Tablier", "Manteau", "Mantelet", "Pelisse", "Pardessus", "Mac Parlane",
 "Paletot", "Parka", "Tunique", "Cape", "Combinaison", "Poncho", "Sari", "Toge",
@@ -48,16 +49,16 @@ QString subcategory3[] = {
 };
 
 QString subcategory4[] = {
-"Tailleur", "Costume 1 pièce", "Costume 2 pièces", "Costume 3 pièces", "Complet"
+"Tailleur", QObject::trUtf8("Costume 1 pièce"), QObject::trUtf8("Costume 2 pièces"), QObject::trUtf8("Costume 3 pièces"), "Complet"
 };
 
 QString* vetements[] = {subcategory0, subcategory1, subcategory2, subcategory3, subcategory4};
 
 QString color_name[] = {
 "Rose", "Orange", "Rouge", "Noir", "Parme", "Vert amande", "Vert", "Beige",
-"Gris", "Blanc", "Bleu marine", "Marron", "Jaune", "Blanc cassé", "Marron chocolat",
+"Gris", "Blanc", "Bleu marine", "Marron", "Jaune", QObject::trUtf8("Blanc cassé"), "Marron chocolat",
 "Kaki", "Marron caramel", "Lavande", "Bleu", "Violet", "Bleu turquoise",
-"Pêche", "Bordeaux", "Bleu ciel", "Vert pomme", "Pourpre", "Noisette"
+QObject::trUtf8("Pêche"), "Bordeaux", "Bleu ciel", "Vert pomme", "Pourpre", "Noisette"
 };
 
 
