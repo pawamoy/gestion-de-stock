@@ -56,11 +56,9 @@ int Article::GetCategoryInt()
     return cat;
 }
 
-const char* Article::GetCategoryString()
+QString Article::GetCategoryString()
 {
-    QString result = QString::number(GetCategoryInt());
-    QByteArray lol = result.toUtf8();
-    return lol.constData();
+    return QString::number(GetCategoryInt());
 }
 
 int Article::GetTypeInt()
@@ -189,17 +187,13 @@ QString Article::GetSizeString()
 	return refs.rightJustified(2, '0');
 }
 
-const char* Article::GetCategoryName()
+QString Article::GetCategoryName()
 {
     int c = GetCategoryInt();
     if (c < END_CATEGORY && c != NR)
-    {
-        QString result = category[GetCategoryInt()];
-        QByteArray lol = result.toUtf8();
-        return lol.constData();
-    }
+        return category[GetCategoryInt()];
     else
-        return DEF_NAME;
+        return QString(DEF_NAME);
 }
 
 QString Article::GetTypeName()

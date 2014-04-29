@@ -137,8 +137,8 @@ void Stock::Print(StockArticle* sa)
     QDate date = sa->GetDeliveryDate();
     std::cout << "-------------------------------" << std::endl;
     std::cout << "Référence: " << ba.constData() << std::endl;
-    //ba = sa->GetCategoryName().toUtf8();
-    //std::cout << "Catégorie: " << ba.constData() << std::endl;
+    ba = sa->GetCategoryName().toUtf8();
+    std::cout << "Catégorie: " << ba.constData() << std::endl;
     ba = sa->GetTypeName().toUtf8();
     std::cout << "Type     : " << ba.constData() << std::endl;
     //ba = sa->GetModelName().toUtf8();
