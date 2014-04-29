@@ -376,6 +376,64 @@ void MainWindow::on_tabWidget_currentChanged(int index)
 
 void MainWindow::on_actionQuitter_triggered()
 {
+    if (stockmodified == true)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Le stock a été modifié.");
+        msgBox.setInformativeText("Voulez-vous sauvegarder vos changements?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        msgBox.setButtonText(QMessageBox::Save, "Sauvegarder");
+        msgBox.setButtonText(QMessageBox::Cancel, "Annuler");
+        msgBox.setButtonText(QMessageBox::Discard, "Ne pas sauvegarder");
+        int ret = msgBox.exec();
+
+        switch (ret) {
+          case QMessageBox::Save:
+              // Save was clicked
+              on_actionEnregistrer_Stock_triggered();
+              break;
+          case QMessageBox::Discard:
+              // Don't Save was clicked
+              break;
+          case QMessageBox::Cancel:
+              // Cancel was clicked
+              return;
+          default:
+              // should never be reached
+              break;
+        }
+    }
+
+    if (sellsmodified == true)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Les ventes ont été modifiées.");
+        msgBox.setInformativeText("Voulez-vous sauvegarder vos changements?");
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        msgBox.setButtonText(QMessageBox::Save, "Sauvegarder");
+        msgBox.setButtonText(QMessageBox::Cancel, "Annuler");
+        msgBox.setButtonText(QMessageBox::Discard, "Ne pas sauvegarder");
+        int ret = msgBox.exec();
+
+        switch (ret) {
+          case QMessageBox::Save:
+              // Save was clicked
+              on_actionEnregistrer_Vente_triggered();
+              break;
+          case QMessageBox::Discard:
+              // Don't Save was clicked
+              break;
+          case QMessageBox::Cancel:
+              // Cancel was clicked
+              return;
+          default:
+              // should never be reached
+              break;
+        }
+    }
+
     DeleteStock();
     DeleteSells();
     this->close();
