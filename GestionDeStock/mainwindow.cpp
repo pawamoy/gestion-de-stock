@@ -225,19 +225,19 @@ void MainWindow::SetTableRow(QTableWidget* table, int row, Article* a)
 void MainWindow::StockModified(bool m)
 {
     stockmodified = m;
-    if (m == true)
-        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Red"));
-    else
-        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Black"));
+//    if (m == true)
+//        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Red"));
+//    else
+//        ui->tabWidget->tabBar()->setTabTextColor(0,QColor("Black"));
 }
 
 void MainWindow::SellsModified(bool m)
 {
     sellsmodified = m;
-    if (m == true)
-        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Red"));
-    else
-        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Black"));
+//    if (m == true)
+//        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Red"));
+//    else
+//        ui->tabWidget->tabBar()->setTabTextColor(1,QColor("Black"));
 }
 
 /** ************ SLOTS ************* **/
@@ -740,12 +740,4 @@ void MainWindow::on_stock_search_clicked()
         state = state.append("(Rechercher->Réinitialiser->Annuler pour afficher tous les produits)");
         ui->etat->setText(state);
     }
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    if (Quitter() == 1)
-        event->ignore();
-    else
-        event->accept();
 }

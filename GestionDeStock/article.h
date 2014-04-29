@@ -21,7 +21,7 @@ class Article
 		Ref GetReferenceRef();
 		QString GetReferenceString();
 		int GetCategoryInt();
-        const char *GetCategoryString();
+        QString GetCategoryString();
 		int GetTypeInt();
 		QString GetTypeString();
 		int GetModelInt();
@@ -45,7 +45,7 @@ class Article
 		QString GetColorHexa();
 		int GetSizeInt();
 		QString GetSizeString();
-        const char *GetCategoryName();
+        QString GetCategoryName();
 		QString GetTypeName();
 		QString GetSizeName();
 		QString GetColorName();
