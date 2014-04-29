@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <QDebug>
 
 #include "article.h"
 
