@@ -809,7 +809,8 @@ les entrées pour la référence sont liées aux 5 entrées suivantes, respectiv
 Modèle, Taille et Couleur.\nLors d'une nouvelle vente, vous devez préciser un article existant dans le stock.\n\n\
 Les raccourcis de l'application: CTRL-S pour sauvegarder, CTRL-Q pour quitter, Suppr pour supprimer un article, a pour ajouter un article, \
 m pour modifier un article, v pour le vendre, n pour faire une nouvelle vente, c pour annuler une vente et Tab\
-pour changer d'onglet.");
+pour changer d'onglet.\n\nAttention! Si vous quittez le programme en cliquant sur la croix de la fenetre, \
+le programme ne vous proposera pas de sauvegarder, meme si vous avez fait des modifications!");
     msgBox.setInformativeText (help);
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
