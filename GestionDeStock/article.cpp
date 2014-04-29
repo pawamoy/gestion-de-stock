@@ -501,7 +501,11 @@ bool Article::EquivalentTo(Article a)
 bool Article::EquivalentTo(Article a, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da)
 {
     bool result = true;
-    result &= EquivalentTo(a);
+    result &= HasCategory(a.GetCategoryInt());
+    result &= HasType(a.GetTypeInt());
+    result &= HasModel(a.GetModelInt());
+    result &= HasColor(a.GetColorInt());
+
     switch (size)
     {
     case INFERIOR:

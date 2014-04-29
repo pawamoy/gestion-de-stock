@@ -49,7 +49,7 @@ int StVector::Size()
 
 bool StVector::Empty()
 {
-	return (Size() == 0);
+    return (Size() == 0);
 }
 
 

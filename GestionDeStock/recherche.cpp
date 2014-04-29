@@ -8,6 +8,7 @@ recherche::recherche(QWidget *parent, Stock* st) :
     ui->setupUi(this);
 
     stock = st;
+    vect = StVector();
 
     category_box = new ComboBoxCategory(this, 0);
     type_box = new ComboBoxType(this, 0, 0);
