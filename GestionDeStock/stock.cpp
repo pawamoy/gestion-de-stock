@@ -372,7 +372,8 @@ void Stock::New(StockArticle sa)
 	}
 	else
 	{
-		std::cerr << "StockArticle sa is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(&sa);
 	}
 }
 
@@ -381,7 +382,10 @@ void Stock::New(StockArticle* sa)
 	if (sa->IsValid())
         stock.Add(sa);
 	else
-		std::cerr << "StockArticle sa is NOT valid" << std::endl;
+    {
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(sa);
+    }
 }
 
 void Stock::New(int r, int q, float bp, float sp, int di, QDate de)
@@ -394,7 +398,8 @@ void Stock::New(int r, int q, float bp, float sp, int di, QDate de)
 	}
 	else
 	{
-		std::cerr << "StockArticle sa is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(na);
 		delete na;;
 	}
 }
@@ -409,7 +414,8 @@ void Stock::New(Ref r, int q, float bp, float sp, int di, QDate de)
 	}
 	else
 	{
-		std::cerr << "StockArticle sa is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(na);
 		delete na;;
 	}
 }
@@ -621,7 +627,8 @@ void Stock::Replace(int refa, StockArticle sb) //! all occurences
 	}
 	else
 	{
-		std::cerr << "StockArticle sb is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(&sb);
 	}
 }
 
@@ -635,7 +642,8 @@ void Stock::Replace(Ref refa, StockArticle sb) //! all occurences
 	}
 	else
 	{
-		std::cerr << "StockArticle sb is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(&sb);
 	}
 }
 
@@ -644,7 +652,8 @@ void Stock::Replace(StockArticle* sa, StockArticle sb) // exact occurence
 	if (sb.IsValid())
 		sa->Replace(sb);
 	else
-		std::cerr << "StockArticle sb is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid" << std::endl;
+        Print(&sb);
 }
 
 void Stock::Replace(StVector sv, StockArticle sb) // exact occurences
@@ -659,7 +668,8 @@ void Stock::Replace(StVector sv, StockArticle sb) // exact occurences
 	}
 	else
 	{
-		std::cerr << "StockArticle sb is NOT valid" << std::endl;
+        std::cerr << "StockArticle is NOT valid " << std::endl;
+        Print(&sb);
 	}
 }
 
