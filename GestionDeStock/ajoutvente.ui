@@ -282,6 +282,10 @@
       <property name="text">
        <string>Annuler</string>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../appdata/edit-delete.png</normaloff>../appdata/edit-delete.png</iconset>
+      </property>
       <property name="autoDefault">
        <bool>true</bool>
       </property>
@@ -291,6 +295,10 @@
      <widget class="QPushButton" name="valider">
       <property name="text">
        <string>Valider</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../appdata/arrow-right.png</normaloff>../appdata/arrow-right.png</iconset>
       </property>
       <property name="default">
        <bool>true</bool>
