@@ -48,7 +48,7 @@ QString Article::GetReferenceString()
 	QString refs = GetSizeString();
 	QString refco = GetColorString();
 	
-	return refca.append(reft).append(refm).append(refs).append(refco);
+    return refca.append(reft).append(refm).append(refs).append(refco);
 }
 
 int Article::GetCategoryInt()
@@ -56,9 +56,11 @@ int Article::GetCategoryInt()
     return cat;
 }
 
-QString Article::GetCategoryString()
+const char* Article::GetCategoryString()
 {
-    return QString::number(GetCategoryInt());
+    QString result = QString::number(GetCategoryInt());
+    QByteArray lol = result.toUtf8();
+    return lol.constData();
 }
 
 int Article::GetTypeInt()
@@ -187,13 +189,17 @@ QString Article::GetSizeString()
 	return refs.rightJustified(2, '0');
 }
 
-QString Article::GetCategoryName()
+const char* Article::GetCategoryName()
 {
     int c = GetCategoryInt();
     if (c < END_CATEGORY && c != NR)
-        return category[GetCategoryInt()];
+    {
+        QString result = category[GetCategoryInt()];
+        QByteArray lol = result.toUtf8();
+        return lol.constData();
+    }
     else
-        return QString(DEF_NAME);
+        return DEF_NAME;
 }
 
 QString Article::GetTypeName()
