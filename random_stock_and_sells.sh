@@ -40,13 +40,13 @@ generate_sold_article() {
 }
 
 generate_stock() {
-	for ((i=0; i<300; i++)); do
+	for ((i=0; i<75; i++)); do
 		generate_stock_article
 	done
 }
 
 generate_sells() {
-	for ((i=0; i<100; i++)); do
+	for ((i=0; i<40; i++)); do
 		generate_sold_article
 	done
 }
