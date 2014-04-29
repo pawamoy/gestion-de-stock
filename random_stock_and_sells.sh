@@ -28,7 +28,7 @@ discount() {
 }
 
 date() {
-	echo "2013 $(($RANDOM%13)) $(($RANDOM%29)) "
+	echo "2013 $(($RANDOM%12+1)) $(($RANDOM%28+1)) "
 }
 
 generate_stock_article() {
