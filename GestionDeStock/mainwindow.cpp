@@ -798,3 +798,19 @@ bool MainWindow::SearchMode()
     else
         return (!search->ReInit() && !search->Empty());
 }
+
+void MainWindow::on_actionManuel_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Petit manuel d'aide à l'utilisation du programme.");
+    QString help = QString("Changez d'onglet pour afficher le stock, les ventes ou des informations.\n");
+    help = help.append("Lorsque vous ajoutez ou modifiez un article, ou lorsque vous cherchez à faire une nouvelle vente, \
+les entrées pour la référence sont liées aux 5 entrées suivantes, respectivement Catégorie, Type, \
+Modèle, Taille et Couleur.\nLors d'une nouvelle vente, vous devez préciser un article existant dans le stock.\n\n\
+Les raccourcis de l'application: CTRL-S pour sauvegarder, CTRL-Q pour quitter, Suppr pour supprimer un article, a pour ajouter un article, \
+m pour modifier un article, v pour le vendre, n pour faire une nouvelle vente, c pour annuler une vente et Tab\
+pour changer d'onglet.");
+    msgBox.setInformativeText (help);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+}
