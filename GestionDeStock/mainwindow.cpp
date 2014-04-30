@@ -302,7 +302,8 @@ void MainWindow::on_stock_del_clicked()
             sa = search->vect.Get(row);
             DeleteStockRow(row);
             search->vect.Del(row);
-            stock->Del(stock->indexes.at(row));
+            stock->Del(sa);
+            //stock->indexes.erase(stock->indexes.begin()+row);
         }
         else
         {
@@ -748,7 +749,7 @@ void MainWindow::on_lancer_requete2_clicked()
     for (i=0; i<s; i++)
     {
         sa = sells->GetArticleN(i);
-        if (sa->DeliveredLately(selected_date))
+        if (sa->SoldLately(selected_date))
         {
             tmp = sa->GetDiscountPrice() - sa->GetBuyPrice();
             recette += tmp * sa->GetQuantity();

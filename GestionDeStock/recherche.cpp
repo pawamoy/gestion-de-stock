@@ -338,8 +338,8 @@ void recherche::on_valider_clicked()
     }
     else
     {
-        StockArticle sa((Ref){ca,ty,mo,si,co},NR,bp,sp,di,da);
-        vect = stock->GetArticles(sa, equ_size, equ_qty,equ_buy,equ_sell,equ_disc,equ_del);
+        StockArticle sa((Ref){ca,ty,mo,si,co},qt,bp,sp,di,da);
+        vect = stock->GetArticles(sa,equ_size,equ_qty,equ_buy,equ_sell,equ_disc,equ_del);
 
         if (Empty())
         {

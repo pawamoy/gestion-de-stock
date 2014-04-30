@@ -289,7 +289,7 @@ StVector Stock::GetArticles(StockArticle sa)
 StVector Stock::GetArticles(StockArticle sa, EQ size, EQ qty, EQ bp, EQ sp, EQ di, EQ da)
 {
     StVector v = StVector();
-    indexes = std::vector<int>();
+    //indexes.clear();
 
     int i, s = stock.Size();
     StockArticle* a;
@@ -299,7 +299,7 @@ StVector Stock::GetArticles(StockArticle sa, EQ size, EQ qty, EQ bp, EQ sp, EQ d
         a = stock.Get(i);
         if (a->EquivalentTo(sa,size,qty,bp,sp,di,da))
         {
-            indexes.push_back(i);
+            //indexes.push_back(i);
             v.Add(a);
         }
     }
@@ -676,6 +676,11 @@ void Stock::Replace(StVector sv, StockArticle sb) // exact occurences
 void Stock::Del(int i)
 {
     stock.Del(i);
+}
+
+void Stock::Del(StockArticle* sa)
+{
+    stock.Del(GetPosition(sa));
 }
 
 
