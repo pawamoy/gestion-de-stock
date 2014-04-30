@@ -81,13 +81,14 @@ class Stock
 		void Replace(StockArticle* sa, StockArticle sb); // exact occurence
 		void Replace(StVector sv, StockArticle sb); // exact occurences
         void Del(int i);
+        void Del(StockArticle* sa);
 		
 		bool Contains(int reference);
 		bool Contains(Ref reference);
 		bool Contains(StockArticle sa);
 		bool Contains(StockArticle* sa);
 
-        std::vector<int> indexes;
+        //std::vector<int> indexes;
 		
 	private:
         StVector stock;

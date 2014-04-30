@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1164</width>
-    <height>496</height>
+    <height>497</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Gestion de stock</string>
@@ -18,6 +24,12 @@
     <normaloff>../appdata/kspread.png</normaloff>../appdata/kspread.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -29,7 +41,7 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="sizeConstraint">
-      <enum>QLayout::SetDefaultConstraint</enum>
+      <enum>QLayout::SetMaximumSize</enum>
      </property>
      <item>
       <widget class="QTabWidget" name="tabWidget">
@@ -57,6 +69,12 @@
         <bool>false</bool>
        </property>
        <widget class="QWidget" name="onglet_stock">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
@@ -68,6 +86,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <property name="spacing">
             <number>20</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
            </property>
            <item>
             <widget class="QPushButton" name="stock_add">
@@ -134,6 +155,9 @@
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
            <item>
             <widget class="QTableWidget" name="tableWidget">
              <property name="editTriggers">
@@ -255,6 +279,12 @@
         </layout>
        </widget>
        <widget class="QWidget" name="onglet_vente">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <attribute name="title">
          <string>Ventes effectuées</string>
         </attribute>
@@ -263,6 +293,9 @@
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <property name="spacing">
             <number>20</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
            </property>
            <item>
             <widget class="QPushButton" name="sells_add">
@@ -308,6 +341,9 @@
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
            <item>
             <widget class="QTableWidget" name="tableWidget_2">
              <property name="focusPolicy">
@@ -425,12 +461,21 @@
         </layout>
        </widget>
        <widget class="QWidget" name="onglet_info">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <attribute name="title">
          <string>Informations et Requêtes</string>
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
           <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>
@@ -769,8 +814,17 @@
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
      <item>
       <widget class="QLabel" name="etat">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -788,8 +842,17 @@
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
      <item>
       <widget class="QLabel" name="label_9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Dernière action:</string>
        </property>
